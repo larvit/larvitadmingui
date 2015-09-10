@@ -1,0 +1,117 @@
+*
+{
+	box-sizing:                     border-box;
+}
+
+html,
+body
+{
+	min-height:                     100%;
+}
+
+body
+{
+	background:                     #ccc;
+	color:                          #444;
+	font-family:                    Arial, sans-serif;
+	font-size:                      1.3rem;
+	-webkit-font-smoothing:         subpixel-antialiased;
+	-moz-osx-font-smoothing:        auto;
+}
+
+h1
+{
+	margin:                         2rem 0;
+	font-size:                      3.6rem;
+	font-weight:                    200;
+	line-height:                    normal;
+}
+
+p
+{
+	margin:                         0 0 2rem;
+}
+
+a
+{
+	text-decoration:                none;
+	color:                          #444;
+}
+
+ul,
+ul ul,
+ul ol,
+ol ol,
+ol ul,
+li,
+form,
+input,
+textarea,
+fieldset
+{
+	font-size:                      inherit;
+	margin-bottom:                  0;
+}
+
+label,
+legend
+{
+	font-weight:                    normal;
+	margin-bottom:                  0;
+}
+
+textarea.zebra
+{
+	font-size:                      16px;
+	line-height:                    20px;
+	padding:                        0;
+	background-image:               repeating-linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255) 20px, rgb(239, 239, 239) 20px, rgb(239, 239, 239) 40px);
+}
+
+/* Remove ugly dotted outline around links */
+::-moz-focus-inner,
+:active,
+:focus
+{
+	outline:                        none;
+	border:                         0;
+	-moz-outline-style:             none;
+}
+
+/* Remove ugly dotted outline around selects (Firefox) */
+@-moz-document url-prefix()
+{
+	select
+	{
+		color:                        transparent;
+		text-shadow:                  0 0 0 #444;
+	}
+}
+
+select,
+select:active,
+select:focus,
+input[type="text"],
+input[type="password"]
+{
+	-moz-appearance:                none;
+	-webkit-appearance:             none;
+	background-color:               transparent;
+	border:                         1px solid #efefef;
+	border-radius:                  0.3rem;
+	background-clip:                padding-box;
+	height:                         auto;
+	line-height:                    normal;
+	margin-bottom:                  0;
+	outline:                        none;
+	padding:                        0.5rem 1.5rem;
+	position:                       relative;
+	width:                          100%;
+	z-index:                        99;
+	font-size:                      1.3rem;
+}
+
+select::-ms-expand
+{
+	display:                        none;
+}

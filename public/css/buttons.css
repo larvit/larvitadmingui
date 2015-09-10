@@ -1,0 +1,71 @@
+.button,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"]
+{
+	display:                        block;
+	color:                          #444;
+	background:                     #efefef;
+	border-radius:                  0.3rem;
+	background-clip:                padding-box;
+	border:                         0;
+	cursor:                         pointer;
+	font-size:                      inherit;
+	font-weight:                    normal;
+	height:                         auto;
+	letter-spacing:                 inherit;
+	line-height:                    normal;
+	margin:                         0;
+	padding:                        0.7rem 1.6rem;
+	text-transform:                 none;
+}
+
+	.button:hover,
+	.button:focus,
+	button:hover,
+	button:focus,
+	input[type="submit"]:hover,
+	input[type="submit"]:focus,
+	input[type="reset"]:hover,
+	input[type="reset"]:focus,
+	input[type="button"]:hover,
+	input[type="button"]:focus
+	{
+		background:                     #444;
+		color:                          #fff;
+	}
+
+	.button.lg,
+	button.lg,
+	input[type="submit"].lg,
+	input[type="reset"].lg,
+	input[type="button"].lg
+	{
+		padding:                        1.6rem 1.6rem;
+	}
+
+	.button.inv,
+	button.inv,
+	input[type="submit"].inv,
+	input[type="reset"].inv,
+	input[type="button"].inv
+	{
+		background:                     #444;
+		color:                          #fff;
+	}
+
+	.button.inv:hover,
+	.button.inv:focus,
+	button.inv:hover,
+	button.inv:focus,
+	input[type="submit"].inv:hover,
+	input[type="submit"].inv:focus,
+	input[type="reset"].inv:hover,
+	input[type="reset"].inv:focus,
+	input[type="button"].inv:hover,
+	input[type="button"].inv:focus
+	{
+		background:                     #efefef;
+		color:                          #444;
+	}

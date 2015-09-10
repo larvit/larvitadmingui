@@ -1,0 +1,306 @@
+/* Rows */
+.wrap_row
+{
+	margin-bottom:                  3rem;
+}
+
+.wrap_small_row
+{
+	margin-bottom:                  1rem;
+}
+
+.wrap_medium_row
+{
+	margin-bottom:                  1.5rem;
+}
+
+.wrap_large_row
+{
+	margin-bottom:                  2.2rem;
+}
+
+.wrap_big_row
+{
+	margin-bottom:                  3.5rem;
+}
+
+.wrap_mega_row
+{
+	margin-bottom:                  5.5rem;
+}
+
+/* Visible/hidden */
+.visible_md,
+.visible_sm,
+.hidden
+{
+	display:                        none;
+}
+
+/* Diverse */
+.target_fix
+{
+	display:                        block;
+	left:                           0;
+	position:                       fixed;
+	top:                            0;
+}
+
+.avatar
+{
+	border-radius:                  4rem;
+	background-clip:                padding-box;
+	overflow:                       hidden;
+	width:                          3.2rem;
+	height:                         3.2rem;
+}
+
+.strong
+{
+	font-family:                    'montserratregular', Arial, sans-serif;
+}
+
+.border_bot
+{
+	border-bottom:                  1px solid #efefef;
+}
+
+/* Message box */
+.msg_box
+{
+	background:                     #efefef;
+	border:                         1px solid #ccc;
+	color:                          inherit;
+	padding:                        1rem 3rem 1rem 2rem;
+	position:                       relative;
+}
+
+.msg_box a.close
+{
+	position:                       absolute;
+	top:                            50%;
+	right:                          1rem;
+	font-size:                      1rem;
+	margin-top:                     -0.5rem;
+	-webkit-transform:              rotate(45deg);
+	-ms-transform:                  rotate(45deg);
+	transform:                      rotate(45deg);
+}
+
+.msg_box a.close .br_icon_close
+{
+	color:                          inherit;
+	opacity:                        0.2;
+}
+
+.msg_box a.close:hover .br_icon_close
+{
+	opacity:                        1;
+}
+
+.msg_box p:last-child
+{
+	margin:                         0;
+}
+
+.msg_box.happy
+{
+	background:                     #dff0d8;
+	border:                         1px solid #d6e9c6;
+	color:                          #3c763d;
+}
+
+.msg_box.happy a.close .br_icon_close
+{
+	color:                          #3c763d;
+}
+
+.msg_box.sad
+{
+	background:                     #f2dede;
+	border:                         1px solid #ebccd1;
+	color:                          #a94442;
+}
+
+.msg_box.sad a.close .br_icon_close
+{
+	color:                          #a94442;
+}
+
+.page_wrapper
+{
+	position:                       relative;
+}
+
+.select_wrapper,
+.input_wrapper
+{
+	display:                        inline-block;
+	width:                          100%;
+	position:                       relative;
+}
+
+.select_wrapper .sel_wrap,
+.input_wrapper .input_wrap
+{
+	border:                         0;
+	display:                        inline-block;
+	width:                          100%;
+	position:                       relative;
+	padding:                        0;
+}
+
+.select_wrapper .sel_wrap:after
+{
+	color:                          #999;
+	content:                        'a';
+	font-family:                    'icons';
+	position:                       absolute;
+	top:                            50%;
+	right:                          1rem;
+	font-size:                      1rem;
+	margin-top:                     -0.5rem;
+}
+
+.hor_field_wrap label
+{
+	display:                        inline-block;
+	width:                          25%;
+}
+
+.hor_field_wrap .select_wrapper,
+.hor_field_wrap .input_wrapper
+{
+	display:                        inline-block;
+	width:                          70%;
+}
+
+.vert_field_wrap label,
+.vert_field_wrap .select_wrapper,
+.vert_field_wrap .input_wrapper
+{
+	display:                        block;
+	width:                          50%;
+}
+
+.vert_field_wrap label
+{
+	margin-bottom:                  1rem;
+}
+
+.vert_field_wrap .input_wrapper textarea
+{
+	height:                         20rem;
+}
+
+/* jQuery UI theming */
+.ui-widget-content
+{
+	background:                     #fff;
+}
+
+.ui-widget,
+.ui-widget input,
+.ui-widget select,
+.ui-widget textarea,
+.ui-widget button
+{
+	font-size:                      inherit;
+	font-family:                    Arial, sans-serif;
+}
+
+.ui-datepicker
+{
+	cursor:                         pointer;
+}
+
+.ui-datepicker-prev,
+.ui-datepicker-next
+{
+	cursor:                         pointer;
+}
+
+.ui-widget-content .ui-state-default
+{
+	background:                     transparent;
+	color:                          inherit;
+}
+
+.ui-menu .ui-state-hover,
+.ui-menu .ui-state-focus,
+.ui-widget-header,
+.ui-widget-header .ui-state-hover,
+.ui-widget-header .ui-state-focus,
+.ui-datepicker-next-hover,
+.ui-widget-content .ui-state-default.ui-state-active,
+.ui-widget-content .ui-state-hover
+{
+	font-weight:                    normal;
+	background:                     #444;
+	color:                          #fff;
+	border:                         0;
+}
+
+.ui-widget-header .ui-icon
+{
+	background-image:               url('../js/jquery-ui/images/ui-icons_ffffff_256x240.png');
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px)
+{
+	.four.hor_field_wrap
+	{
+		width:                          70%;
+	}
+}
+
+@media only screen and (max-width: 767px)
+{
+	.visible_md
+	{
+		display:                        inline-block;
+	}
+	.hidden_md
+	{
+		display:                        none !important;
+	}
+	.four.hor_field_wrap
+	{
+		width:                          100%;
+	}
+	.hor_field_wrap label,
+	.hor_field_wrap .select_wrapper,
+	.hor_field_wrap .input_wrapper,
+	.vert_field_wrap label,
+	.vert_field_wrap .select_wrapper,
+	.vert_field_wrap .input_wrapper
+	{
+		display:                        block;
+		width:                          100%;
+	}
+}
+
+@media only screen and (max-width: 550px)
+{
+	body
+	{
+		overflow-x:                       hidden;
+		font-size:                        1.6rem;
+	}
+	.visible_sm
+	{
+		display:                        inline-block;
+	}
+	.hidden_sm
+	{
+		display:                        none !important;
+	}
+	select,
+	select:active,
+	select:focus,
+	input[type="text"],
+	input[type="password"]
+	{
+		font-size:                      1.6rem;
+	}
+}
