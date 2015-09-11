@@ -3,7 +3,7 @@ $(function() {
 	$('.data_date').datepicker();
 	/* Datepicker end */
 	/* if desktop AND cookie says so - show left nav */
-	if ($.browser.desktop && Cookies.get('leftNav') === '1') {
+	if ($(window).width() > 768 && Cookies.get('leftNav') === '1') {
 		location.hash = 'main_nav';
 	}
 	/* if click hamburger AND left nav is hidden - set cookie AND show left nav */
