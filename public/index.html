@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="sv">
 <head>
 
@@ -193,9 +194,9 @@
 					</ul>
 				</nav>
 
-				<section class="section content">
+				<section id="main_content" class="section content">
 
-					<h1>Header</h1>
+					<h1>Header <span id="msg_print"></span></h1>
 
 					<ul class="breadcrumbs">
 						<li>
@@ -231,10 +232,10 @@
 							<h2>Subheader</h2>
 
 							<form class="read_update_delete_form" id="read_update_delete_form" method="post">
-								<div class="row">
+								<div class="row wrap_row">
 									<div class="ten columns">
 
-										<div class="row wrap_row">
+										<div class="row wrap_small_row">
 											<div class="hor_field_wrap">
 												<label for="data_choice" class="strong">Choice *</label>
 												<div class="select_wrapper">
@@ -249,7 +250,7 @@
 											</div>
 										</div>
 
-										<div id="field_level_0" class="row wrap_row field_level">
+										<div id="field_level_0" class="row wrap_small_row field_level">
 											<div class="hor_field_wrap">
 												<label for="data_field_0">Data field 0</label>
 												<div class="input_wrapper">
@@ -258,7 +259,7 @@
 											</div>
 										</div>
 
-										<div class="row wrap_row field_level">
+										<div class="row wrap_small_row field_level">
 											<div class="hor_field_wrap">
 												<label for="data_field_1">Data field 1</label>
 												<div class="input_wrapper">
@@ -286,12 +287,25 @@
 										</div>
 									</div>
 
-									<!--div class="two columns">
-										<div class="row wrap_medium_row">
-											<button type="submit" class="button u-full-width">Preview</button>
-										</div>
-									</div-->
+								</div>
 
+								<div class="row sticky_bot">
+									<div class="twelve columns">
+										<ul class="sub_nav">
+											<li>
+												<a class="button inv" href="#">Cancel</a>
+											</li>
+											<li>
+												<a class="button inv" href="#">Delete</a>
+											</li>
+											<li>
+												<a class="button inv" href="#">Save & Exit</a>
+											</li>
+											<li>
+												<a class="button inv active" href="#">Save</a>
+											</li>
+										</ul>
+									</div>
 								</div>
 
 							</form>

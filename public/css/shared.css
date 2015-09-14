@@ -69,7 +69,7 @@
 .msg_box
 {
 	background:                     #efefef;
-	border:                         1px solid #ccc;
+	border:                         1px solid #d1d1d1;
 	color:                          inherit;
 	padding:                        1rem 3rem 1rem 2rem;
 	position:                       relative;
@@ -130,6 +130,7 @@
 .page_wrapper
 {
 	position:                       relative;
+	height:                         100%;
 }
 
 .select_wrapper,
@@ -190,7 +191,10 @@
 
 .vert_field_wrap .input_wrapper textarea
 {
+	width:                          100%;
+	max-width:                      100%;
 	height:                         20rem;
+	border:                         1px solid #d1d1d1;
 }
 
 /* jQuery UI theming */
