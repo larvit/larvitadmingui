@@ -21,8 +21,16 @@ body
 
 h1
 {
-	margin:                         2rem 0;
+	margin:                         1.4rem 0;
 	font-size:                      3.6rem;
+	font-weight:                    200;
+	line-height:                    normal;
+}
+
+h2
+{
+	margin:                         0 0 1.4rem 0;
+	font-size:                      2.8rem;
 	font-weight:                    200;
 	line-height:                    normal;
 }

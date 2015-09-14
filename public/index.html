@@ -1,303 +1,308 @@
 <html lang="sv">
 <head>
 
-  <title>LarvIT Admin GUI</title>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" type="text/css" href="css/normalize.css" />
-  <link rel="stylesheet" type="text/css" href="css/skeleton.css" />
-  <link rel="stylesheet" type="text/css" href="css/fonts.css" />
-  <link rel="stylesheet" type="text/css" href="js/jquery-ui/jquery-ui.min.css" />
-  <link rel="stylesheet" type="text/css" href="css/general.css" />
-  <link rel="stylesheet" type="text/css" href="css/shared.css" />
-  <link rel="stylesheet" type="text/css" href="css/buttons.css" />
-  <link rel="stylesheet" type="text/css" href="css/custom.css" />
+	<title>LarvIT Admin GUI</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/skeleton.css" />
+	<link rel="stylesheet" type="text/css" href="css/fonts.css" />
+	<link rel="stylesheet" type="text/css" href="js/jquery-ui/jquery-ui.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/general.css" />
+	<link rel="stylesheet" type="text/css" href="css/shared.css" />
+	<link rel="stylesheet" type="text/css" href="css/buttons.css" />
+	<link rel="stylesheet" type="text/css" href="css/custom.css" />
 
-  <script src="js/jquery.min.js"></script>
-  <script src="js/jquery-ui/jquery-ui.min.js"></script>
-  <script src="js/js.cookie.js"></script>
-  <script src="js/custom.js"></script>
+	<link rel="stylesheet" type="text/css" href="brookings/css/theme.css" />
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery-ui/jquery-ui.min.js"></script>
+	<script src="js/js.cookie.js"></script>
+	<script src="js/custom.js"></script>
 
 </head>
 <body>
 
-  <div class="page_wrapper">
+	<div class="page_wrapper">
 
-    <span class="target_fix" id="main_nav"></span>
+		<span class="target_fix" id="main_nav"></span>
 
-    <header class="section header">
-      <ul>
-        <li><a href="#" class="site_logo">LarvIT Admin GUI</a></li>
-        <li class="nav_trigger">
-          <a href="#main_nav" class="open_menu">
-            <span class="br_icon_hamburger_vert"></span>
-          </a>
-          <a href="#" class="close_menu">
-            <span class="br_icon_hamburger"></span>
-          </a>
-        </li>
-        <li class="right">
-            <div class="txt user hidden_md">
-              <form>
-                <div class="select_wrapper">
-                  <div class="sel_wrap">
-                    <select name="user" id="user">
-                      <option value="">Namn Namnsson</option>
-                      <option value="profil">Profil</option>
-                      <option value="loggaut">Logga ut</option>
-                    </select>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <span class="avatar">
-              <img src="images/avatar.png" alt="avatar" />
-            </span>
-        </li>
-        <li class="right">
-          <div class="txt hidden_md">
-            <form method="post">
-              <div class="input_wrapper">
-                <div class="input_wrap">
-                  <input type="text" name="search" id="search" placeholder="Sök" />
-                  <button type="submit">
-                    <span class="br_icon_search"></span>
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="visible_md">
-            <a href="#">
-              <span class="br_icon_search"></span>
-            </a>
-          </div>
-        </li>
-    </header>
+		<header class="section header">
+			<ul>
+				<li><a href="#" class="site_logo">LarvIT Admin GUI</a></li>
+				<li class="nav_trigger">
+					<a href="#main_nav" class="open_menu">
+						<span class="br_icon_hamburger_vert"></span>
+					</a>
+					<a href="#" class="close_menu">
+						<span class="br_icon_hamburger"></span>
+					</a>
+				</li>
+				<li class="right">
+					<div class="txt user hidden_md">
+						<form>
+							<div class="select_wrapper">
+								<div class="sel_wrap">
+									<select name="user" id="user">
+										<option value="">Namn Namnsson</option>
+										<option value="profil">Profil</option>
+										<option value="loggaut">Logga ut</option>
+									</select>
+								</div>
+							</div>
+						</form>
+					</div>
+					<span class="avatar">
+						<img src="images/avatar.png" alt="avatar" />
+					</span>
+				</li>
+				<li class="right">
+					<div class="txt hidden_md">
+						<form method="post">
+							<div class="input_wrapper">
+								<div class="input_wrap">
+									<input type="text" name="search" id="search" placeholder="Sök" />
+									<button type="submit">
+										<span class="br_icon_search"></span>
+									</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="visible_md">
+						<a href="#">
+							<span class="br_icon_search"></span>
+						</a>
+					</div>
+				</li>
+			</header>
 
-    <section class="section main_wrapper">
+			<section class="section main_wrapper">
 
-      <nav class="main_nav">
-        <ul class="accordion">
-          <li>
-            <input type="checkbox" name="a" id="cp-1" />
-            <label for="cp-1">
-              Left nav 0 0
-              <div class="plus">
-                <span class="br_icon_plus"></span>
-              </div>
-              <div class="minus">
-                <span class="br_icon_minus"></span>
-              </div>
-            </label>
-            <ul class="content">
-              <li>
-                <a href="#" target="_blank">
-                  <span class="br_icon_caret_right"></span>
-                  Left nav 0 0 0
-                </a>
-              </li>
-              <li>
-                <a href="#" target="_blank">
-                  <span class="br_icon_caret_right"></span>
-                  Left nav 0 0 1
-                </a>
-              </li>
-              <li>
-                <a href="#" target="_blank">
-                  <span class="br_icon_caret_right"></span>
-                  Left nav 0 0 2
-                </a>
-              </li>
-              <li>
-                <a href="#" target="_blank">
-                  <span class="br_icon_caret_right"></span>
-                  Left nav 0 0 3
-                </a>
-              </li>
-              <li>
-                <a href="#" target="_blank">
-                  <span class="br_icon_caret_right"></span>
-                  Left nav 0 0 4
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <input type="checkbox" name="b" id="cp-2" />
-            <label for="cp-2">
-              Left nav 0 1
-              <div class="plus">
-                <span class="br_icon_plus"></span>
-              </div>
-              <div class="minus">
-                <span class="br_icon_minus"></span>
-              </div>
-            </label>
-            <ul class="content">
-              <li>
-                <a href="http://www.dn.se" target="_blank">
-                  <span class="br_icon_caret_right"></span>
-                  Left nav 0 1 0
-                </a>
-              </li>
-              <li>
-                <a href="http://www.dn.se" target="_blank">
-                  <span class="br_icon_caret_right"></span>
-                  Left nav 0 1 1
-                </a>
-              </li>
-              <li>
-                <a href="http://www.dn.se" target="_blank">
-                  <span class="br_icon_caret_right"></span>
-                  Left nav 0 1 2
-                </a>
-              </li>
-              <li>
-                <a href="http://www.dn.se" target="_blank">
-                  <span class="br_icon_caret_right"></span>
-                  Left nav 0 1 3
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <input type="checkbox" name="c" id="cp-3" />
-            <label for="cp-3">
-              Left nav 0 2
-              <div class="plus">
-                <span class="br_icon_plus"></span>
-              </div>
-              <div class="minus">
-                <span class="br_icon_minus"></span>
-              </div>
-            </label>
-            <ul class="content">
-              <li>
-                <a href="http://www.dn.se" target="_blank">
-                  <span class="br_icon_caret_right"></span>
-                  Left nav 0 2 0
-                </a>
-              </li>
-              <li>
-                <a href="http://www.dn.se" target="_blank">
-                  <span class="br_icon_caret_right"></span>
-                  Left nav 0 2 1
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
+				<nav class="main_nav">
+					<ul class="accordion">
+						<li>
+							<input type="checkbox" name="a" id="cp-1" />
+							<label for="cp-1">
+								Left nav 0 0
+								<div class="plus">
+									<span class="br_icon_plus"></span>
+								</div>
+								<div class="minus">
+									<span class="br_icon_minus"></span>
+								</div>
+							</label>
+							<ul class="content">
+								<li>
+									<a href="#" target="_blank">
+										<span class="br_icon_caret_right"></span>
+										Left nav 0 0 0
+									</a>
+								</li>
+								<li>
+									<a href="#" target="_blank">
+										<span class="br_icon_caret_right"></span>
+										Left nav 0 0 1
+									</a>
+								</li>
+								<li>
+									<a href="#" target="_blank">
+										<span class="br_icon_caret_right"></span>
+										Left nav 0 0 2
+									</a>
+								</li>
+								<li>
+									<a href="#" target="_blank">
+										<span class="br_icon_caret_right"></span>
+										Left nav 0 0 3
+									</a>
+								</li>
+								<li>
+									<a href="#" target="_blank">
+										<span class="br_icon_caret_right"></span>
+										Left nav 0 0 4
+									</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<input type="checkbox" name="b" id="cp-2" />
+							<label for="cp-2">
+								Left nav 0 1
+								<div class="plus">
+									<span class="br_icon_plus"></span>
+								</div>
+								<div class="minus">
+									<span class="br_icon_minus"></span>
+								</div>
+							</label>
+							<ul class="content">
+								<li>
+									<a href="http://www.dn.se" target="_blank">
+										<span class="br_icon_caret_right"></span>
+										Left nav 0 1 0
+									</a>
+								</li>
+								<li>
+									<a href="http://www.dn.se" target="_blank">
+										<span class="br_icon_caret_right"></span>
+										Left nav 0 1 1
+									</a>
+								</li>
+								<li>
+									<a href="http://www.dn.se" target="_blank">
+										<span class="br_icon_caret_right"></span>
+										Left nav 0 1 2
+									</a>
+								</li>
+								<li>
+									<a href="http://www.dn.se" target="_blank">
+										<span class="br_icon_caret_right"></span>
+										Left nav 0 1 3
+									</a>
+								</li>
+							</ul>
+						</li>
+						<li>
+							<input type="checkbox" name="c" id="cp-3" />
+							<label for="cp-3">
+								Left nav 0 2
+								<div class="plus">
+									<span class="br_icon_plus"></span>
+								</div>
+								<div class="minus">
+									<span class="br_icon_minus"></span>
+								</div>
+							</label>
+							<ul class="content">
+								<li>
+									<a href="http://www.dn.se" target="_blank">
+										<span class="br_icon_caret_right"></span>
+										Left nav 0 2 0
+									</a>
+								</li>
+								<li>
+									<a href="http://www.dn.se" target="_blank">
+										<span class="br_icon_caret_right"></span>
+										Left nav 0 2 1
+									</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</nav>
 
-      <section class="section content">
+				<section class="section content">
 
-        <h1>Header</h1>
+					<h1>Header</h1>
 
-        <ul class="breadcrumbs">
-          <li>
-            <a href="#">
-              <span class="br_icon_house"></span>
-              Home
-            </a>
-          </li>
-          <li>
-            <a href="#">Sub page</a>
-          </li>
-          <li>
-            <a href="#">Sub sub page</a>
-          </li>
-        </ul>
+					<ul class="breadcrumbs">
+						<li>
+							<a href="#">
+								<span class="br_icon_house"></span>
+								Home
+							</a>
+						</li>
+						<li>
+							<a href="#">Sub page</a>
+						</li>
+						<li>
+							<a href="#">Sub sub page</a>
+						</li>
+					</ul>
 
-        <div class="content_wrapper">
+					<div class="content_wrapper">
 
-          <ul class="sub_nav">
-            <li>
-              <a class="button active" href="#">All</a>
-            </li>
-            <li>
-              <a class="button" href="#">Create new</a>
-            </li>
-            <li>
-              <a class="button" href="#">Import</a>
-            </li>
-          </ul>
+						<ul class="sub_nav">
+							<li>
+								<a class="button active" href="#">All</a>
+							</li>
+							<li>
+								<a class="button" href="#">Create new</a>
+							</li>
+							<li>
+								<a class="button" href="#">Import</a>
+							</li>
+						</ul>
 
-          <div class="wrap">
-            <form class="read_update_delete_form" id="read_update_delete_form" method="post">
-              <div class="row">
-                <div class="five columns">
+						<div class="wrap">
 
-                  <div class="row wrap_row">
-                    <div class="hor_field_wrap">
-                      <label for="data_choice" class="strong">Choice *</label>
-                      <div class="select_wrapper">
-                        <div class="sel_wrap">
-                          <select id="data_type" name="data_type">
-                            <option value="choice1">Choice 1</option>
-                            <option value="choice2">Choice 2</option>
-                            <option value="choice3">Choice 3</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+							<h2>Subheader</h2>
 
-                  <div id="field_level_0" class="row wrap_row field_level">
-                    <div class="hor_field_wrap">
-                      <label for="data_field_0">Data field 0</label>
-                       <div class="input_wrapper">
-                        <input type="text" id="data_field_0" class="data_field" name="data_field_0" placeholder="Choose data field 0" />
-                      </div>
-                    </div>
-                  </div>
+							<form class="read_update_delete_form" id="read_update_delete_form" method="post">
+								<div class="row">
+									<div class="ten columns">
 
-                  <div class="row wrap_row field_level">
-                    <div class="hor_field_wrap">
-                      <label for="data_field_1">Data field 1</label>
-                       <div class="input_wrapper">
-                        <input type="text" id="data_field_1" class="data_field" name="data_field_1" placeholder="Choose data field 1" />
-                      </div>
-                    </div>
-                  </div>
+										<div class="row wrap_row">
+											<div class="hor_field_wrap">
+												<label for="data_choice" class="strong">Choice *</label>
+												<div class="select_wrapper">
+													<div class="sel_wrap">
+														<select id="data_type" name="data_type">
+															<option value="choice1">Choice 1</option>
+															<option value="choice2">Choice 2</option>
+															<option value="choice3">Choice 3</option>
+														</select>
+													</div>
+												</div>
+											</div>
+										</div>
 
-                  <div class="row wrap_row">
-                    <div class="hor_field_wrap">
-                      <label for="data_date" class="strong">Date *</label>
-                      <div class="input_wrapper">
-                        <input type="text" id="data_date" class="data_date" name="data_date" placeholder="Choose date" />
-                      </div>
-                    </div>
-                  </div>
+										<div id="field_level_0" class="row wrap_row field_level">
+											<div class="hor_field_wrap">
+												<label for="data_field_0">Data field 0</label>
+												<div class="input_wrapper">
+													<input type="text" id="data_field_0" class="data_field" name="data_field_0" placeholder="Choose data field 0" />
+												</div>
+											</div>
+										</div>
 
-                  <div class="row wrap_row">
-                    <div class="vert_field_wrap">
-                      <label for="data_current_data">Current data</label>
-                      <div class="input_wrapper">
-                        <textarea id="data_current_data" class="u-full-width data_current_data zebra" name="data_current_data"></textarea>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+										<div class="row wrap_row field_level">
+											<div class="hor_field_wrap">
+												<label for="data_field_1">Data field 1</label>
+												<div class="input_wrapper">
+													<input type="text" id="data_field_1" class="data_field" name="data_field_1" placeholder="Choose data field 1" />
+												</div>
+											</div>
+										</div>
 
-                <div class="two columns">
-                  <div class="row wrap_medium_row">
-                    <button type="submit" class="button u-full-width">Preview</button>
-                  </div>
-                </div>
+										<div class="row wrap_row">
+											<div class="hor_field_wrap">
+												<label for="data_date" class="strong">Date *</label>
+												<div class="input_wrapper">
+													<input type="text" id="data_date" class="data_date" name="data_date" placeholder="Choose date" />
+												</div>
+											</div>
+										</div>
 
-              </div>
+										<div class="row wrap_row">
+											<div class="vert_field_wrap">
+												<label for="data_current_data">Current data</label>
+												<div class="input_wrapper">
+													<textarea id="data_current_data" class="u-full-width data_current_data zebra" name="data_current_data"></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
 
-            </form>
-          </div>
+									<!--div class="two columns">
+										<div class="row wrap_medium_row">
+											<button type="submit" class="button u-full-width">Preview</button>
+										</div>
+									</div-->
 
-        </div>
+								</div>
 
-      </section>
+							</form>
+						</div>
 
-    </section>
+					</div>
 
-  </div>
+				</section>
 
-</body>
+			</section>
+
+		</div>
+
+	</body>

@@ -257,7 +257,7 @@
 
 			.main_nav > ul > li > ul.content li a
 			{
-				margin:                         1rem 0;
+				margin:                         0;
 				padding:                        0.5rem 1rem;
 				background:                     transparent;
 				border-radius:                  0.3rem;
@@ -273,7 +273,7 @@
 				{
 					font-size:                      4px;
 					vertical-align:                 middle;
-					padding-bottom:                 0.2rem;
+					padding:                        0 0.5rem 0.2rem 0;
 				}
 
 			.main_nav > ul > li > input[type="checkbox"]:checked ~ ul.content
@@ -301,7 +301,7 @@
 	left:                           0;
 	bottom:                         0;
 	transition:                     left 0.3s ease;
-	padding:                        0 3rem 5rem 3rem;/*5rem 3rem;*/
+	padding:                        0 2rem 5rem 2rem;/*5rem 3rem;*/
 }
 
 	.section.content h1
@@ -310,11 +310,16 @@
 		text-transform:                 uppercase;
 	}
 
+	.section.content h2
+	{
+		text-transform:                 uppercase;
+	}
+
 	.section.content ul.breadcrumbs
 	{
 		position:                       absolute;
 		right:                          3rem;
-		top:                            4rem;/*9rem;*/
+		top:                            3rem;/*9rem;*/
 		list-style:                     none;
 	}
 
@@ -377,6 +382,7 @@
 		{
 			padding:                        0;
 		}
+
 		.section.content .content_wrapper.login .login_wrapper
 		{
 			background-color:               #fff;
@@ -419,9 +425,8 @@
 	.section.content .content_wrapper ul.sub_nav
 	{
 		list-style:                     none;
-		padding:                        3rem 3rem 2.3rem 3rem;
+		padding:                        2rem 2rem 1.3rem 2rem;
 		border-bottom:                  1px solid #efefef;
-		margin-bottom:                  3rem;
 	}
 
 		.section.content .content_wrapper ul.sub_nav > li
@@ -439,7 +444,7 @@
 
 	.section.content .content_wrapper .wrap
 	{
-		padding:                        3rem;
+		padding:                        1rem 2rem 2rem;
 	}
 
 /* Active/shown left nav */
@@ -470,18 +475,18 @@
 	{
 		max-width:                      10rem;
 	}
-}
-
-@media only screen and (max-width: 767px)
-{
 	.section.content ul.breadcrumbs
 	{
 		position:                       relative;
 		right:                          auto;
 		top:                            auto;
 		display:                        block;
-		min-width:                      28rem;
 	}
+}
+
+@media only screen and (max-width: 767px)
+{
+
 }
 
 @media only screen and (max-width: 550px)
