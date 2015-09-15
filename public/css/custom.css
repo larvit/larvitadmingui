@@ -242,7 +242,7 @@
 		.main_nav > ul > li > label .br_icon_minus
 		{
 			font-size:                      0.7rem;
-			vertical-align:                 top;
+			vertical-align:                 middle;
 		}
 
 		.main_nav > ul > li > ul.content
@@ -423,7 +423,7 @@
 			background:                     #ccc;
 		}
 
-.section.content .content_wrapper .sticky_bot.sticky
+.section.content .content_wrapper #sticky_bot.sticky
 {
 	position:                       fixed;
 	bottom:                         0;
@@ -431,7 +431,7 @@
 	z-index:                        999;
 }
 
-	.section.content .content_wrapper .sticky_bot.sticky .columns
+	.section.content .content_wrapper #sticky_bot.sticky .columns
 	{
 		background:                     #fff;
 		margin-left:                    -2rem;
@@ -457,7 +457,7 @@
 			margin:                         0 0.7rem 0.7rem 0;
 		}
 
-			.section.content .content_wrapper .sticky_bot.sticky .columns ul.sub_nav > li:first-child
+			.section.content .content_wrapper #sticky_bot.sticky .columns ul.sub_nav > li:first-child
 			{
 				margin-left:                    2rem;
 			}
@@ -540,13 +540,13 @@
 	{
 		left:                           60%;
 	}
-	.section.content .content_wrapper .sticky_bot.sticky
+	.section.content .content_wrapper #sticky_bot.sticky
 	{
 		position:                       relative !important;
 		bottom:                         auto !important;
 		width:                          auto !important;
 	}
-	.section.content .content_wrapper .sticky_bot.sticky .columns
+	.section.content .content_wrapper #sticky_bot.sticky .columns
 	{
 		background:                     transparent !important;
 	}
