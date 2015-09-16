@@ -250,6 +250,12 @@
 	background-image:               url('../js/jquery-ui/images/ui-icons_ffffff_256x240.png');
 }
 
+.toolbar_fixed
+{
+	z-index:                        999;
+	background:                     #fff;
+}
+
 @media only screen and (min-width: 768px) and (max-width: 1024px)
 {
 	.four.hor_field_wrap
