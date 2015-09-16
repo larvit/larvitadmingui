@@ -4,8 +4,7 @@ jQuery(function($) {
 
 		var $window = $(window),
 		$body = $('#body'),
-		$toolbar = $('.toolbar_fixed'),
-		$curform = $('.toolbar_form');
+		$toolbar = $('.toolbar_fixed');
 
 		if (!$toolbar.length) return;
 
@@ -15,7 +14,7 @@ jQuery(function($) {
 		$wrap = $toolbar.parent().css('height', toolbarHeight);
 
 		$toolbar.css({
-			//width: $curform.outerWidth(),
+			//width: $formbody.innerWidth(),
 			position: 'absolute'
 		});
 
@@ -33,21 +32,24 @@ jQuery(function($) {
 				x: $window.width(),
 				y: $window.height()
 			},
-			sizeChanged = (newSize.x != windowSize.x || newSize.y != windowSize.y);
+			sizeChanged = (newSize.x != windowSize.x || newSize.y != windowSize.y),
+			formWidth = $('.toolbar_form .form_body').width();
 
 			if (viewY > maxY && (sizeChanged || mode != 'inline')) {
 				mode = 'inline';
 				windowSize = newSize;
 				$toolbar.css({
 					top: 0,
-					position: 'absolute'
+					position: 'absolute',
+					width: formWidth
 				});
 			} else if (viewY <= maxY && (sizeChanged || mode == 'inline')) {
 				mode = 'fixed';
 				windowSize = newSize;
 				$toolbar.css({
 					top: $window.height() - toolbarHeight,
-					position: 'fixed'
+					position: 'fixed',
+					width: formWidth
 				});
 			}
 
