@@ -176,17 +176,18 @@
 	width:                          70%;
 }
 
-.vert_field_wrap label,
+.vert_field_wrap label
+{
+	display:                        block;
+	width:                          auto;
+	margin-bottom:                  1rem;
+}
+
 .vert_field_wrap .select_wrapper,
 .vert_field_wrap .input_wrapper
 {
-	display:                        block;
-	width:                          50%;
-}
-
-.vert_field_wrap label
-{
-	margin-bottom:                  1rem;
+	display:                        inline-block;
+	width:                          25%;
 }
 
 .vert_field_wrap .input_wrapper textarea
@@ -196,6 +197,33 @@
 	height:                         20rem;
 	border:                         1px solid #d1d1d1;
 }
+
+.zebra
+{
+	background-image:               repeating-linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255) 20px, rgb(239, 239, 239) 20px, rgb(239, 239, 239) 40px);
+}
+
+	.zebra textarea,
+	.zebra table
+	{
+		font-size:                      16px;
+		line-height:                    20px;
+		padding:                        0;
+		background:                     transparent;
+		float:                          left;
+	}
+
+		.zebra table th,
+		.zebra table td
+		{
+			padding:                        0 1.5rem;
+			border:                         0;
+		}
+
+	.zebra textarea
+	{
+		padding-top:                    2rem;
+	}
 
 /* jQuery UI theming */
 .ui-widget-content

@@ -8,13 +8,13 @@ jQuery(function($) {
 
 		if (!$toolbar.length) return;
 
-		$toolbar.wrap('<div class="toolbar_wrapper" style="position: relative;">');
+		$toolbar.wrap('<div class="row"><div class="eight columns toolbar_wrapper" style="position: relative;">');
 
 		var toolbarHeight = $toolbar.outerHeight(), //  + 15 add 15px for margin
 		$wrap = $toolbar.parent().css('height', toolbarHeight);
 
 		$toolbar.css({
-			//width: $formbody.innerWidth(),
+			width: $toolbar.parent().width()+'px',
 			position: 'absolute'
 		});
 
@@ -41,7 +41,8 @@ jQuery(function($) {
 				$toolbar.css({
 					top: 0,
 					position: 'absolute',
-					width: formWidth
+					width: $toolbar.parent().width()+'px'//,
+					//width: formWidth
 				});
 			} else if (viewY <= maxY && (sizeChanged || mode == 'inline')) {
 				mode = 'fixed';
@@ -49,16 +50,18 @@ jQuery(function($) {
 				$toolbar.css({
 					top: $window.height() - toolbarHeight,
 					position: 'fixed',
-					width: formWidth
+					width: $toolbar.parent().width()+'px'//,
+					//width: formWidth
 				});
 			}
 
 		}
 
 		$window.scroll(onScroll);
-		$window.resize(onScroll);
 		$window.on('redraw', onScroll);
-		onScroll();
+		$window.bind('resize', function() {
+    	onScroll();
+		}).trigger('resize');
 
 		// do it again in a few hundred ms to correct for other UI initialisation
 		setTimeout(onScroll, 200);

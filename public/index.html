@@ -234,12 +234,12 @@
 
 							<form class="toolbar_form read_update_delete_form" id="read_update_delete_form" method="post">
 								<div id="content_form_top" class="row wrap_row">
-									<div class="ten columns form_body">
+									<div class="eight columns form_body">
 
 										<div class="row wrap_small_row">
 											<div class="hor_field_wrap">
 												<label for="data_choice" class="strong">Choice *</label>
-												<div class="select_wrapper">
+												<div class="u-pull-right select_wrapper">
 													<div class="sel_wrap">
 														<select id="data_type" name="data_type">
 															<option value="choice1">Choice 1</option>
@@ -254,7 +254,7 @@
 										<div id="field_level_0" class="row wrap_small_row field_level">
 											<div class="hor_field_wrap">
 												<label for="data_field_0">Data field 0</label>
-												<div class="input_wrapper">
+												<div class="u-pull-right input_wrapper">
 													<input type="text" id="data_field_0" class="data_field" name="data_field_0" placeholder="Choose data field 0" />
 												</div>
 											</div>
@@ -263,7 +263,7 @@
 										<div class="row wrap_small_row field_level">
 											<div class="hor_field_wrap">
 												<label for="data_field_1">Data field 1</label>
-												<div class="input_wrapper">
+												<div class="u-pull-right input_wrapper">
 													<input type="text" id="data_field_1" class="data_field" name="data_field_1" placeholder="Choose data field 1" />
 												</div>
 											</div>
@@ -272,7 +272,7 @@
 										<div class="row wrap_row">
 											<div class="hor_field_wrap">
 												<label for="data_date" class="strong">Date *</label>
-												<div class="input_wrapper">
+												<div class="u-pull-right input_wrapper">
 													<input type="text" id="data_date" class="data_date" name="data_date" placeholder="Choose date" />
 												</div>
 											</div>
@@ -281,8 +281,46 @@
 										<div class="row wrap_row">
 											<div class="vert_field_wrap">
 												<label for="data_current_data">Current data</label>
-												<div class="input_wrapper">
-													<textarea id="data_current_data" class="u-full-width data_current_data zebra" name="data_current_data"></textarea>
+												<div class="row zebra">
+													<table>
+														<thead>
+															<tr>
+																<th>Header 1</th>
+																<th>Header 2</th>
+																<th>Header 3</th>
+																<th>Header 4</th>
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td>Cell 1</td>
+																<td>Cell 2</td>
+																<td>Cell 3</td>
+																<td>Cell 4</td>
+															</tr>
+															<tr>
+																<td>Cell 1</td>
+																<td>Cell 2</td>
+																<td>Cell 3</td>
+																<td>Cell 4</td>
+															</tr>
+															<tr>
+																<td>Cell 1</td>
+																<td>Cell 2</td>
+																<td>Cell 3</td>
+																<td>Cell 4</td>
+															</tr>
+															<tr>
+																<td>Cell 1</td>
+																<td>Cell 2</td>
+																<td>Cell 3</td>
+																<td>Cell 4</td>
+															</tr>
+														</tbody>
+													</table>
+													<div class="input_wrapper">
+														<textarea id="data_current_data" class="data_current_data" name="data_current_data"></textarea>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -290,23 +328,21 @@
 
 								</div>
 
-								<div class="row toolbar_fixed">
-									<div class="twelve columns">
-										<ul class="sub_nav">
-											<li>
-												<a class="button inv" href="#">Cancel</a>
-											</li>
-											<li>
-												<a class="button inv" href="#">Delete</a>
-											</li>
-											<li>
-												<a class="button inv" href="#">Save & Exit</a>
-											</li>
-											<li>
-												<a class="button inv active" href="#">Save</a>
-											</li>
-										</ul>
-									</div>
+								<div class="toolbar_fixed">
+									<ul class="sub_nav">
+										<li>
+											<a class="button" href="#">Delete</a>
+										</li>
+										<li class="u-pull-right">
+											<a class="button inv active" href="#">Save</a>
+										</li>
+										<li class="u-pull-right">
+											<a class="button inv" href="#">Save & Exit</a>
+										</li>
+										<li class="u-pull-right">
+											<a class="button inv" href="#">Cancel</a>
+										</li>
+									</ul>
 								</div>
 
 							</form>

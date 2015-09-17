@@ -69,14 +69,6 @@ legend
 	margin-bottom:                  0;
 }
 
-textarea.zebra
-{
-	font-size:                      16px;
-	line-height:                    20px;
-	padding:                        0;
-	background-image:               repeating-linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255) 20px, rgb(239, 239, 239) 20px, rgb(239, 239, 239) 40px);
-}
-
 /* Remove ugly dotted outline around links */
 ::-moz-focus-inner,
 :active,
