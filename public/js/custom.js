@@ -3,11 +3,27 @@ $(document).ready(function() {
 	$('.data_date').datepicker();
 
 	// Sortable init
-	$('ul.sortable').sortable();
+	$('table.sortable tbody').sortable({
+		helper: fixWidthHelper
+	}).disableSelection();
+
+	// Helper to keep full width of sortable tr's
+	function fixWidthHelper(e, ui) {
+		ui.children().each(function() {
+			$(this).width($(this).width());
+		});
+		return ui;
+	}
+
+	/*$('a').on('click', function() {
+		window.placeFooterBtns();
+		setTimeout(window.placeFooterBtns, 305);
+	});*/
 
 	// If desktop AND cookie says so - show left nav
 	if ($(window).width() > 768 && Cookies.get('leftNav') === '1') {
 		location.hash = 'main_nav';
+		//setTimeout(window.placeFooterBtns, 500);
 	}
 
 	// If click hamburger AND left nav is hidden - set cookie AND show left nav

@@ -14,6 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="css/shared.css" />
 	<link rel="stylesheet" type="text/css" href="css/buttons.css" />
 	<link rel="stylesheet" type="text/css" href="css/custom.css" />
+	<link rel="stylesheet" type="text/css" href="css/theme.css" />
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-ui/jquery-ui.min.js"></script>
@@ -57,7 +58,7 @@
 						<img src="images/avatar.png" alt="avatar" />
 					</span>
 				</li>
-				<li class="right">
+				<!--li class="right">
 					<div class="txt hidden_md">
 						<form method="post">
 							<div class="input_wrapper">
@@ -75,7 +76,7 @@
 							<span class="br_icon_search"></span>
 						</a>
 					</div>
-				</li>
+				</li-->
 			</header>
 
 			<section class="section main_wrapper">
@@ -216,25 +217,15 @@
 
 					<div id="content_wrapper" class="content_wrapper">
 
-						<ul id="content_top_nav" class="sub_nav">
-							<li>
-								<a class="button active" href="#">All</a>
-							</li>
-							<li>
-								<a class="button" href="#">Create new</a>
-							</li>
-							<li>
-								<a class="button" href="#">Import</a>
-							</li>
-						</ul>
+						<ul id="content_top_nav" class="sub_nav"></ul>
 
 						<div class="wrap">
 
-							<h2>Subheader</h2>
+							<p class="ingress">All categories with the same path can be re-ordered, simply drag and drop each category.</p>
 
 							<form class="toolbar_form read_update_delete_form" id="read_update_delete_form" method="post">
 								<div id="content_form_top" class="row wrap_row">
-									<div class="eight columns form_body">
+									<div class="nine columns form_body">
 
 										<div class="row wrap_row">
 											<div class="vert_field_wrap full">
@@ -251,22 +242,19 @@
 											</div>
 										</div>
 
-										<div class="row">
-											<div class="vert_field_wrap split">
-												<label for="data_cat_list_path_label">Path</label>
-											</div>
-											<div class="vert_field_wrap split">
-												<label for="data_cat_list_cat_label">Category</label>
-											</div>
-										</div>
-
 										<div class="row wrap_small_row">
-											<ul class="sortable">
-												<li>
-													<input type="hidden" name="sortable_nr_1[]" />
-													<div class="sort_wrap">
-														<div class="split text_right">/</div>
-														<div class="split right">
+											<table class="u-full-width sortable">
+												<thead>
+													<tr>
+														<th>Path</th>
+														<th>Category</th>
+													</tr>
+												</thead>
+												<tbody class="wrap_row">
+													<tr>
+														<td class="text_right">/</td>
+														<td>
+															<input type="hidden" name="data_category_list_1[]" value="1" />
 															<a href="#">ERH</a>
 															<div class="handle">
 																<span class="top"></span>
@@ -275,14 +263,12 @@
 																<span class="line"></span>
 																<span class="bot"></span>
 															</div>
-														</div>
-													</div>
-												</li>
-												<li>
-													<input type="hidden" name="sortable_nr_1[]" />
-													<div class="sort_wrap">
-														<div class="split text_right">/</div>
-														<div class="split right">
+														</td>
+													</tr>
+													<tr>
+														<td class="text_right">/</td>
+														<td>
+															<input type="hidden" name="data_category_list_1[]" value="2" />
 															<a href="#">Other</a>
 															<div class="handle">
 																<span class="top"></span>
@@ -291,20 +277,15 @@
 																<span class="line"></span>
 																<span class="bot"></span>
 															</div>
-														</div>
-													</div>
-												</li>
-											</ul>
-										</div>
-
-										<div class="row wrap_small_row">
-											<ul class="sortable">
-												<li>
-													<input type="hidden" name="sortable_nr_2[]" />
-													<div class="sort_wrap">
-														<div class="split text_right">/ ERH /</div>
-														<div class="split right">
-															<a href="#">Needs</a>
+														</td>
+													</tr>
+												</tbody>
+												<tbody class="wrap_row">
+													<tr>
+														<td class="text_right">/ ERH / Needs / Resilience /</td>
+														<td>
+															<input type="hidden" name="data_category_list_2[]" value="1" />
+															<a href="#">Production shocks</a>
 															<div class="handle">
 																<span class="top"></span>
 																<span class="line"></span>
@@ -312,14 +293,12 @@
 																<span class="line"></span>
 																<span class="bot"></span>
 															</div>
-														</div>
-													</div>
-												</li>
-												<li>
-													<input type="hidden" name="sortable_nr_2[]" />
-													<div class="sort_wrap">
-														<div class="split text_right">/ ERH /</div>
-														<div class="split right">
+														</td>
+													</tr>
+													<tr>
+														<td class="text_right">/ ERH /</td>
+														<td>
+															<input type="hidden" name="data_category_list_2[]" value="2" />
 															<a href="#">Inv. clim</a>
 															<div class="handle">
 																<span class="top"></span>
@@ -328,48 +307,22 @@
 																<span class="line"></span>
 																<span class="bot"></span>
 															</div>
-														</div>
-													</div>
-												</li>
-											</ul>
-										</div>
-
-										<div class="row wrap_row">
-											<div class="hor_field_wrap">
-												<label for="data_cat_desc">Description</label>
-												<div class="u-pull-right input_wrapper">
-													<textarea id="data_cat_desc" class="data_textarea" name="data_cat_desc"></textarea>
-												</div>
-											</div>
-										</div>
-
-										<div class="row wrap_row">
-											<div class="hor_field_wrap">
-												<label for="data_cat_unit">Unit</label>
-												<div class="u-pull-right input_wrapper">
-													<textarea id="data_cat_unit" class="data_textarea tight" name="data_cat_unit"></textarea>
-												</div>
-											</div>
-										</div>
-
-										<div class="row wrap_small_row">
-											<div class="hor_field_wrap">
-												<label for="data_cat_anonymous"></label>
-												<div class="u-pull-right input_wrapper">
-													<input type="text" id="data_cat_anonymous" class="data_field" name="data_cat_anonymous" placeholder="Category anonymous" />
-												</div>
-											</div>
+														</td>
+													</tr>
+												</tbody>
+											</table>
 										</div>
 
 								</div>
 
 								<div class="toolbar_fixed">
 									<ul class="sub_nav">
+										<li>&nbsp;</li>
 										<li class="u-pull-right">
 											<a class="button inv active" href="#">Save</a>
 										</li>
 										<li class="u-pull-right">
-											<a class="button inv" href="#">Cancel</a>
+											<a class="button" href="#">Cancel</a>
 										</li>
 									</ul>
 								</div>

@@ -69,3 +69,12 @@ input[type="button"]
 		background:                     #efefef;
 		color:                          #444;
 	}
+
+	.button.warning,
+	button.warning,
+	input[type="submit"].warning,
+	input[type="reset"].warning,
+	input[type="button"].warning
+	{
+		color:                          #ff0000;
+	}

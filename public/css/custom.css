@@ -432,7 +432,7 @@
 
 		.section.content .content_wrapper form ul.sub_nav
 		{
-			padding:                        2rem 0 0;
+			padding:                        2rem 0;
 			border-bottom:                  0;
 		}
 
@@ -441,6 +441,11 @@
 			display:                        inline-block;
 			margin:                         0 0.7rem 0.7rem 0;
 		}
+
+			.section.content .content_wrapper ul.sub_nav > li.u-pull-right
+			{
+				margin:                         0 0 0.7rem 0.7rem;
+			}
 
 		/*.section.content .content_wrapper ul.sub_nav > li > a:hover,
 		.section.content .content_wrapper a.active

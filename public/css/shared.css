@@ -70,44 +70,50 @@
 	text-align:                     right;
 }
 
+p.ingress
+{
+	font-size:                      2rem;
+	opacity:                        0.5;
+}
+
 .border_bot
 {
 	border-bottom:                  1px solid #efefef;
 }
 
-ul.sortable
+table.sortable
 {
-	list-style:                     none;
+	border-collapse:                separate;
+  border-spacing:                 0 0.3rem;
 }
 
-	ul.sortable li
+	table.sortable tbody:after
 	{
+		content:                        '';
 		display:                        block;
-		cursor:                         move;
+		height:                         2rem;
 	}
 
-		ul.sortable li .sort_wrap
+		table.sortable tbody tr
 		{
-			display:                        inline-block;
-			width:                          100%;
-			background:                     #d1d1d1;
-			padding:                        0.5rem 0;
+			cursor:                         move;
 		}
 
-			ul.sortable li .sort_wrap .split
+			table.sortable thead tr th,
+			table.sortable tbody tr td
 			{
-				float:                          left;
-				width:                          50%;
-				padding:                        0 0.5rem;
+				border:                         0;
+				padding:                        0.2rem 0.5rem;
 				position:                       relative;
 			}
 
-				ul.sortable li .sort_wrap .split.right
-				{
-					padding-left:                   0;
-				}
+			table.sortable tbody tr td
+			{
+				background:                     #efefef;
+				white-space:                    nowrap;
+			}
 
-				ul.sortable li .sort_wrap .split .handle
+				table.sortable tbody tr td .handle
 				{
 					position:                       absolute;
 					right:                          1rem;
@@ -118,27 +124,27 @@ ul.sortable
 					background:                     transparent;
 				}
 
-					ul.sortable li .sort_wrap .split .handle .top,
-					ul.sortable li .sort_wrap .split .handle .bot
+					table.sortable tbody tr td .handle .top,
+					table.sortable tbody tr td .handle .bot
 					{
 						display:                        block;
-						background:                     #444;
+						background:                     #aaa;
 						width:                          10%;
-						height:                         2px;
+						height:                         3px;
 						margin:                         0 auto 2px auto;
 						opacity:                        0;
 					}
 
-						ul.sortable li:hover .sort_wrap .split .handle .top,
-						ul.sortable li:hover .sort_wrap .split .handle .bot
+						table.sortable tbody tr:hover .handle .top,
+						table.sortable tbody tr:hover .handle .bot
 						{
 							opacity:                        1;
 						}
 
-					ul.sortable li .sort_wrap .split .handle .line
+					table.sortable tbody tr .handle .line
 					{
 						display:                        block;
-						background:                     #444;
+						background:                     #aaa;
 						width:                          100%;
 						height:                         1px;
 						margin-bottom:                  2px;
@@ -302,32 +308,47 @@ ul.sortable
 		height:                         20rem;
 	}
 
-.zebra
+.input_wrapper.zebra,
+table.zebra
 {
-	background-image:               repeating-linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255) 20px, rgb(239, 239, 239) 20px, rgb(239, 239, 239) 40px);
+	background:                     transparent;
+	float:                          left;
 }
 
-	.zebra textarea,
-	.zebra table
+	.input_wrapper.zebra textarea
 	{
-		font-size:                      16px;
+		background-image:               repeating-linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255) 20px, rgb(239, 239, 239) 20px, rgb(239, 239, 239) 40px);
 		line-height:                    20px;
 		padding:                        0;
-		background:                     transparent;
-		float:                          left;
 	}
 
-		.zebra table th,
-		.zebra table td
+			table.zebra tr:nth-child(even) {
+				background-color:               #efefef;
+			}
+
+		table.zebra th,
+		table.zebra td
 		{
 			padding:                        0 1.5rem;
 			border:                         0;
+			line-height:                    20px;
 		}
 
-	.zebra textarea
-	{
-		padding-top:                    2rem;
-	}
+		table.zebra th
+		{
+			vertical-align:                 top;
+		}
+
+		table.zebra thead
+		{
+			height:                         40px;
+		}
+
+		.input_wrapper.zebra label
+		{
+			height:                         39px;
+			margin:                         0;
+		}
 
 /* jQuery UI theming */
 .ui-widget-content
@@ -441,7 +462,8 @@ ul.sortable
 	select:active,
 	select:focus,
 	input[type="text"],
-	input[type="password"]
+	input[type="password"],
+	textarea
 	{
 		font-size:                      1.6rem;
 	}

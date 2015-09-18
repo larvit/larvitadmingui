@@ -8,7 +8,7 @@ jQuery(function($) {
 
 		if (!$toolbar.length) return;
 
-		$toolbar.wrap('<div class="row"><div class="eight columns toolbar_wrapper" style="position: relative;">');
+		$toolbar.wrap('<div class="row"><div class="nine columns toolbar_wrapper" style="position: relative;">');
 
 		var toolbarHeight = $toolbar.outerHeight(), //  + 15 add 15px for margin
 		$wrap = $toolbar.parent().css('height', toolbarHeight);
@@ -24,7 +24,8 @@ jQuery(function($) {
 			y: $window.height()
 		};
 
-		var onScroll = function() {
+		window.placeFooterBtns = function() {
+			//console.log($toolbar);
 
 			var maxY = $wrap.offset().top + toolbarHeight,
 			viewY = $window.scrollTop() + $window.height(),
@@ -32,8 +33,7 @@ jQuery(function($) {
 				x: $window.width(),
 				y: $window.height()
 			},
-			sizeChanged = (newSize.x != windowSize.x || newSize.y != windowSize.y),
-			formWidth = $('.toolbar_form .form_body').width();
+			sizeChanged = (newSize.x != windowSize.x || newSize.y != windowSize.y);
 
 			if (viewY > maxY && (sizeChanged || mode != 'inline')) {
 				mode = 'inline';
@@ -41,8 +41,7 @@ jQuery(function($) {
 				$toolbar.css({
 					top: 0,
 					position: 'absolute',
-					width: $toolbar.parent().width()+'px'//,
-					//width: formWidth
+					width: $toolbar.parent().width()+'px'
 				});
 			} else if (viewY <= maxY && (sizeChanged || mode == 'inline')) {
 				mode = 'fixed';
@@ -50,21 +49,20 @@ jQuery(function($) {
 				$toolbar.css({
 					top: $window.height() - toolbarHeight,
 					position: 'fixed',
-					width: $toolbar.parent().width()+'px'//,
-					//width: formWidth
+					width: $toolbar.parent().width()+'px'
 				});
 			}
 
 		}
 
-		$window.scroll(onScroll);
-		$window.on('redraw', onScroll);
+		$window.scroll(placeFooterBtns);
+		$window.on('redraw', placeFooterBtns);
 		$window.bind('resize', function() {
-    	onScroll();
+			placeFooterBtns();
 		}).trigger('resize');
 
 		// do it again in a few hundred ms to correct for other UI initialisation
-		setTimeout(onScroll, 200);
+		setTimeout(placeFooterBtns, 200);
 
 	})();
 });

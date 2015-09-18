@@ -14,6 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="css/shared.css" />
 	<link rel="stylesheet" type="text/css" href="css/buttons.css" />
 	<link rel="stylesheet" type="text/css" href="css/custom.css" />
+	<link rel="stylesheet" type="text/css" href="css/theme.css" />
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-ui/jquery-ui.min.js"></script>
@@ -57,7 +58,7 @@
 						<img src="images/avatar.png" alt="avatar" />
 					</span>
 				</li>
-				<li class="right">
+				<!--li class="right">
 					<div class="txt hidden_md">
 						<form method="post">
 							<div class="input_wrapper">
@@ -75,7 +76,7 @@
 							<span class="br_icon_search"></span>
 						</a>
 					</div>
-				</li>
+				</li-->
 			</header>
 
 			<section class="section main_wrapper">
@@ -217,24 +218,13 @@
 					<div id="content_wrapper" class="content_wrapper">
 
 						<ul id="content_top_nav" class="sub_nav">
-							<li>
-								<a class="button active" href="#">All</a>
-							</li>
-							<li>
-								<a class="button" href="#">Create new</a>
-							</li>
-							<li>
-								<a class="button" href="#">Import</a>
-							</li>
 						</ul>
 
 						<div class="wrap">
 
-							<h2>Subheader</h2>
-
 							<form class="toolbar_form read_update_delete_form" id="read_update_delete_form" method="post">
 								<div id="content_form_top" class="row wrap_row">
-									<div class="eight columns form_body">
+									<div class="nine columns form_body">
 
 										<div class="row wrap_small_row">
 											<div class="hor_field_wrap">
@@ -280,45 +270,45 @@
 
 										<div class="row wrap_row">
 											<div class="vert_field_wrap">
-												<label for="data_current_data">Current data</label>
-												<div class="row zebra">
-													<table>
+												<div class="row">
+													<table class="zebra">
 														<thead>
 															<tr>
-																<th>Header 1</th>
-																<th>Header 2</th>
-																<th>Header 3</th>
-																<th>Header 4</th>
+																<th>Country</th>
+																<th>ISO 3</th>
+																<th>Current<br />datapoints</th>
 															</tr>
 														</thead>
 														<tbody>
 															<tr>
-																<td>Cell 1</td>
-																<td>Cell 2</td>
-																<td>Cell 3</td>
-																<td>Cell 4</td>
+																<td>Afghanistan</td>
+																<td>AFG</td>
+																<td>3.1020</td>
 															</tr>
 															<tr>
-																<td>Cell 1</td>
-																<td>Cell 2</td>
-																<td>Cell 3</td>
-																<td>Cell 4</td>
+																<td>Albania</td>
+																<td>ALB</td>
+																<td>0.2929</td>
 															</tr>
 															<tr>
-																<td>Cell 1</td>
-																<td>Cell 2</td>
-																<td>Cell 3</td>
-																<td>Cell 4</td>
+																<td>Algeria</td>
+																<td>DZA</td>
+																<td>2.3929</td>
 															</tr>
 															<tr>
-																<td>Cell 1</td>
-																<td>Cell 2</td>
-																<td>Cell 3</td>
-																<td>Cell 4</td>
+																<td>American Samoa</td>
+																<td>ASM</td>
+																<td>1.0202</td>
+															</tr>
+															<tr>
+																<td>Angola</td>
+																<td>AGO</td>
+																<td>2.1919</td>
 															</tr>
 														</tbody>
 													</table>
-													<div class="input_wrapper">
+													<div class="input_wrapper zebra">
+														<label for="data_current_data">New data</label>
 														<textarea id="data_current_data" class="data_current_data" name="data_current_data"></textarea>
 													</div>
 												</div>
@@ -331,16 +321,16 @@
 								<div class="toolbar_fixed">
 									<ul class="sub_nav">
 										<li>
-											<a class="button" href="#">Delete</a>
+											<a class="button warning" href="#">Delete</a>
 										</li>
 										<li class="u-pull-right">
 											<a class="button inv active" href="#">Save</a>
 										</li>
 										<li class="u-pull-right">
-											<a class="button inv" href="#">Save & Exit</a>
+											<a class="button" href="#">Save & Exit</a>
 										</li>
 										<li class="u-pull-right">
-											<a class="button inv" href="#">Cancel</a>
+											<a class="button" href="#">Cancel</a>
 										</li>
 									</ul>
 								</div>
