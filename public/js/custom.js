@@ -1,6 +1,9 @@
 $(document).ready(function() {
-	// Datepicker begin
+	// Datepicker init
 	$('.data_date').datepicker();
+
+	// Sortable init
+	$('ul.sortable').sortable();
 
 	// If desktop AND cookie says so - show left nav
 	if ($(window).width() > 768 && Cookies.get('leftNav') === '1') {

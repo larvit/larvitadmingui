@@ -60,10 +60,89 @@
 	font-family:                    'montserratregular', Arial, sans-serif;
 }
 
+.text_center
+{
+	text-align:                     center;
+}
+
+.text_right
+{
+	text-align:                     right;
+}
+
 .border_bot
 {
 	border-bottom:                  1px solid #efefef;
 }
+
+ul.sortable
+{
+	list-style:                     none;
+}
+
+	ul.sortable li
+	{
+		display:                        block;
+		cursor:                         move;
+	}
+
+		ul.sortable li .sort_wrap
+		{
+			display:                        inline-block;
+			width:                          100%;
+			background:                     #d1d1d1;
+			padding:                        0.5rem 0;
+		}
+
+			ul.sortable li .sort_wrap .split
+			{
+				float:                          left;
+				width:                          50%;
+				padding:                        0 0.5rem;
+				position:                       relative;
+			}
+
+				ul.sortable li .sort_wrap .split.right
+				{
+					padding-left:                   0;
+				}
+
+				ul.sortable li .sort_wrap .split .handle
+				{
+					position:                       absolute;
+					right:                          1rem;
+					top:                            50%;
+					margin-top:                     -0.75rem;
+					width:                          1.5rem;
+					height:                         1.5rem;
+					background:                     transparent;
+				}
+
+					ul.sortable li .sort_wrap .split .handle .top,
+					ul.sortable li .sort_wrap .split .handle .bot
+					{
+						display:                        block;
+						background:                     #444;
+						width:                          10%;
+						height:                         2px;
+						margin:                         0 auto 2px auto;
+						opacity:                        0;
+					}
+
+						ul.sortable li:hover .sort_wrap .split .handle .top,
+						ul.sortable li:hover .sort_wrap .split .handle .bot
+						{
+							opacity:                        1;
+						}
+
+					ul.sortable li .sort_wrap .split .handle .line
+					{
+						display:                        block;
+						background:                     #444;
+						width:                          100%;
+						height:                         1px;
+						margin-bottom:                  2px;
+					}
 
 /* Message box */
 .msg_box
@@ -75,57 +154,57 @@
 	position:                       relative;
 }
 
-.msg_box a.close
-{
-	position:                       absolute;
-	top:                            50%;
-	right:                          1rem;
-	font-size:                      1rem;
-	margin-top:                     -0.5rem;
-	-webkit-transform:              rotate(45deg);
-	-ms-transform:                  rotate(45deg);
-	transform:                      rotate(45deg);
-}
+	.msg_box a.close
+	{
+		position:                       absolute;
+		top:                            50%;
+		right:                          1rem;
+		font-size:                      1rem;
+		margin-top:                     -0.5rem;
+		-webkit-transform:              rotate(45deg);
+		-ms-transform:                  rotate(45deg);
+		transform:                      rotate(45deg);
+	}
 
-.msg_box a.close .br_icon_close
-{
-	color:                          inherit;
-	opacity:                        0.2;
-}
+		.msg_box a.close .br_icon_close
+		{
+			color:                          inherit;
+			opacity:                        0.2;
+		}
 
-.msg_box a.close:hover .br_icon_close
-{
-	opacity:                        1;
-}
+		.msg_box a.close:hover .br_icon_close
+		{
+			opacity:                        1;
+		}
 
-.msg_box p:last-child
-{
-	margin:                         0;
-}
+	.msg_box p:last-child
+	{
+		margin:                         0;
+	}
 
-.msg_box.happy
-{
-	background:                     #dff0d8;
-	border:                         1px solid #d6e9c6;
-	color:                          #3c763d;
-}
+	.msg_box.happy
+	{
+		background:                     #dff0d8;
+		border:                         1px solid #d6e9c6;
+		color:                          #3c763d;
+	}
 
-.msg_box.happy a.close .br_icon_close
-{
-	color:                          #3c763d;
-}
+		.msg_box.happy a.close .br_icon_close
+		{
+			color:                          #3c763d;
+		}
 
-.msg_box.sad
-{
-	background:                     #f2dede;
-	border:                         1px solid #ebccd1;
-	color:                          #a94442;
-}
+	.msg_box.sad
+	{
+		background:                     #f2dede;
+		border:                         1px solid #ebccd1;
+		color:                          #a94442;
+	}
 
-.msg_box.sad a.close .br_icon_close
-{
-	color:                          #a94442;
-}
+		.msg_box.sad a.close .br_icon_close
+		{
+			color:                          #a94442;
+		}
 
 .page_wrapper
 {
@@ -176,27 +255,52 @@
 	width:                          70%;
 }
 
-.vert_field_wrap label
+.hor_field_wrap .input_wrapper textarea.data_textarea
 {
-	display:                        block;
-	width:                          auto;
-	margin-bottom:                  1rem;
+	height:                         10rem;
 }
 
-.vert_field_wrap .select_wrapper,
-.vert_field_wrap .input_wrapper
+.hor_field_wrap .input_wrapper textarea.data_textarea.tight
 {
-	display:                        inline-block;
-	width:                          25%;
+	height:                         5rem;
 }
 
-.vert_field_wrap .input_wrapper textarea
+.vert_field_wrap
 {
-	width:                          100%;
-	max-width:                      100%;
-	height:                         20rem;
-	border:                         1px solid #d1d1d1;
+
 }
+
+	.vert_field_wrap.split
+	{
+		float:                          left;
+		width:                          50%;
+	}
+
+	.vert_field_wrap label
+	{
+		display:                        block;
+		width:                          auto;
+		margin-bottom:                  1rem;
+	}
+
+	.vert_field_wrap .select_wrapper,
+	.vert_field_wrap .input_wrapper
+	{
+		display:                        inline-block;
+		width:                          25%;
+	}
+
+		.vert_field_wrap.full .select_wrapper,
+		.vert_field_wrap.full .input_wrapper
+		{
+			display:                        block;
+			width:                          100%;
+		}
+
+	.vert_field_wrap .input_wrapper textarea
+	{
+		height:                         20rem;
+	}
 
 .zebra
 {

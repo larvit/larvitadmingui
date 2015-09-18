@@ -93,7 +93,8 @@ select,
 select:active,
 select:focus,
 input[type="text"],
-input[type="password"]
+input[type="password"],
+textarea
 {
 	-moz-appearance:                none;
 	-webkit-appearance:             none;
@@ -108,6 +109,7 @@ input[type="password"]
 	padding:                        0.5rem 1.5rem;
 	position:                       relative;
 	width:                          100%;
+	max-width:                      100%;
 	z-index:                        99;
 	font-size:                      1.3rem;
 }
