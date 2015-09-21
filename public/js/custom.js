@@ -1,6 +1,47 @@
+var i = 5,
+dummydatearr = [];
+
+// Autocomplete dummy arr
+dummydatearr.push(
+	{
+		'id': 0,
+		'value': 'New date'
+	}
+);
+
+while(i>0) {
+	dummydatearr.push(
+		{
+			'id': i,
+			'value': '2015-09-0' + ((i == 5) ? i + ' (Latest)' : i)
+		}
+	);
+	i--;
+}
+
 $(document).ready(function() {
-	// Datepicker init
-	$('.data_date').datepicker();
+
+	// Autocomplete init
+	$('#data_date').autocomplete({
+		source: dummydatearr,
+		minLength: 0,
+		select: function(event, ui) {
+			if (ui.item.id === 0) {
+				$('#data_date').val('');
+			}
+		},
+		open: function(event, ui) {
+			$('.ui-autocomplete').off('menufocus hover mouseover mouseenter');
+		}
+	}).focus(function() {
+		$(this).autocomplete('search', $(this).val());
+	});
+
+	// Date formatter init
+	$('#data_date').dateEntry({
+		dateFormat: 'ymd-',
+		spinnerImage: ''
+	});
 
 	// Sortable init
 	$('table.sortable tbody').sortable({
@@ -15,15 +56,9 @@ $(document).ready(function() {
 		return ui;
 	}
 
-	/*$('a').on('click', function() {
-		window.placeFooterBtns();
-		setTimeout(window.placeFooterBtns, 305);
-	});*/
-
 	// If desktop AND cookie says so - show left nav
 	if ($(window).width() > 768 && Cookies.get('leftNav') === '1') {
 		location.hash = 'main_nav';
-		//setTimeout(window.placeFooterBtns, 500);
 	}
 
 	// If click hamburger AND left nav is hidden - set cookie AND show left nav

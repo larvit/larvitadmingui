@@ -28,7 +28,7 @@ jQuery(function($) {
 			y: $content.height()
 		};
 
-		window.placeFooterBtns = function() {
+		window.doResizeActions = function() {
 
 			var maxY = $wrap.offset().top + toolbarHeight,
 			viewY = $window.scrollTop() + $window.height(),
@@ -65,15 +65,15 @@ jQuery(function($) {
 
 		}
 
-		$window.scroll(placeFooterBtns);
-		$window.on('redraw', placeFooterBtns);
-		$mainnav.on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', placeFooterBtns);
+		$window.scroll(doResizeActions);
+		$window.on('redraw', doResizeActions);
+		$mainnav.on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', doResizeActions);
 		$window.bind('resize', function() {
-			placeFooterBtns();
+			doResizeActions();
 		}).trigger('resize');
 
 		// do it again in a few hundred ms to correct for other UI initialisation
-		setTimeout(placeFooterBtns, 200);
+		setTimeout(doResizeActions, 200);
 
 	})();
 });
