@@ -248,6 +248,16 @@ table.sortable
 	margin-top:                     -0.7rem;
 }
 
+	.input_wrapper .notice
+	{
+		position:                       absolute;
+		left:                           25%;
+		top:                            50%;
+		margin-top:                     -1rem;
+		color:                          #ff0000;
+		display:                        none;
+	}
+
 .hor_field_wrap label
 {
 	display:                        inline-block;
@@ -466,5 +476,9 @@ table.zebra
 	textarea
 	{
 		font-size:                      1.6rem;
+	}
+	.input_wrapper .notice
+	{
+		margin-top:                     -1.2rem;
 	}
 }

@@ -1,47 +1,65 @@
 var i = 5,
-dummydatearr = [];
+dummydatearr = [],
+$datadate = {},
+datefound = 0,
+datetxt = '';
 
 // Autocomplete dummy arr
-dummydatearr.push(
-	{
-		'id': 0,
-		'value': 'New date'
-	}
-);
-
 while(i>0) {
 	dummydatearr.push(
 		{
 			'id': i,
-			'value': '2015-09-0' + ((i == 5) ? i + ' (Latest)' : i)
+			'value': '2015-09-0' + i
 		}
 	);
 	i--;
 }
 
 $(document).ready(function() {
+	$datadate = $('#data_date');
 
 	// Autocomplete init
-	$('#data_date').autocomplete({
+	/*$datadate.autocomplete({
 		source: dummydatearr,
 		minLength: 0,
 		select: function(event, ui) {
-			if (ui.item.id === 0) {
-				$('#data_date').val('');
-			}
+
 		},
 		open: function(event, ui) {
 			$('.ui-autocomplete').off('menufocus hover mouseover mouseenter');
 		}
 	}).focus(function() {
 		$(this).autocomplete('search', $(this).val());
+	});*/
+
+//alert(dummydatearr[0].value.toString());
+
+function setDateTxt(txt) {
+	$datadate.next('.notice').text(txt).show(0);
+}
+
+function updateDate() {
+	datefound = 0;
+	datetxt = '(New date)';
+	$.each(dummydatearr, function(i, val) {
+		if ($datadate.val().toString() === val.value.toString()) {
+			datefound = 1;
+			datetxt = (i === 0) ? '(Latest)' : '';
+		}
 	});
+	setDateTxt(datetxt);
+}
 
 	// Date formatter init
-	$('#data_date').dateEntry({
+	$datadate.dateEntry({
 		dateFormat: 'ymd-',
 		spinnerImage: ''
+	}).change(function() {
+		updateDate();
 	});
+
+	// Date formatter initial value (Latest)
+	$datadate.dateEntry('setDate', '2015-09-05');
 
 	// Sortable init
 	$('table.sortable tbody').sortable({
