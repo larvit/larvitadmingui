@@ -114,6 +114,16 @@ textarea
 	font-size:                      1.3rem;
 }
 
+	select.disabled,
+	select.disabled:active,
+	select.disabled:focus,
+	input[type="text"].disabled,
+	input[type="password"].disabled,
+	textarea.disabled
+	{
+		border:                       0;
+	}
+
 select::-ms-expand
 {
 	display:                        none;

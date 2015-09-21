@@ -19,7 +19,7 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/jquery-ui/jquery-ui.min.js"></script>
 	<script src="js/js.cookie.js"></script>
-	<script src="js/jquery.fixed.toolbar.js"></script>
+	<script src="js/jquery.custom.resize.js"></script>
 	<script src="js/custom.js"></script>
 
 </head>
@@ -228,22 +228,16 @@
 
 										<div class="row wrap_small_row">
 											<div class="hor_field_wrap">
-												<label for="data_cat_path" class="strong">Path *</label>
-												<div class="u-pull-right select_wrapper">
-													<div class="sel_wrap">
-														<select id="data_cat_path" name="data_cat_path">
-															<option value="1">/ ERH / Needs / Resilience / Production shocks 1</option>
-															<option value="2">/ ERH / Needs / Resilience / Production shocks 2</option>
-															<option value="3">/ ERH / Needs / Resilience / Production shocks 3</option>
-														</select>
-													</div>
+												<label for="data_cat_path" class="strong">Path</label>
+												<div class="u-pull-right input_wrapper">
+													<input type="text" id="data_cat_path" class="data_field disabled" name="data_cat_name" value="/ ERH / Needs / Resilience / Production shocks" disabled="disabled" />
 												</div>
 											</div>
 										</div>
 
 										<div class="row wrap_small_row">
 											<div class="hor_field_wrap">
-												<label for="data_cat_name">Name</label>
+												<label for="data_cat_name">Name *</label>
 												<div class="u-pull-right input_wrapper">
 													<input type="text" id="data_cat_name" class="data_field" name="data_cat_name" placeholder="Category name" />
 												</div>
@@ -252,7 +246,7 @@
 
 										<div class="row wrap_small_row">
 											<div class="hor_field_wrap">
-												<label for="data_cat_source">Source</label>
+												<label for="data_cat_source">Source *</label>
 												<div class="u-pull-right input_wrapper">
 													<input type="text" id="data_cat_source" class="data_field" name="data_cat_source" placeholder="Category source" />
 												</div>
@@ -279,9 +273,9 @@
 
 										<div class="row wrap_small_row">
 											<div class="hor_field_wrap">
-												<label for="data_cat_anonymous"></label>
+												<label for="data_cat_tags">Tags</label>
 												<div class="u-pull-right input_wrapper">
-													<input type="text" id="data_cat_anonymous" class="data_field" name="data_cat_anonymous" placeholder="Category anonymous" />
+													<input type="text" id="data_cat_tags" class="data_field" name="data_cat_tags" placeholder="Category tags" />
 												</div>
 											</div>
 										</div>

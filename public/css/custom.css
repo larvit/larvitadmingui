@@ -178,6 +178,7 @@
 	overflow-y:                     auto;
 	-webkit-transition:             left .3s ease;
 	-moz-transition:                left .3s ease;
+	-o-transition:                  left .3s ease;
 	transition:                     left .3s ease;
 	z-index:                        9999;
 }
