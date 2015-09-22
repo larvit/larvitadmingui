@@ -1,10 +1,11 @@
-var i = 5,
-dummydatearr = [],
-$datadate = {},
-datefound = 0,
-datetxt = '';
+var i,
+    dummydatearr = [],
+    $datadate    = {},
+    datefound    = 0,
+    datetxt      = '';
 
 // Autocomplete dummy arr
+i = 5;
 while(i>0) {
 	dummydatearr.push(
 		{
@@ -13,6 +14,22 @@ while(i>0) {
 		}
 	);
 	i--;
+}
+
+function setDateTxt(txt) {
+	$datadate.next('.notice').text(txt).show(0);
+}
+
+function updateDate() {
+	datefound = 0;
+	datetxt = '(New date)';
+	$.each(dummydatearr, function(i, val) {
+		if ($datadate.val().toString() === val.value.toString()) {
+			datefound = 1;
+			datetxt = (i === 0) ? '(Latest)' : '';
+		}
+	});
+	setDateTxt(datetxt);
 }
 
 $(document).ready(function() {
@@ -31,24 +48,6 @@ $(document).ready(function() {
 	}).focus(function() {
 		$(this).autocomplete('search', $(this).val());
 	});*/
-
-//alert(dummydatearr[0].value.toString());
-
-function setDateTxt(txt) {
-	$datadate.next('.notice').text(txt).show(0);
-}
-
-function updateDate() {
-	datefound = 0;
-	datetxt = '(New date)';
-	$.each(dummydatearr, function(i, val) {
-		if ($datadate.val().toString() === val.value.toString()) {
-			datefound = 1;
-			datetxt = (i === 0) ? '(Latest)' : '';
-		}
-	});
-	setDateTxt(datetxt);
-}
 
 	// Date formatter init
 	$datadate.dateEntry({
