@@ -23,7 +23,6 @@ function validDate(val) {
 	obj = val.match(/^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/);
 
 	if (!obj) {
-		console.log('Not even a date');
 		return false; // Not even a date
 	}
 
@@ -32,21 +31,17 @@ function validDate(val) {
 	d   = obj[2];
 
 	if (d === '31' && (m === '4' || m === '6' || m === '9' || m === '11')) {
-		console.log('31st of a month with 30 days');
 		return false; // 31st of a month with 30 days
 	}
 
 	if (d >= '30' && m === '2') {
-		console.log('Feb 30th or 31st');
 		return false; // Feb 30th or 31st
 	}
 
 	if (m === '2' && d === '29' && !(y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0))) {
-		console.log('Feb 29th outside a leap year');
 		return false; // Feb 29th outside a leap year
 	}
 
-	console.log('A valid date!');
 	return true;
 }
 
