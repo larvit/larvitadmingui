@@ -1,8 +1,6 @@
 var i,
     dummydatearr = [],
-    $datadate    = {},
-    datefound    = 0,
-    datetxt      = '';
+    $datadate    = {};
 
 // Autocomplete dummy arr
 i = 5;
@@ -16,49 +14,91 @@ while(i>0) {
 	i--;
 }
 
-function setDateTxt(txt) {
-	$datadate.next('.notice').text(txt).show(0);
+function validDate(val) {
+	var obj,
+	    y,
+	    m,
+	    d;
+
+	obj = val.match(/^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/);
+
+	if (!obj) {
+		console.log('Not even a date');
+		return false; // Not even a date
+	}
+
+	y   = parseInt(obj[0].substring(4));
+	m   = obj[1];
+	d   = obj[2];
+
+	if (d === '31' && (m === '4' || m === '6' || m === '9' || m === '11')) {
+		console.log('31st of a month with 30 days');
+		return false; // 31st of a month with 30 days
+	}
+
+	if (d >= '30' && m === '2') {
+		console.log('Feb 30th or 31st');
+		return false; // Feb 30th or 31st
+	}
+
+	if (m === '2' && d === '29' && !(y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0))) {
+		console.log('Feb 29th outside a leap year');
+		return false; // Feb 29th outside a leap year
+	}
+
+	console.log('A valid date!');
+	return true;
 }
 
-function updateDate() {
+function setDateTxt(el, txt) {
+	el.next('.notice').text(txt).show(0);
+}
+
+function updateDate(el) {
+	var str,
+	    datefound,
+	    datetxt;
+
+	if (validDate(el.val())) {
+		str = el.val();
+	} else {
+		str = dummydatearr[0].value;
+		el.val(str);
+	}
+
 	datefound = 0;
 	datetxt = '(New date)';
 	$.each(dummydatearr, function(i, val) {
-		if ($datadate.val().toString() === val.value.toString()) {
+		if (str === val.value) {
 			datefound = 1;
 			datetxt = (i === 0) ? '(Latest)' : '';
 		}
+		i ++;
 	});
-	setDateTxt(datetxt);
+	setDateTxt(el, datetxt);
 }
 
 $(document).ready(function() {
 	$datadate = $('#data_date');
 
 	// Autocomplete init
-	/*$datadate.autocomplete({
+	$datadate.autocomplete({
 		source: dummydatearr,
 		minLength: 0,
-		select: function(event, ui) {
-
+		change: function(event, ui) {
+			updateDate($(this));
 		},
 		open: function(event, ui) {
 			$('.ui-autocomplete').off('menufocus hover mouseover mouseenter');
 		}
 	}).focus(function() {
 		$(this).autocomplete('search', $(this).val());
-	});*/
-
-	// Date formatter init
-	$datadate.dateEntry({
-		dateFormat: 'ymd-',
-		spinnerImage: ''
-	}).change(function() {
-		updateDate();
 	});
 
 	// Date formatter initial value (Latest)
-	$datadate.dateEntry('setDate', '2015-09-05');
+	$datadate.val(dummydatearr[0].value);
+
+	updateDate($datadate);
 
 	// Sortable init
 	$('table.sortable tbody').sortable({
