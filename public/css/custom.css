@@ -434,6 +434,8 @@
 		{
 			padding:                        2rem 0;
 			border-bottom:                  0;
+			border-top:                     1px solid #efefef;
+			margin-top:                     1rem;
 		}
 
 		.section.content .content_wrapper ul.sub_nav > li

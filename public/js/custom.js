@@ -1,11 +1,14 @@
 var i,
-    dummydatearr = [],
-    $datadate    = {};
+    dummyDateArr     = [],
+    $dataDate        = {},
+    dateAllowedChars = /[^0-9-]/g,
+    dateAllowedStr   = /^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/,
+    tmpVal           = '';
 
 // Autocomplete dummy arr
 i = 5;
 while(i>0) {
-	dummydatearr.push(
+	dummyDateArr.push(
 		{
 			'id': i,
 			'value': '2015-09-0' + i
@@ -20,7 +23,10 @@ function validDate(val) {
 	    m,
 	    d;
 
-	obj = val.match(/^[0-9]{4}\-(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])/);
+	if (val === undefined)
+		return false;
+
+	obj = val.match(dateAllowedStr);
 
 	if (!obj) {
 		return false; // Not even a date
@@ -51,34 +57,34 @@ function setDateTxt(el, txt) {
 
 function updateDate(el) {
 	var str,
-	    datefound,
-	    datetxt;
+	    dateFound,
+	    dateTxt;
 
 	if (validDate(el.val())) {
 		str = el.val();
 	} else {
-		str = dummydatearr[0].value;
+		str = dummyDateArr[0].value;
 		el.val(str);
 	}
 
-	datefound = 0;
-	datetxt = '(New date)';
-	$.each(dummydatearr, function(i, val) {
+	dateFound = 0;
+	dateTxt = '(New date)';
+	$.each(dummyDateArr, function(i, val) {
 		if (str === val.value) {
-			datefound = 1;
-			datetxt = (i === 0) ? '(Latest)' : '';
+			dateFound = 1;
+			dateTxt = (i === 0) ? '(Latest)' : '';
 		}
 		i ++;
 	});
-	setDateTxt(el, datetxt);
+	setDateTxt(el, dateTxt);
 }
 
 $(document).ready(function() {
-	$datadate = $('#data_date');
+	$dataDate = $('#data_date');
 
 	// Autocomplete init
-	$datadate.autocomplete({
-		source: dummydatearr,
+	$dataDate.autocomplete({
+		source: dummyDateArr,
 		minLength: 0,
 		change: function(event, ui) {
 			updateDate($(this));
@@ -91,9 +97,15 @@ $(document).ready(function() {
 	});
 
 	// Date formatter initial value (Latest)
-	$datadate.val(dummydatearr[0].value);
+	$dataDate.val(dummyDateArr[0].value);
 
-	updateDate($datadate);
+	updateDate($dataDate);
+
+	// Only allow numbers or '-' in date field
+	$dataDate.on('keyup', function() {
+		tmpVal = $(this).val();
+		$(this).val(tmpVal.replace(dateAllowedChars, ''));
+	});
 
 	// Sortable init
 	$('table.sortable tbody').sortable({

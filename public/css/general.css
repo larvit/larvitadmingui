@@ -114,12 +114,30 @@ textarea
 	font-size:                      1.3rem;
 }
 
+	select:hover,
+	input[type="text"]:hover,
+	input[type="password"]:hover
+	{
+		border:                         1px solid #aaa;
+	}
+
+	select:focus,
+	input[type="text"]:focus,
+	input[type="password"]:focus
+	{
+		border:                         1px solid #777;
+	}
+
 	select.disabled,
 	select.disabled:active,
 	select.disabled:focus,
+	select.disabled:hover,
 	input[type="text"].disabled,
+	input[type="text"].disabled:hover,
 	input[type="password"].disabled,
-	textarea.disabled
+	input[type="password"].disabled:hover,
+	textarea.disabled,
+	textarea.disabled:hover
 	{
 		border:                       0;
 	}
