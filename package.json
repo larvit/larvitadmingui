@@ -20,7 +20,7 @@
 		"dashboard",
 		"menu"
 	],
-	"main": "larvitadmingui.js",
+	"main": "server.js",
 	"name": "larvitadmingui",
 	"repository": {
 		"url": "https://github.com/hemligabyran/larvitadmingui",
