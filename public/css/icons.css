@@ -1,0 +1,235 @@
+@charset 'UTF-8';
+
+@font-face
+{
+	font-family:                    'icons';
+	src:                            url('../fonts/icons.eot');
+	src:                            url('../fonts/icons.eot?#iefix') format('embedded-opentype'),
+																	url('../fonts/icons.woff') format('woff'),
+																	url('../fonts/icons.ttf') format('truetype'),
+																	url('../fonts/icons.svg#icons') format('svg');
+	font-weight:                    normal;
+	font-style:                     normal;
+}
+
+.after_icon,
+.before_icon
+{
+	position:                       relative;
+}
+
+	.after_icon:after,
+	.before_icon:before
+	{
+		position:                       absolute;
+		top:                            50%;
+		width:                          1.6rem;
+		height:                         1.6rem;
+		background-size:                1.6rem 1.6rem;
+		content:                        '';
+		margin-top:                     -0.8rem;
+		background-position:            0 0;
+		background-repeat:              no-repeat;
+	}
+
+	.after_icon:after
+	{
+		right:                          1rem;
+	}
+
+		.after_icon.user:after
+		{
+			background-image:               url('../images/icons_colors/444444/user.svg');
+		}
+
+		.after_icon.lock:after
+		{
+			background-image:               url('../images/icons_colors/444444/lock.svg');
+		}
+
+		.after_icon.plus:after,
+		.after_icon.minus:after
+		{
+			right:                          0;
+			top:                            1.3rem;
+			background-size:                0.9rem 0.9rem;
+			width:                          0.9rem;
+			height:                         0.9rem;
+		}
+
+			.after_icon.plus:after
+			{
+				background-image:               url('../images/icons_colors/ffffff/plus.svg');
+			}
+
+			.after_icon.minus:after
+			{
+				background-image:               url('../images/icons_colors/ffffff/minus.svg');
+			}
+
+			.after_icon.cross:after
+			{
+				width:                          1rem;
+				height:                         1rem;
+				background-size:                1rem 1rem;
+				right:                          0.5rem;
+				margin-top:                     -0.5rem;
+				background-image:               url('../images/icons_colors/444444/cross.svg');
+			}
+
+	.before_icon
+	{
+		padding-left:                   2rem;
+	}
+
+		.before_icon:before
+		{
+			left:                           0;
+			margin-right:                   1rem;
+		}
+
+			.before_icon.house:before
+			{
+				background-size:                1.3rem 1.3rem;
+				width:                          1.3rem;
+				height:                         1.3rem;
+				margin-top:                     -0.7rem;
+				background-image:               url('../images/icons_colors/444444/house.svg');
+			}
+
+				.before_icon.house:hover:before
+				{
+					background-image:               url('../images/icons_colors/ffffff/house.svg');
+				}
+
+			.before_icon.caret_right:before
+			{
+				width:                          0;
+				height:                         0;
+				border-top:                     0.2rem solid transparent;
+				border-bottom:                  0.2rem solid transparent;
+				border-left:                    0.3rem solid #ffffff;
+				margin-top:                     -0.2rem;
+        margin-left:                    1rem;
+			}
+
+[class^='br_icon_'],
+[class*=' br_icon_']
+{
+	position:                       relative;
+	line-height:                    3.2rem;
+}
+
+[class^='br_icon_']:after,
+[class*=' br_icon_']:after
+{
+	/*font-family:                    'icons' !important;
+	font-style:                     normal !important;
+	font-weight:                    normal !important;
+	font-variant:                   normal !important;
+	text-transform:                 none !important;
+	speak:                          none;
+	line-height:                    1;
+	-webkit-font-smoothing:         subpixel-antialiased;
+	-moz-osx-font-smoothing:        auto;
+	position:                       absolute;
+	top:                            0;*/
+	width:                          1.6rem;
+	height:                         1.6rem;
+	background-size:                1.6rem 1.6rem;
+	content:                        '';
+	background-position:            0 0;
+	background-repeat:              no-repeat;
+}
+
+.br_icon_hamburger:after
+{
+	background-image:               url('../images/icons_colors/444444/hamburger.svg');
+}
+
+.br_icon_chevron_down:after
+{
+	background-image:               url('../images/icons_colors/444444/chevron_down.svg');
+}
+
+.br_icon_calendar:before
+{
+	position:                       absolute;
+	right:                          0;
+	top:                            0.2rem;
+	bottom:                         0.2rem;
+	content:                        '';
+	background:                     #444444;
+	width:                          3.5rem;
+	border-top-right-radius:        0.4rem;
+	border-bottom-right-radius:     0.4rem;
+	background-clip:                padding-box;
+}
+
+.br_icon_calendar:after
+{
+	width:                          2rem;
+	height:                         2rem;
+	background-size:                2rem 2rem;
+	margin-top:                     -1rem;
+	background-image:               url('../images/icons_colors/ffffff/calendar.svg');
+}
+
+/*.br_icon_chevron_down:before
+{
+	content:                        'a';
+}
+
+.br_icon_hamburger:before
+{
+	content:                        'b';
+}*/
+
+.br_icon_hamburger_vert:before
+{
+	content:                        'c';
+}
+
+.br_icon_house:before
+{
+	content:                        'd';
+}
+
+.br_icon_lock:before
+{
+	content:                        'e';
+}
+
+.br_icon_minus:before
+{
+	content:                        'f';
+}
+
+.br_icon_plus:before,
+.br_icon_close:before
+{
+	content:                        'g';
+}
+
+.br_icon_search:before
+{
+	content:                        'h';
+}
+
+.br_icon_caret_right:before
+{
+	content:                        'i';
+}
+
+.br_icon_user:before
+{
+	content:                        'j';
+}
+
+@media only screen and (max-width: 550px)
+{
+	.br_icon_calendar:before
+	{
+		top:                            0;
+	}
+}

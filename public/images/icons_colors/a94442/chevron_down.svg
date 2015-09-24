@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<svg width="9px" height="6px" viewBox="0 0 9 6" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" enable-background="new 0 0 9 6" xml:space="preserve">
+<g>
+	<g transform="translate(-934.000000, -4.000000)">
+		<g transform="translate(934.000000, 4.000000)">
+			<path fill="#a94442" d="M4.468,6.01L4.468,6.01c-0.152,0-0.296-0.069-0.391-0.188L0.109,0.854
+				c-0.172-0.216-0.137-0.53,0.079-0.703C0.404-0.021,0.719,0.014,0.891,0.23l3.578,4.479l3.609-4.512
+				C8.251-0.019,8.564-0.052,8.78,0.119c0.216,0.173,0.25,0.487,0.078,0.703l-4,5C4.763,5.94,4.62,6.01,4.468,6.01z"/>
+		</g>
+	</g>
+</g>
+</svg>

@@ -189,28 +189,22 @@ table.sortable
 		position:                       absolute;
 		top:                            50%;
 		right:                          1rem;
-		font-size:                      1rem;
-		margin-top:                     -0.5rem;
-		-webkit-transform:              rotate(45deg);
-		-ms-transform:                  rotate(45deg);
-		transform:                      rotate(45deg);
 	}
-
-		.msg_box a.close .br_icon_close
-		{
-			color:                          inherit;
-			opacity:                        0.2;
-		}
-
-		.msg_box a.close:hover .br_icon_close
-		{
-			opacity:                        1;
-		}
 
 	.msg_box p:last-child
 	{
 		margin:                         0;
 	}
+
+		.msg_box a.close
+		{
+			opacity:                        0.5;
+		}
+
+			.msg_box a.close:hover
+			{
+				opacity:                        1;
+			}
 
 	.msg_box.happy
 	{
@@ -219,9 +213,9 @@ table.sortable
 		color:                          #3c763d;
 	}
 
-		.msg_box.happy a.close .br_icon_close
+		.msg_box.happy a.close:after
 		{
-			color:                          #3c763d;
+			background-image:               url('../images/icons_colors/3c763d/cross.svg');
 		}
 
 	.msg_box.sad
@@ -231,9 +225,9 @@ table.sortable
 		color:                          #a94442;
 	}
 
-		.msg_box.sad a.close .br_icon_close
+		.msg_box.sad a.close:after
 		{
-			color:                          #a94442;
+			background-image:               url('../images/icons_colors/a94442/cross.svg');
 		}
 
 .page_wrapper
@@ -263,14 +257,25 @@ table.sortable
 .select_wrapper .sel_wrap:after,
 .input_wrapper .input_wrap.sel:after
 {
-	color:                          #999;
+	/*color:                          #999;
 	content:                        'a';
-	font-family:                    'icons';
+	font-family:                    'icons';*/
 	position:                       absolute;
 	top:                            50%;
+	margin-top:                     -0.5rem;
 	right:                          1rem;
-	font-size:                      1rem;
-	margin-top:                     -0.7rem;
+	width:                          1rem;
+	height:                         1rem;
+	background-size:                1rem 1rem;
+}
+
+.select_wrapper .sel_wrap.br_icon_calendar:after,
+.input_wrapper .input_wrap.sel.br_icon_calendar:after
+{
+	width:                          1.6rem;
+	height:                         1.6rem;
+	background-size:                1.6rem 1.6rem;
+	margin-top:                     -0.8rem;
 }
 
 	.input_wrapper .notice
@@ -278,7 +283,7 @@ table.sortable
 		position:                       absolute;
 		left:                           25%;
 		top:                            50%;
-		margin-top:                     -1rem;
+		margin-top:                     -1.5rem;
 		color:                          #ff0000;
 		display:                        none;
 	}
@@ -514,6 +519,6 @@ table.zebra
 	}
 	.input_wrapper .notice
 	{
-		margin-top:                     -1.2rem;
+		margin-top:                     -1.6rem;
 	}
 }

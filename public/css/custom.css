@@ -73,8 +73,8 @@
 				line-height:                    3.2rem;
 			}
 
-			.section.header ul li [class^="br_icon_"]:before,
-			.section.header ul li [class*=" br_icon_"]:before,
+			.section.header ul li [class^="br_icon_"]:after,
+			.section.header ul li [class*=" br_icon_"]:after,
 			.section.header ul li .avatar
 			{
 				vertical-align:                 middle;
@@ -108,19 +108,23 @@
 					color:                          #444;
 				}
 
-				.section.header ul li a.open_menu
+				.section.header ul li.nav_trigger a
 				{
+					height:                         100%;
+					width:                          100%;
+					margin:                         0 auto;
+					padding:                        1rem 3rem;
 				}
 
-				.section.header ul li a.close_menu
-				{
-					display:                        none;
-				}
+					.section.header ul li a.open_menu
+					{
+						display:                        block;
+					}
 
-			.section.header ul li.nav_trigger a
-			{
-				padding:                        1rem 3rem;
-			}
+					.section.header ul li a.close_menu
+					{
+						display:                        none;
+					}
 
 			.section.header ul li .input_wrapper input[type="text"]
 			{
@@ -150,11 +154,6 @@
 			.section.header ul li .select_wrapper .sel_wrap select
 			{
 				border:                         0;
-			}
-
-			.section.header ul li .select_wrapper .sel_wrap:after
-			{
-				top:                            0.7rem;
 			}
 
 /* Main wrapper */
@@ -259,7 +258,7 @@
 			.main_nav > ul > li > ul.content li a
 			{
 				margin:                         0;
-				padding:                        0.5rem 1rem;
+				padding:                        0.5rem 1rem 0.5rem 2rem;
 				background:                     transparent;
 				border-radius:                  0.3rem;
 				background-clip:                padding-box;
