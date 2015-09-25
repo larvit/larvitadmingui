@@ -122,9 +122,9 @@
 	background-image:               url('../images/icons_colors/444444/hamburger.svg');
 }
 
-.br_icon_chevron_down:after
+.br_icon_down_arrow:after
 {
-	background-image:               url('../images/icons_colors/444444/chevron_down.svg');
+	background-image:               url('../images/icons_colors/444444/down_arrow.svg');
 }
 
 .br_icon_calendar:before
