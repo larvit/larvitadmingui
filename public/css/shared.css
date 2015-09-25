@@ -78,9 +78,9 @@
 
 p.ingress
 {
-	font-size:                      1.7rem;
+	font-size:                      1.6rem;
 	line-height:                    2rem;
-	opacity:                        0.5;
+	color:                          #999999;
 }
 
 .border_bot
@@ -269,10 +269,10 @@ table.sortable
 .select_wrapper .sel_wrap.br_icon_calendar:after,
 .input_wrapper .input_wrap.sel.br_icon_calendar:after
 {
-	width:                          1.6rem;
-	height:                         1.6rem;
-	background-size:                1.6rem 1.6rem;
-	margin-top:                     -0.8rem;
+	width:                          1.4rem;
+	height:                         1.4rem;
+	background-size:                1.4rem 1.4rem;
+	margin-top:                     -0.7rem;
 }
 
 	.input_wrapper .notice
@@ -356,7 +356,7 @@ table.zebra
 	{
 		background-image:               repeating-linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255) 20px, rgb(239, 239, 239) 20px, rgb(239, 239, 239) 40px);
 		line-height:                    20px;
-		padding:                        0;
+		padding:                        0 1rem;
 	}
 
 			table.zebra tr:nth-child(even) {
