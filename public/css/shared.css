@@ -257,9 +257,6 @@ table.sortable
 .select_wrapper .sel_wrap:after,
 .input_wrapper .input_wrap.sel:after
 {
-	/*color:                          #999;
-	content:                        'a';
-	font-family:                    'icons';*/
 	position:                       absolute;
 	top:                            50%;
 	margin-top:                     -0.5rem;
@@ -283,7 +280,7 @@ table.sortable
 		position:                       absolute;
 		left:                           25%;
 		top:                            50%;
-		margin-top:                     -1.5rem;
+		margin-top:                     -1rem;
 		color:                          #ff0000;
 		display:                        none;
 	}
@@ -491,6 +488,11 @@ table.zebra
 		display:                        block;
 		width:                          100%;
 	}
+	.input_wrapper .notice
+	{
+		left:                           auto;
+		right:                          25%;
+	}
 }
 
 @media only screen and (max-width: 550px)
@@ -519,6 +521,6 @@ table.zebra
 	}
 	.input_wrapper .notice
 	{
-		margin-top:                     -1.6rem;
+		margin-top:                     -1.3rem;
 	}
 }
