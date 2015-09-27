@@ -2,7 +2,7 @@
 	"author": {
 		"name": "Mikael 'Lilleman' Göransson",
 		"email": "lilleman@larvit.se",
-		"url": "http://larvit.se"
+		"url": "http://github.com/larvit/larvitadmingui"
 	},
 	"private": false,
 	"contributors": [{
@@ -11,19 +11,32 @@
 		"url": "http://larvit.se"
 	}],
 	"dependencies": {
-		"larvitbase": "latest"
+		"larvitbase": "latest",
+		"larvituser": "latest",
+		"larvitsession": "latest",
+		"cookies": "latest",
+		"winston": "latest"
 	},
 	"description": "Generic admin GUI",
-	"devDependencies": {},
+	"devDependencies": {
+		"mocha": "latest",
+		"pre-git": "latest"
+	},
+	"pre-commit": [
+		"npm test",
+		"eslint ./"
+	],
 	"keywords": [
+		"admin",
 		"gui",
+		"admingui",
 		"dashboard",
 		"menu"
 	],
 	"main": "server.js",
 	"name": "larvitadmingui",
 	"repository": {
-		"url": "https://github.com/hemligabyran/larvitadmingui",
+		"url": "https://github.com/larvit/larvitadmingui",
 		"type": "git"
 	},
 	"version": "0.0.1",
@@ -32,5 +45,12 @@
 		"url": "https://github.com/larvit/larvitadmingui/issues"
 	},
 	"homepage": "https://github.com/larvit/larvitadmingui",
-	"scripts": {}
+	"scripts": {
+		"test": "mocha"
+	},
+	"license": "MIT",
+	"maintainers": [{
+		"name": "lilleman",
+		"email": "lilleman@larvit.se"
+	}]
 }

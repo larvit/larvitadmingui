@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Larv IT Admin GUI - Login</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/skeleton.css" />
+		<link rel="stylesheet" type="text/css" href="css/icons.css" />
+		<link rel="stylesheet" type="text/css" href="css/general.css" />
+		<link rel="stylesheet" type="text/css" href="css/shared.css" />
+		<link rel="stylesheet" type="text/css" href="css/buttons.css" />
+		<link rel="stylesheet" type="text/css" href="css/custom.css" />
+		<link rel="stylesheet" type="text/css" href="css/theme.css" />
+	</head>
+	<body>
+		<div class="page_wrapper">
+			<div class="bg_img"></div>
+			<section class="section main_wrapper">
+				<section class="section content">
+					<div class="content_wrapper login">
+						<div class="wrap">
+							<div class="row wrap_big_row login_wrapper">
+								<div class="eight columns">
+									<div class="row border_bot">
+										<div class="wrap header">
+											<h1>Larv IT Admin GUI - Login</h1>
+										</div>
+									</div>
+									<form class="login_form" id="login_form" method="post">
+										<div class="wrap">
+											<div class="row wrap_row">
+												<div class="input_wrapper after_icon user">
+													<input type="text" id="login_username" class="login_username" name="username" placeholder="Username" <% if (obj.formFields !== undefined) { print('value="' + obj.formFields.username + '"'); } %>/>
+												</div>
+											</div>
+
+											<!--div class="row wrap_row msg_box happy">
+												<a class="after_icon cross close" href="#"></a>
+												<p>Happy message</p>
+											</div-->
+
+											<%
+												if (obj.formErrors instanceof Array) {
+													_.forEach(formErrors, function(errStr) {%>
+													<div class="row wrap_row msg_box sad">
+														<a class="after_icon cross close" href="#"></a>
+														<p><%= errStr %></p>
+													</div>
+													<%});
+												}
+											%>
+
+											<div class="row wrap_row">
+												<div class="input_wrapper after_icon lock">
+													<input type="password" id="login_password" class="login_password" name="password" placeholder="Password" />
+												</div>
+											</div>
+
+											<div class="row wrap_medium_row">
+												<button type="submit" class="button u-full-width lg inv">Log in</button>
+											</div>
+										</div>
+									</form>
+								</div>
+								<div class="four columns hidden_sm"></div>
+							</div>
+						</div>
+					</div>
+				</section>
+			</section>
+		</div>
+	</body>
+</html>
