@@ -287,15 +287,17 @@ table.sortable
 
 .hor_field_wrap label
 {
-	display:                        inline-block;
-	width:                          25%;
+	display:                        block;
+	width:                          20rem;
+	float:                          left;
 }
 
 .hor_field_wrap .select_wrapper,
 .hor_field_wrap .input_wrapper
 {
-	display:                        inline-block;
-	width:                          70%;
+	display:                        block;
+	width:                          auto;
+	overflow:                       hidden;
 }
 
 .hor_field_wrap .input_wrapper textarea.data_textarea
