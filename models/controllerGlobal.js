@@ -37,7 +37,7 @@ function middleware(request, response, callback) {
 	// Set the logged in user
 	utils.getUserFromSession(request, function(err, user) {
 		if (user) {
-			log.verbose('larvitadmingui: models/controllerGlobal.js - User found in session. UserUuid: "' + user.uuid + '"');
+			log.debug('larvitadmingui: models/controllerGlobal.js - User found in session. UserUuid: "' + user.uuid + '"');
 			response.globalData.user = user;
 		}
 

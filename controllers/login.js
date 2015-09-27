@@ -7,7 +7,7 @@ exports.run = function(request, response, callback) {
 	var data = {};
 
 	if (request.formFields !== undefined && request.formFields.username !== undefined && request.formFields.password !== undefined) {
-		log.verbose('larvitadmingui: Login form POSTed, username: ' + request.formFields.username);
+		log.verbose('larvitadmingui: Login form POSTed, username: "' + request.formFields.username + '"');
 
 		userLib.fromUserAndPass(request.formFields.username, request.formFields.password, function(err, user) {
 			if (err) {

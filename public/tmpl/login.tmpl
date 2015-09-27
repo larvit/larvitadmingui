@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<title>Larv IT Admin GUI - Login</title>
-		<meta charset="utf-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
-		<link rel="stylesheet" type="text/css" href="css/skeleton.css" />
-		<link rel="stylesheet" type="text/css" href="css/icons.css" />
-		<link rel="stylesheet" type="text/css" href="css/general.css" />
-		<link rel="stylesheet" type="text/css" href="css/shared.css" />
-		<link rel="stylesheet" type="text/css" href="css/buttons.css" />
-		<link rel="stylesheet" type="text/css" href="css/custom.css" />
-		<link rel="stylesheet" type="text/css" href="css/theme.css" />
-	</head>
+<%= _.render('inc/head', obj) %>
 	<body>
 		<div class="page_wrapper">
 			<div class="bg_img"></div>
@@ -35,29 +20,18 @@
 													<input type="text" id="login_username" class="login_username" name="username" placeholder="Username" <% if (obj.formFields !== undefined) { print('value="' + obj.formFields.username + '"'); } %>/>
 												</div>
 											</div>
-
-											<!--div class="row wrap_row msg_box happy">
-												<a class="after_icon cross close" href="#"></a>
-												<p>Happy message</p>
-											</div-->
-
 											<%
 												if (obj.formErrors instanceof Array) {
-													_.forEach(formErrors, function(errStr) {%>
-													<div class="row wrap_row msg_box sad">
-														<a class="after_icon cross close" href="#"></a>
-														<p><%= errStr %></p>
-													</div>
-													<%});
+													_.forEach(formErrors, function(errStr) {
+														_.render('inc/msg_box', {'msgclass': 'sad', 'msgTxt': errStr});
+													});
 												}
 											%>
-
 											<div class="row wrap_row">
 												<div class="input_wrapper after_icon lock">
 													<input type="password" id="login_password" class="login_password" name="password" placeholder="Password" />
 												</div>
 											</div>
-
 											<div class="row wrap_medium_row">
 												<button type="submit" class="button u-full-width lg inv">Log in</button>
 											</div>

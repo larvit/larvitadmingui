@@ -1,0 +1,14 @@
+<body>
+	<div class="page_wrapper">
+		<span class="target_fix" id="main_nav"></span>
+		<%= _.render('inc/header', obj) %>
+		<section class="section main_wrapper">
+			<%= _.render('inc/main_nav', obj) %>
+			<section class="section content">
+				<div id="content_header" class="row">
+					<h1><% if (obj.pageHeader !== undefined) { print(obj.pageHeader); } else { print('obj.pageHeader'); } %></h1>
+				</div>
+				<%= _.render('inc/breadcrumbs', obj) %>
+				<div id="content_wrapper" class="content_wrapper">
+					<%= _.render('inc/sub_nav', obj) %>
+					<div class="wrap">
