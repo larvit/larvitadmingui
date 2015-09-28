@@ -1,0 +1,17 @@
+<ul id="content_top_nav" class="sub_nav"><%
+	if (obj.global !== undefined && obj.global.menuStructure !== undefined) {
+		_.forEach(obj.global.menuStructure, function(menuItems, groupName) {
+			_.forEach(menuItems, function(menuItem) {
+				if (menuItem.controllerName === obj.global.controllerName) {
+					if (menuItem.subNav !== undefined) {
+						_.forEach(menuItem.subNav, function(subNavItem) {%>
+							<li>
+								<a class="button dblue<% if (obj.global.urlParsed.pathName === subNavItem.href) { print(' active'); } %>" href="<%= subNavItem.href %>"><%= subNavItem.label %></a>
+							</li>
+						<%});
+					}
+				}
+			});
+		});
+	}
+%></ul>
