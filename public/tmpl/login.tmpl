@@ -23,7 +23,7 @@
 											<%
 												if (obj.formErrors instanceof Array) {
 													_.forEach(formErrors, function(errStr) {
-														_.render('inc/msg_box', {'msgclass': 'sad', 'msgTxt': errStr});
+														print(_.render('inc/msg_box', {'msgClass': 'sad', 'msgTxt': errStr}));
 													});
 												}
 											%>

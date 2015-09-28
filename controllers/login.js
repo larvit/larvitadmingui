@@ -4,7 +4,7 @@ var userLib = require('larvituser'),
     log     = require('winston');
 
 exports.run = function(request, response, callback) {
-	var data = {};
+	var data = {'global': response.globalData};
 
 	if (request.formFields !== undefined && request.formFields.username !== undefined && request.formFields.password !== undefined) {
 		log.verbose('larvitadmingui: Login form POSTed, username: "' + request.formFields.username + '"');
