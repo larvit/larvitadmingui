@@ -13,6 +13,7 @@
 	"dependencies": {
 		"larvitbase": "latest",
 		"larvituser": "latest",
+		"larvitrouter": "latest",
 		"larvitsession": "latest",
 		"cookies": "latest",
 		"winston": "latest"
@@ -39,7 +40,7 @@
 		"url": "https://github.com/larvit/larvitadmingui",
 		"type": "git"
 	},
-	"version": "0.0.1rc2",
+	"version": "0.0.1rc3",
 	"readmeFilename": "README.md",
 	"bugs": {
 		"url": "https://github.com/larvit/larvitadmingui/issues"
