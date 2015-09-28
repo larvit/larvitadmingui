@@ -1,3 +1,5 @@
+'use strict';
+
 var i,
     dummyDateArr     = [],
     $dataDate        = {},
@@ -7,14 +9,13 @@ var i,
 
 // Autocomplete dummy arr
 i = 5;
-while(i>0) {
-	dummyDateArr.push(
-		{
-			'id': i,
-			'value': '2015-09-0' + i
-		}
-	);
-	i--;
+while (i > 0) {
+	dummyDateArr.push({
+		'id': i,
+		'value': '2015-09-0' + i
+	});
+
+	i --;
 }
 
 function validDate(val) {
@@ -28,7 +29,7 @@ function validDate(val) {
 
 	obj = val.match(dateAllowedStr);
 
-	if (!obj) {
+	if ( ! obj) {
 		return false; // Not even a date
 	}
 
@@ -44,7 +45,7 @@ function validDate(val) {
 		return false; // Feb 30th or 31st
 	}
 
-	if (m === '2' && d === '29' && !(y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0))) {
+	if (m === '2' && d === '29' && ! (y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0))) {
 		return false; // Feb 29th outside a leap year
 	}
 
@@ -57,7 +58,6 @@ function setDateTxt(el, txt) {
 
 function updateDate(el) {
 	var str,
-	    dateFound,
 	    dateTxt;
 
 	if (validDate(el.val())) {
@@ -67,11 +67,9 @@ function updateDate(el) {
 		el.val(str);
 	}
 
-	dateFound = 0;
 	dateTxt = '(New date)';
 	$.each(dummyDateArr, function(i, val) {
 		if (str === val.value) {
-			dateFound = 1;
 			dateTxt = (i === 0) ? '(Latest)' : '';
 		}
 		i ++;
@@ -86,10 +84,10 @@ $(document).ready(function() {
 	$dataDate.autocomplete({
 		source: dummyDateArr,
 		minLength: 0,
-		change: function(event, ui) {
+		change: function() {
 			updateDate($(this));
 		},
-		open: function(event, ui) {
+		open: function() {
 			$('.ui-autocomplete').off('menufocus hover mouseover mouseenter');
 		}
 	}).focus(function() {
