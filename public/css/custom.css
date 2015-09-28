@@ -113,7 +113,7 @@
 					height:                         100%;
 					width:                          100%;
 					margin:                         0 auto;
-					padding:                        1rem 3rem;
+					padding:                        0.8rem 3rem;
 				}
 
 					.section.header ul li a.open_menu
@@ -174,10 +174,10 @@
 	min-height:                     100%;
 	background:                     #444;
 	overflow-y:                     auto;
-	-webkit-transition:             left .3s ease;
-	-moz-transition:                left .3s ease;
-	-o-transition:                  left .3s ease;
-	transition:                     left .3s ease;
+	-webkit-transition:             left 0s ease;
+	-moz-transition:                left 0s ease;
+	-o-transition:                  left 0s ease;
+	transition:                     left 0s ease;
 	z-index:                        9999;
 }
 
@@ -264,16 +264,10 @@
 				background-clip:                padding-box;
 			}
 
-				.main_nav > ul > li > ul.content li a:hover
+				.main_nav > ul > li > ul.content li a:hover,
+				.main_nav > ul > li > ul.content li a.active
 				{
 					background:                     #999;
-				}
-
-				.main_nav > ul > li > ul.content li a .br_icon_caret_right
-				{
-					font-size:                      4px;
-					vertical-align:                 middle;
-					padding:                        0 0.5rem 0.2rem 0;
 				}
 
 			.main_nav > ul > li > input[type="checkbox"]:checked ~ ul.content
@@ -300,7 +294,7 @@
 	right:                          0;
 	left:                           0;
 	bottom:                         0;
-	transition:                     left 0.3s ease;
+	transition:                     left 0s ease;
 	padding:                        0 2rem 5rem 2rem;/*5rem 3rem;*/
 }
 

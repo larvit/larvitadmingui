@@ -1,11 +1,23 @@
 <nav class="main_nav">
 	<ul class="accordion">
-		<% if (obj.global !== undefined && obj.global.menuStructure !== undefined) { %>
-			<% var i = 0; %>
-			<% _.forEach(obj.global.menuStructure, function(menuItems, groupName) { %>
-				<% i ++; %>
+		<%
+		if (obj.global !== undefined && obj.global.menuStructure !== undefined) {
+			var i = 0,
+			    found;
+
+			_.forEach(obj.global.menuStructure, function(menuItems, groupName) {
+				i ++;
+				found = false;
+				%>
 				<li>
-					<input type="checkbox" name="a" id="cp-<%= i %>" />
+					<%
+					_.forEach(menuItems, function(menuItem) {
+						if (obj.global.controllerName === menuItem.controllerName) {
+							found = true;
+						}
+					});
+					%>
+					<input type="checkbox" name="a" id="cp-<%= i %>" <% if (found) { print(' checked="checked"'); } %> />
 					<label for="cp-<%= i %>"><%= groupName %><div class="after_icon plus"></div><div class="after_icon minus"></div></label>
 					<ul class="content">
 						<% _.forEach(menuItems, function(menuItem) { %>

@@ -134,4 +134,9 @@ $(document).ready(function() {
 		Cookies.remove('leftNav');
 		//location.hash = '';
 	});
+
+	// If click close msg_box
+	$('.msg_box a.close').on('click', function() {
+		$(this).closest('.msg_box').remove();
+	});
 });
