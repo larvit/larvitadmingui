@@ -1,10 +1,14 @@
 'use strict';
 
-var log   = require('winston'),
-    utils = require('./utils');
+var log           = require('winston'),
+    utils         = require('./utils'),
+    router        = require('larvitrouter')();
 
 function middleware(request, response, callback) {
 	response.globalData = {};
+
+	// Include menu structure config
+	response.globalData.menuStructure = require(router.fileExists('config/menuStructure.json'));
 
 	// Include the domain in global data
 	response.globalData.domain = request.headers.host;
@@ -28,11 +32,6 @@ function middleware(request, response, callback) {
 		callback(null);
 		return;
 	}
-
-	// Set forms part of session if it is not set
-	//if (request.session.data.forms === undefined) {
-	//	request.session.data.forms = {};
-	//}
 
 	// Set the logged in user
 	utils.getUserFromSession(request, function(err, user) {

@@ -10,7 +10,7 @@
 								<div class="eight columns">
 									<div class="row border_bot">
 										<div class="wrap header">
-											<h1>Larv IT Admin GUI - Login</h1>
+											<h1><% if (obj.pageHeader !== undefined) { print(obj.pageHeader); } else { print('Larv IT Admin GUI - Login'); } %></h1>
 										</div>
 									</div>
 									<form class="login_form" id="login_form" method="post">

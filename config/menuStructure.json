@@ -1,0 +1,26 @@
+{
+	"System": [
+		{
+			"label": "Home",
+			"controllerName": "home",
+			"href": "/home"
+		}
+	],
+	"Example": [
+		{
+			"label": "Foo",
+			"controllerName": "foo",
+			"href": "/foo",
+			"subNav": [
+				{
+					"label": "List",
+					"href": "/foo/list"
+				},
+				{
+					"label": "Edit",
+					"href": "/foo/edit"
+				}
+			]
+		}
+	]
+}
