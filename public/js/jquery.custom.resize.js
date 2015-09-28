@@ -5,7 +5,7 @@ jQuery(function($) {
 		var $window  = $(window),
 		    $content = $('.section.content'),
 		    $toolbar = $('.toolbar_fixed'),
-		    $mainnav = $('.main_nav'),
+		    $mainNav = $('.main_nav'),
 		    mode     = 'inline',
 		    windowSize,
 		    contentSize,
@@ -78,7 +78,7 @@ jQuery(function($) {
 
 		$window.scroll(doResizeActions);
 		$window.on('redraw', doResizeActions);
-		$mainnav.on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', doResizeActions);
+		$mainNav.on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', doResizeActions);
 		$window.bind('resize', function() {
 			doResizeActions();
 		}).trigger('resize');
