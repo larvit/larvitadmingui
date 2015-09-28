@@ -2,15 +2,15 @@
 	<ul>
 		<li><a href="/" class="site_logo">Larv IT Admin GUI</a></li>
 		<li class="nav_trigger">
-			<a href="#main_nav" class="open_menu">
+			<a href="<%= obj.global.urlParsed.path %>#main_nav" class="open_menu">
 				<span class="br_icon_hamburger"></span>
 			</a>
-			<a href="#" class="close_menu">
+			<a href="<%= obj.global.urlParsed.path %>" class="close_menu">
 				<span class="br_icon_hamburger"></span>
 			</a>
 		</li>
 		<li class="right">
-			<div class="txt user hidden_md">
+			<div class="txt user"><!--  hidden_md -->
 				<a href="/logout">Log out</a>
 				<!--form>
 					<div class="select_wrapper">
