@@ -6,7 +6,24 @@
 			<%= _.render('inc/main_nav', obj) %>
 			<section class="section content">
 				<div id="content_header" class="row">
-					<h1><% if (obj.pageHeader !== undefined) { print(obj.pageHeader); } else { print('obj.pageHeader'); } %></h1>
+					<h1><%
+						var pageHeader = false;
+						if (obj.global !== undefined && obj.global.menuStructure !== undefined) {
+							_.forEach(obj.global.menuStructure, function(menuItems, groupName) {
+								_.forEach(menuItems, function(menuItem) {
+									if (menuItem.controllerName === obj.global.controllerName && menuItem.pageHeader !== undefined) {
+										pageHeader = menuItem.pageHeader;
+									}
+								});
+							});
+						}
+
+						if (pageHeader) {
+							print(pageHeader);
+						} else {
+							print('No header found');
+						}
+					%></h1>
 				</div>
 				<%= _.render('inc/breadcrumbs', obj) %>
 				<div id="content_wrapper" class="content_wrapper">

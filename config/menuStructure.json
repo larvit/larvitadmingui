@@ -3,7 +3,8 @@
 		{
 			"label": "Home",
 			"controllerName": "home",
-			"href": "/home"
+			"href": "/home",
+			"pageHeader": "Home"
 		}
 	],
 	"Example": [
@@ -11,6 +12,7 @@
 			"label": "Foo",
 			"controllerName": "foo",
 			"href": "/foo",
+			"pageHeader": "Foo",
 			"subNav": [
 				{
 					"label": "List",
