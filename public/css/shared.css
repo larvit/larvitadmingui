@@ -120,6 +120,11 @@ table.sortable
 				/*white-space:                    nowrap;*/
 			}
 
+				table.sortable tbody tr td:last-child
+				{
+					padding-right:                  3rem;
+				}
+
 				table.sortable tbody tr td a
 				{
 					text-decoration:                underline;
