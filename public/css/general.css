@@ -20,6 +20,16 @@ body
 	-moz-osx-font-smoothing:        auto;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+{
+	letter-spacing:                 0.08rem;
+}
+
 h1
 {
 	margin:                         1.4rem 0;

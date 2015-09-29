@@ -452,6 +452,7 @@ table.zebra
 	background-color:               #efefef;
 	z-index:                        9999;
 	border:                         0;
+	padding:                        0.5rem 0;
 }
 
 .toolbar_fixed

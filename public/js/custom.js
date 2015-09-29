@@ -124,15 +124,17 @@ $(document).ready(function() {
 	}
 
 	// If click hamburger AND left nav is hidden - set cookie AND show left nav
-	$('a.open_menu').on('click', function() {
+	$('a.open_menu').on('click', function(event) {
+		event.preventDefault();
 		Cookies.set('leftNav', '1');
-		//location.hash = 'main_nav';
+		location.hash = 'main_nav';
 	});
 
 	// If click hamburger AND left nav is visible - remove cookie AND hide left nav
-	$('a.close_menu').on('click', function() {
+	$('a.close_menu').on('click', function(event) {
+		event.preventDefault();
 		Cookies.remove('leftNav');
-		//location.hash = '';
+		location.hash = '';
 	});
 
 	// If click close msg_box
