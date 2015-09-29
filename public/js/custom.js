@@ -138,7 +138,8 @@ $(document).ready(function() {
 	});
 
 	// If click close msg_box
-	$('.msg_box a.close').on('click', function() {
+	$('.msg_box a.close').on('click', function(event) {
+		event.preventDefault();
 		$(this).closest('.msg_box').remove();
 	});
 });
