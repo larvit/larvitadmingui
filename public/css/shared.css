@@ -117,7 +117,7 @@ table.sortable
 			table.sortable tbody tr td
 			{
 				background:                     #efefef;
-				white-space:                    nowrap;
+				/*white-space:                    nowrap;*/
 			}
 
 				table.sortable tbody tr td a
