@@ -90,7 +90,7 @@ $(document).ready(function() {
 		open: function() {
 			$('.ui-autocomplete').off('menufocus hover mouseover mouseenter');
 		}
-	}).focus(function() {
+	}).click(function() {
 		$(this).autocomplete('search', $(this).val());
 	});
 
@@ -128,7 +128,9 @@ $(document).ready(function() {
 		event.preventDefault();
 		Cookies.set('leftNav', '1');
 		location.hash = 'main_nav';
-		if (typeof doResizeActions !== 'undefined' && $.isFunction(doResizeActions)) {
+
+		// Make sure stuff in the right place after DOM change
+		if (typeof doResizeActions === 'function') {
 			doResizeActions();
 		}
 	});
@@ -138,7 +140,9 @@ $(document).ready(function() {
 		event.preventDefault();
 		Cookies.remove('leftNav');
 		location.hash = '';
-		if (typeof doResizeActions !== 'undefined' && $.isFunction(doResizeActions)) {
+
+		// Make sure stuff in the right place after DOM change
+		if (typeof doResizeActions === 'function') {
 			doResizeActions();
 		}
 	});
