@@ -128,6 +128,9 @@ $(document).ready(function() {
 		event.preventDefault();
 		Cookies.set('leftNav', '1');
 		location.hash = 'main_nav';
+		if (typeof doResizeActions !== 'undefined' && $.isFunction(doResizeActions)) {
+			doResizeActions();
+		}
 	});
 
 	// If click hamburger AND left nav is visible - remove cookie AND hide left nav
@@ -135,6 +138,9 @@ $(document).ready(function() {
 		event.preventDefault();
 		Cookies.remove('leftNav');
 		location.hash = '';
+		if (typeof doResizeActions !== 'undefined' && $.isFunction(doResizeActions)) {
+			doResizeActions();
+		}
 	});
 
 	// If click close msg_box
