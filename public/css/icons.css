@@ -37,20 +37,24 @@
 		.after_icon.minus:after
 		{
 			right:                          0;
-			top:                            1.3rem;
-			background-size:                0.9rem 0.9rem;
 			width:                          0.9rem;
-			height:                         0.9rem;
 		}
 
 			.after_icon.plus:after
 			{
+				top:                            1.3rem;
+				background-size:                0.9rem 0.9rem;
 				background-image:               url('../images/icons_colors/ffffff/plus.svg');
+				height:                         0.9rem;
 			}
 
 			.after_icon.minus:after
 			{
+				top:                            1.7rem;
+				background-position:            center 0;
+				background-size:                0.9rem 0.1rem;
 				background-image:               url('../images/icons_colors/ffffff/minus.svg');
+				height:                         0.1rem;
 			}
 
 			.after_icon.cross:after
