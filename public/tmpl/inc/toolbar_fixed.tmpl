@@ -1,16 +1,58 @@
 <div class="toolbar_fixed">
 	<ul class="sub_nav">
-		<li>
-			<a class="button warning" href="#">Delete</a>
-		</li>
-		<li class="u-pull-right">
-			<a class="button inv" href="#">Save</a>
-		</li>
-		<li class="u-pull-right">
-			<a class="button" href="#">Save & Exit</a>
-		</li>
-		<li class="u-pull-right">
-			<a class="button" href="#">Cancel</a>
-		</li>
+		<%
+			function writeButton(button) {
+				if (button.type === 'button') {
+					print('<button type="submit"');
+				} else {
+					print('<a href="' + button.href + '"');
+				}
+
+				print(' class="button');
+
+				if (button.warning) {
+					print(' warning');
+				}
+
+				if (button.strong) {
+					print(' inv');
+				}
+
+				print('"');
+
+				if (button.name) {
+					console.log('button name: "' + button.name + '"');
+					print(' name="' + button.name + '"');
+				}
+
+				if (button.value) {
+					print(' value="' + button.value + '"');
+				}
+
+				print('>' + button.label);
+
+				if (button.type === 'button') {
+					print('</button>');
+				} else {
+					print('</a>');
+				}
+			}
+
+			if (obj.leftButtons) {
+				_.forEach(leftButtons, function(button) {
+					print('<li>');
+					writeButton(button);
+					print('</li>');
+				});
+			}
+
+			if (obj.rightButtons) {
+				_.forEach(rightButtons, function(button) {
+					print('<li class="u-pull-right">');
+					writeButton(button);
+					print('</li>');
+				});
+			}
+		%>
 	</ul>
 </div>
