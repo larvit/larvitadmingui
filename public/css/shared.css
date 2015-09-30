@@ -307,7 +307,7 @@ table.sortable
 
 .hor_field_wrap .input_wrapper textarea.data_textarea
 {
-	height:                         10rem;
+	/*height:                         10rem;*/
 }
 
 .hor_field_wrap .input_wrapper textarea.data_textarea.tight
