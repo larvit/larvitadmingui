@@ -317,7 +317,6 @@ table.sortable
 
 .vert_field_wrap
 {
-
 }
 
 	.vert_field_wrap.split
@@ -349,7 +348,7 @@ table.sortable
 
 	.vert_field_wrap .input_wrapper textarea
 	{
-		height:                         20rem;
+		/*height:                         20rem;*/
 	}
 
 .input_wrapper.zebra,
@@ -366,9 +365,9 @@ table.zebra
 		padding:                        0 1rem;
 	}
 
-			table.zebra tr:nth-child(even) {
-				background-color:               #efefef;
-			}
+		table.zebra tr:nth-child(even) {
+			background-color:               #efefef;
+		}
 
 		table.zebra th
 		{
@@ -502,6 +501,7 @@ table.zebra
 	{
 		left:                           auto;
 		right:                          25%;
+		x:                              y;
 	}
 }
 
@@ -509,8 +509,8 @@ table.zebra
 {
 	body
 	{
-		overflow-x:                       hidden;
-		font-size:                        1.6rem;
+		overflow-x:                     hidden;
+		font-size:                      1.6rem;
 	}
 	.visible_sm
 	{
