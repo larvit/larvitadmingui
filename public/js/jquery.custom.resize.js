@@ -2,11 +2,13 @@
 
 jQuery(function($) {
 	(function() {
-		var $window  = $(window),
-		    $content = $('.section.content'),
-		    $toolbar = $('.toolbar_fixed'),
-		    $mainNav = $('.main_nav'),
-		    mode     = 'inline',
+		var $window   = $(window),
+		    $content  = $('.section.content'),
+		    $toolbar  = $('.toolbar_fixed'),
+		    $mainNav  = $('.main_nav'),
+		    $contWrap = $('#content_wrapper'),
+		    $contHead = $('#content_header'),
+		    mode      = 'inline',
 		    windowSize,
 		    contentSize,
 		    toolbarHeight,
@@ -74,6 +76,9 @@ jQuery(function($) {
 					width:    $toolbar.parent().width() + 'px'
 				});
 			}
+
+			// Make main nav fill out full height of content
+			$mainNav.height($contWrap.height() + $contHead.height() + 14);
 		};
 
 		$window.scroll(doResizeActions);
