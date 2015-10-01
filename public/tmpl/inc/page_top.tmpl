@@ -11,7 +11,7 @@
 						if (obj.global !== undefined && obj.global.menuStructure !== undefined) {
 							_.forEach(obj.global.menuStructure, function(menuItems, groupName) {
 								_.forEach(menuItems, function(menuItem) {
-									if (menuItem.controllerName === obj.global.controllerName && menuItem.pageHeader !== undefined) {
+									if ((menuItem.controllerName === obj.global.controllerName || menuItem.controllerName === obj.global.menuControllerName) && menuItem.pageHeader !== undefined) {
 										pageHeader = menuItem.pageHeader;
 									}
 								});
