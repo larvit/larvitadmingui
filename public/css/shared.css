@@ -459,6 +459,9 @@ table.zebra
 	z-index:                        9999;
 	border:                         0;
 	padding:                        0.5rem 0;
+	max-height:                     27rem;
+	overflow-y:                     auto;
+	overflow-x:                     hidden;
 }
 
 .toolbar_fixed
