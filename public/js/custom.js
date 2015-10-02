@@ -58,16 +58,16 @@ $(document).ready(function() {
 	// Cookies storing closed state main nav top lvls
 	$('.cp_nav').each(function() {
 		// If cookie says so, collapse this item
-		if (Cookies.get($(this).attr('id')) === '1') {
+		if (Cookies.get('main_nav_fold_' + $(this).attr('id')) === '1') {
 			$(this).removeAttr('checked');
 		}
 		$(this).on('click', function() {
 			if ($(this).is(':checked')) {
 				// If cookie with this id exists, remove it
-				Cookies.remove($(this).attr('id'));
+				Cookies.remove('main_nav_fold_' + $(this).attr('id'));
 			} else {
 				// Store cookie to keep this item collapsed
-				Cookies.set($(this).attr('id'), '1');
+				Cookies.set('main_nav_fold_' + $(this).attr('id'), '1');
 			}
 		});
 	});
