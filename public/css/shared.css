@@ -348,6 +348,12 @@ table.sortable
 			width:                          100%;
 		}
 
+			.vert_field_wrap .select_wrapper.data_two_col,
+			.vert_field_wrap .input_wrapper.data_two_col
+			{
+				width:                          15rem;
+			}
+
 	.vert_field_wrap .input_wrapper textarea
 	{
 		/*height:                         20rem;*/
@@ -497,7 +503,9 @@ table.zebra
 	.hor_field_wrap .input_wrapper,
 	.vert_field_wrap label,
 	.vert_field_wrap .select_wrapper,
-	.vert_field_wrap .input_wrapper
+	.vert_field_wrap .input_wrapper/*,
+	.vert_field_wrap .select_wrapper.data_two_col,
+	.vert_field_wrap .input_wrapper.data_two_col*/
 	{
 		display:                        block;
 		width:                          100%;
