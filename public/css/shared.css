@@ -386,11 +386,20 @@ table.zebra
 	float:                          left;
 }
 
+.input_wrapper.zebra
+{
+	height:                         100%;
+	position:                       relative;
+}
+
 	.input_wrapper.zebra textarea
 	{
 		background-image:               repeating-linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255) 25px, rgb(239, 239, 239) 25px, rgb(239, 239, 239) 50px);
 		line-height:                    25px;
 		padding:                        0 1rem;
+		height:                         100%;
+		overflow:                       hidden;
+		-ms-overflow-style:             none;
 	}
 
 		table.zebra tr:nth-child(even) {
@@ -412,6 +421,7 @@ table.zebra
 			line-height:                    25px;
 			vertical-align:                 top;
 			white-space:                    nowrap;
+			position:                       relative;
 		}
 
 		table.zebra td.no_pad
