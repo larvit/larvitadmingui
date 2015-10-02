@@ -55,8 +55,21 @@ $(document).ready(function() {
 	// Init close msg_box
 	addMsgBoxClose();
 
-	$('.cp_nav').each(function(item) {
-		if (Cookies.get($(this).attr('id')) !== undefined)
-		//$(item).removeAttr('checked');
+	// Cookies storing closed state main nav top lvls
+	$('.cp_nav').each(function() {
+		// If cookie says so, collapse this item
+		if (Cookies.get($(this).attr('id')) === '1') {
+			$(this).removeAttr('checked');
+		}
+		$(this).on('click', function() {
+			if ($(this).is(':checked')) {
+				// If cookie with this id exists, remove it
+				Cookies.remove($(this).attr('id'));
+			} else {
+				// Store cookie to keep this item collapsed
+				Cookies.set($(this).attr('id'), '1');
+			}
+		});
 	});
+
 });
