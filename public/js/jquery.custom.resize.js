@@ -19,7 +19,7 @@ jQuery(function($) {
 		}
 
 		$toolbar.wrap('<div class="row"><div class="nine columns toolbar_wrapper" style="position: relative;">');
-		toolbarHeight = $toolbar.outerHeight();
+		toolbarHeight = $toolbar.height();
 		$wrap         = $toolbar.parent().css('height', toolbarHeight);
 
 		$toolbar.css({

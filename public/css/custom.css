@@ -431,6 +431,7 @@
 		.section.content .content_wrapper form ul.sub_nav
 		{
 			min-height:                     8rem;
+			min-width:                      28rem;
 			padding:                        2rem 0;
 			border-bottom:                  0;
 			border-top:                     1px solid #efefef;
@@ -519,4 +520,21 @@
 	{
 		left:                           60%;
 	}*/
+}
+
+@media only screen and (max-width: 420px)
+{
+	.section.content .content_wrapper form ul.sub_nav
+	{
+		margin-left:                    -2rem;
+		margin-right:                   -2rem;
+	}
+	.section.content .content_wrapper ul.sub_nav > li .button,
+	.section.content .content_wrapper ul.sub_nav > li button,
+	.section.content .content_wrapper ul.sub_nav > li input[type="submit"],
+	.section.content .content_wrapper ul.sub_nav > li input[type="reset"],
+	.section.content .content_wrapper ul.sub_nav > li input[type="button"]
+	{
+		padding:                        0.7rem 0.8rem;
+	}
 }

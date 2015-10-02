@@ -114,8 +114,8 @@
 [class*=' br_icon_']:after
 {
 	width:                          1.6rem;
-	height:                         1.6rem;
-	background-size:                1.6rem 1.6rem;
+	height:                         1.3rem;
+	background-size:                1.6rem 1.3rem;
 	content:                        '';
 	background-position:            0 0;
 	background-repeat:              no-repeat;
