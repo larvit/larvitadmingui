@@ -88,6 +88,21 @@
 	border-bottom:                  1px solid #efefef;
 }
 
+::-webkit-input-placeholder
+{
+	color:                          #999999;
+}
+
+:-moz-placeholder
+{
+	color:                          #999999;
+}
+
+.placeholder
+{
+	color:                          #999999;
+}
+
 table.sortable
 {
 	border-collapse:                separate;
