@@ -50,7 +50,7 @@ $(document).ready(function() {
 			event.preventDefault();
 			$(this).closest('.msg_box').remove();
 		});
-	}
+	};
 
 	// Init close msg_box
 	addMsgBoxClose();

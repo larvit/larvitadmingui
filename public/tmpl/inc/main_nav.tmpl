@@ -22,7 +22,14 @@
 					<ul class="content">
 						<% _.forEach(menuItems, function(menuItem) { %>
 							<li>
-								<a class="before_icon caret_right<% if (obj.global.controllerName === menuItem.controllerName) { print(' active'); } %>" href="<%= menuItem.href %>"><%= menuItem.label %></a>
+								<a
+									class="before_icon caret_right<%
+										if (obj.global.controllerName === menuItem.controllerName || obj.global.menuControllerName === menuItem.controllerName) {
+											print(' active');
+										}
+									%>"
+									href="<%= menuItem.href %>"
+								><%= menuItem.label %></a>
 							</li>
 						<% }); %>
 					</ul>
