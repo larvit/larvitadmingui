@@ -52,5 +52,11 @@ $(document).ready(function() {
 		});
 	}
 
+	// Init close msg_box
 	addMsgBoxClose();
+
+	$('.cp_nav').each(function(item) {
+		if (Cookies.get($(this).attr('id')) !== undefined)
+		//$(item).removeAttr('checked');
+	});
 });

@@ -17,8 +17,8 @@
 						}
 					});
 					%>
-					<input type="checkbox" name="a" id="cp-<%= i %>" <% if (found) { print(' checked="checked"'); } %> />
-					<label for="cp-<%= i %>"><%= groupName %><div class="after_icon plus"></div><div class="after_icon minus"></div></label>
+					<input class="cp_nav" type="checkbox" name="cp_<%= i %>" id="cp_<%= i %>" checked="checked" />
+					<label for="cp_<%= i %>"><%= groupName %><div class="after_icon plus"></div><div class="after_icon minus"></div></label>
 					<ul class="content">
 						<% _.forEach(menuItems, function(menuItem) { %>
 							<li>
