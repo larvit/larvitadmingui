@@ -76,6 +76,11 @@
 	text-align:                     right;
 }
 
+.nowrap
+{
+	white-space:                    nowrap;
+}
+
 .ingress
 {
 	font-size:                      1.6rem;
@@ -405,6 +410,13 @@ table.zebra
 			padding:                        0 1.5rem;
 			border:                         0;
 			line-height:                    25px;
+			vertical-align:                 top;
+			white-space:                    nowrap;
+		}
+
+		table.zebra td.no_pad
+		{
+			padding:                        0;
 		}
 
 		table.zebra thead
@@ -539,6 +551,10 @@ table.zebra
 	{
 		overflow-x:                     hidden;
 		font-size:                      1.6rem;
+	}
+	body.overflow_x
+	{
+		overflow-x:                     auto;
 	}
 	.visible_sm
 	{

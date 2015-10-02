@@ -1,4 +1,4 @@
-<body>
+<body<% if (obj.bodyClass !== undefined) { print(' class="' + obj.bodyClass + '"'); } %>>
 	<div class="page_wrapper">
 		<span class="target_fix" id="main_nav"></span>
 		<%= _.render('inc/header', obj) %>
