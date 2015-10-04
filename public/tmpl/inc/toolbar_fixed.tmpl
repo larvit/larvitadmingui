@@ -41,17 +41,17 @@
 				}
 			}
 
-			if (obj.leftButtons) {
-				_.forEach(leftButtons, function(button) {
-					print('<li class="u-pull-left">');
+			if (obj.rightButtons) {
+				_.forEach(rightButtons, function(button) {
+					print('<li class="u-pull-right">');
 					writeButton(button);
 					print('</li>');
 				});
 			}
 
-			if (obj.rightButtons) {
-				_.forEach(rightButtons, function(button) {
-					print('<li class="u-pull-right">');
+			if (obj.leftButtons) {
+				_.forEach(leftButtons, function(button) {
+					print('<li class="u-pull-left">');
 					writeButton(button);
 					print('</li>');
 				});
