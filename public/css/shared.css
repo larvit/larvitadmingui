@@ -389,12 +389,12 @@ table.zebra
 .input_wrapper.zebra
 {
 	height:                         100%;
-	position:                       relative;
+	position:                       absolute;
 }
 
 	.input_wrapper.zebra textarea
 	{
-		background-image:               repeating-linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255) 25px, rgb(239, 239, 239) 25px, rgb(239, 239, 239) 50px);
+		/*background-image:               repeating-linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255) 25px, rgb(239, 239, 239) 25px, rgb(239, 239, 239) 50px);*/
 		line-height:                    25px;
 		padding:                        0 1rem;
 		height:                         100%;
@@ -427,6 +427,7 @@ table.zebra
 		table.zebra td.no_pad
 		{
 			padding:                        0;
+			position:                       relative;
 		}
 
 		table.zebra thead
