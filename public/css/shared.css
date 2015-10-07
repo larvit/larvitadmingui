@@ -394,12 +394,12 @@ table.zebra
 
 	.input_wrapper.zebra textarea
 	{
-		/*background-image:               repeating-linear-gradient(rgb(255, 255, 255), rgb(255, 255, 255) 25px, rgb(239, 239, 239) 25px, rgb(239, 239, 239) 50px);*/
 		line-height:                    25px;
 		padding:                        0 1rem;
 		height:                         100%;
 		overflow:                       hidden;
 		-ms-overflow-style:             none;
+		background:                     transparent;
 	}
 
 		table.zebra tr:nth-child(even) {
@@ -424,7 +424,7 @@ table.zebra
 			position:                       relative;
 		}
 
-		table.zebra td.no_pad
+		table.zebra td.with_textarea
 		{
 			padding:                        0;
 			position:                       relative;
