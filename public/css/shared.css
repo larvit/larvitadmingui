@@ -426,6 +426,7 @@ table.zebra
 
 		table.zebra td.with_textarea
 		{
+			width:                          20rem;
 			padding:                        0;
 			position:                       relative;
 		}
