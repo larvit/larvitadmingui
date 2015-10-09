@@ -1,7 +1,7 @@
 'use strict';
 
-var acl    = require(__dirname + '/models/acl')(),
-    router = require('larvitrouter')();
+var router = require('larvitrouter')(),
+    acl;
 
 exports = module.exports = function(customOptions) {
 	var returnObj;
@@ -18,6 +18,8 @@ exports = module.exports = function(customOptions) {
 		'regex': '^/$',
 		'controllerName': 'login'
 	});
+
+	acl = require(__dirname + '/models/acl')(customOptions);
 
 	router.on('pathsLoaded', function() {
 		customOptions.middleware = [
