@@ -40,7 +40,7 @@
 		"url": "https://github.com/larvit/larvitadmingui",
 		"type": "git"
 	},
-	"version": "0.0.2-rc16",
+	"version": "0.0.2-rc17",
 	"readmeFilename": "README.md",
 	"bugs": {
 		"url": "https://github.com/larvit/larvitadmingui/issues"
