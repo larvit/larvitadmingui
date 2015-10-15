@@ -262,6 +262,7 @@
 				background:                     transparent;
 				border-radius:                  0.3rem;
 				background-clip:                padding-box;
+				text-decoration:                none;
 			}
 
 				.main_nav > ul > li > ul.content li a:hover,

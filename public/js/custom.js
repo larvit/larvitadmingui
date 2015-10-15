@@ -16,7 +16,7 @@ $(document).ready(function() {
 	}
 
 	// If desktop AND cookie says so - show left nav
-	if ($(window).width() > 768 && Cookies.get('leftNav') === '1') {
+	if ($(window).width() > 768 && (Cookies.get('leftNav') === '1' || Cookies.get('leftNav') === undefined)) {
 		location.hash = 'main_nav';
 	}
 
@@ -35,7 +35,7 @@ $(document).ready(function() {
 	// If click hamburger AND left nav is visible - remove cookie AND hide left nav
 	$('a.close_menu').on('click', function(event) {
 		event.preventDefault();
-		Cookies.remove('leftNav');
+		Cookies.set('leftNav', '0');
 		location.hash = '';
 
 		// Make sure stuff in the right place after DOM change

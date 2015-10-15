@@ -54,8 +54,8 @@ p
 
 a
 {
-	text-decoration:                none;
-	color:                          #444;
+	text-decoration:                underline;
+	color:                          #3a7ac0;
 }
 
 ul,
