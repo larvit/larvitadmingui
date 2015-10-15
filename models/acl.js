@@ -53,6 +53,13 @@ exports = module.exports = function(options) {
 			return;
 		}
 
+		// Give access to configured public paths
+		if (options.publicPaths !== undefined && options.publicPaths.indexOf(trimmedPathname) !== - 1) {
+			log.debug('larvitadmingui: models/acl.js: checkAndRedirect() - Access granted. Pathname "' + trimmedPathname + '" is in the public paths array');
+			cb(null, true);
+			return;
+		}
+
 		// Always redirect to options.redirectUnauthorizedTo if not logged in
 		if (( ! response.globalData.user || (response.globalData.user && response.globalData.user.fields.role.indexOf('admin') === - 1)) && trimmedPathname !== options.redirectUnauthorizedTo) {
 			log.verbose('larvitadmingui: models/acl.js: checkAndRedirect() - Access denied. No valid user set and pathname: "' + trimmedPathname + '" is not the login url: "' + options.redirectUnauthorizedTo + '"');
