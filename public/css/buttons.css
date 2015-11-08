@@ -4,7 +4,7 @@ input[type="submit"],
 input[type="reset"],
 input[type="button"]
 {
-	display:                        block;
+	/*display:                        block; WHY block?! Fucks up alignment of buttons in forms */
 	color:                          #444;
 	background:                     #edefef;
 	border-radius:                  0.3rem;

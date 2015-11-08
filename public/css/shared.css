@@ -108,6 +108,11 @@
 	color:                          #999999;
 }
 
+.row
+{
+	padding-top:                    0.5rem;
+}
+
 table.sortable
 {
 	border-collapse:                separate;
