@@ -7,6 +7,10 @@ var log           = require('winston'),
 function middleware(request, response, callback) {
 	response.globalData = {};
 
+	// Default admin rights to be false
+	// In the bottom this gets set to true if a correct user is logged in
+	response.adminRights = false;
+
 	// Include menu structure config
 	response.globalData.menuStructure = require(router.fileExists('config/menuStructure.json'));
 
@@ -37,6 +41,12 @@ function middleware(request, response, callback) {
 	utils.getUserFromSession(request, function(err, user) {
 		if (user) {
 			log.debug('larvitadmingui: models/controllerGlobal.js - User found in session. UserUuid: "' + user.uuid + '"');
+
+			if (user.fields && user.fields.role && user.fields.role.indexOf('admin') !== - 1) {
+				log.debug('larvitadmingui: models/controllerGlobal.js - User have admin role set, setting adminRights to true');
+				response.adminRights = true;
+			}
+
 			response.globalData.user = user;
 		}
 
