@@ -58,3 +58,16 @@ exports.run = function(req, res, cb) {
 	cb(null, req, res, data);
 };
 ```
+
+To set messages to the next page load, do this:
+
+```javascript
+if ( ! req.session.data.nextCallData)
+	req.session.data.nextCallData = {};
+
+req.session.data.nextCallData = {'global': {'messages': ['Happy message']}};
+// or
+req.session.data.nextCallData = {'global': {'errors': ['Sad message']}};
+```
+
+These will be loaded on the next page load, and then erased again.
