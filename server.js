@@ -34,11 +34,14 @@ exports = module.exports = function(customOptions) {
 
 		returnObj = require('larvitbase')(customOptions);
 
-		returnObj.on('httpSession', function(request, response) {
-			var originalRunController = response.runController;
+		returnObj.on('httpSession', function(req, res) {
+			var originalRunController = res.runController;
 
-			response.runController = function() {
-				acl.checkAndRedirect(request, response, function(err, userGotAccess) {
+			if (customOptions.langs)
+				res.langs = customOptions.langs;
+
+			res.runController = function() {
+				acl.checkAndRedirect(req, res, function(err, userGotAccess) {
 					if (err) {
 						throw err;
 					}
@@ -49,12 +52,12 @@ exports = module.exports = function(customOptions) {
 					} else {
 						// If userGotAccess is false, we should not execute the controller.
 						// Instead just run sendToClient directly, circumventing the afterware as well.
-						response.sendToClient(null, request, response);
+						res.sendToClient(null, req, res);
 					}
 				});
 			};
 
-			response.next();
+			res.next();
 		});
 	});
 
