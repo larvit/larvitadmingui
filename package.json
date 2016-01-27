@@ -1,57 +1,71 @@
 {
-	"author": {
-		"name": "Mikael 'Lilleman' Göransson",
-		"email": "lilleman@larvit.se",
-		"url": "http://github.com/larvit/larvitadmingui"
-	},
-	"private": false,
-	"contributors": [{
-		"name": "Valter Karlsson",
-		"email": "valter@larvit.se",
-		"url": "http://larvit.se"
-	}],
-	"dependencies": {
-		"cookies": "~0.5",
-		"larvitbase": "~0.1",
-		"larvitrouter": "~0.1",
-		"larvitsession": "~0.1",
-		"larvituser": "~0.4",
-		"winston": "~2.1"
-	},
-	"description": "Generic admin GUI",
-	"devDependencies": {
-		"mocha": "latest",
-		"pre-git": "latest"
-	},
-	"pre-commit": [
-		"npm test",
-		"eslint ./"
-	],
-	"keywords": [
-		"admin",
-		"gui",
-		"admingui",
-		"dashboard",
-		"menu"
-	],
-	"main": "server.js",
-	"name": "larvitadmingui",
-	"repository": {
-		"url": "https://github.com/larvit/larvitadmingui",
-		"type": "git"
-	},
-	"version": "0.1.2",
-	"readmeFilename": "README.md",
-	"bugs": {
-		"url": "https://github.com/larvit/larvitadmingui/issues"
-	},
-	"homepage": "https://github.com/larvit/larvitadmingui",
-	"scripts": {
-		"test": "mocha"
-	},
-	"license": "MIT",
-	"maintainers": [{
-		"name": "lilleman",
-		"email": "lilleman@larvit.se"
-	}]
+  "author": {
+    "name": "Mikael 'Lilleman' Göransson",
+    "email": "lilleman@larvit.se",
+    "url": "http://github.com/larvit/larvitadmingui"
+  },
+  "private": false,
+  "contributors": [
+    {
+      "name": "Valter Karlsson",
+      "email": "valter@larvit.se",
+      "url": "http://larvit.se"
+    }
+  ],
+  "dependencies": {
+    "cookies": "^0.5.1",
+    "larvitbase": "^0.1.12",
+    "larvitrouter": "^0.1.12",
+    "larvitsession": "^0.1.3",
+    "larvituser": "^0.4.14",
+    "winston": "^2.1.1"
+  },
+  "description": "Generic admin GUI",
+  "devDependencies": {
+    "mocha": "^2.4.2",
+    "pre-git": "^3.3.0"
+  },
+  "pre-commit": [
+    "npm test",
+    "eslint ./"
+  ],
+  "keywords": [
+    "admin",
+    "gui",
+    "admingui",
+    "dashboard",
+    "menu"
+  ],
+  "main": "server.js",
+  "name": "larvitadmingui",
+  "repository": {
+    "url": "https://github.com/larvit/larvitadmingui",
+    "type": "git"
+  },
+  "version": "0.1.3",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/larvit/larvitadmingui/issues"
+  },
+  "homepage": "https://github.com/larvit/larvitadmingui",
+  "scripts": {
+    "test": "mocha",
+    "commit": "commit-wizard"
+  },
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "lilleman",
+      "email": "lilleman@larvit.se"
+    }
+  ],
+  "config": {
+    "pre-git": {
+      "commit-msg": [],
+      "pre-commit": [],
+      "pre-push": [],
+      "post-commit": [],
+      "post-merge": []
+    }
+  }
 }
