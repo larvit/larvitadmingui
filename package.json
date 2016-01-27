@@ -14,10 +14,10 @@
   ],
   "dependencies": {
     "cookies": "^0.5.1",
-    "larvitbase": "^0.1.13",
-    "larvitrouter": "^0.1.13",
-    "larvitsession": "^0.1.4",
-    "larvituser": "^0.4.15",
+    "larvitbase": "^0.1.14",
+    "larvitrouter": "^0.1.14",
+    "larvitsession": "^0.1.5",
+    "larvituser": "^0.4.16",
     "winston": "^2.1.1"
   },
   "description": "Generic admin GUI",
@@ -42,7 +42,7 @@
     "url": "https://github.com/larvit/larvitadmingui",
     "type": "git"
   },
-  "version": "0.1.4",
+  "version": "0.1.5",
   "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/larvit/larvitadmingui/issues"
