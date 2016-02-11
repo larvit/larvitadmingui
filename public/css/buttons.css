@@ -23,14 +23,19 @@ input[type="button"]
 
 	.button:hover,
 	.button:focus,
+	.button.active,
 	button:hover,
 	button:focus,
+	button.active
 	input[type="submit"]:hover,
 	input[type="submit"]:focus,
+	input[type="submit"].active,
 	input[type="reset"]:hover,
 	input[type="reset"]:focus,
+	input[type="reset"].active,
 	input[type="button"]:hover,
-	input[type="button"]:focus
+	input[type="button"]:focus,
+	input[type="button"].active
 	{
 		background:                     #444;
 		color:                          #fff;
