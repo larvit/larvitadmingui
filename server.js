@@ -19,6 +19,11 @@ exports = module.exports = function(customOptions) {
 		'controllerName': 'login'
 	});
 
+	customOptions.customRoutes.push({
+		'regex': '\\.css$',
+		'controllerName': 'css'
+	});
+
 	acl = require(__dirname + '/models/acl')(customOptions);
 
 	router.on('pathsLoaded', function() {

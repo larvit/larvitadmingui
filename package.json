@@ -15,7 +15,7 @@
   "dependencies": {
     "cookies": "^0.5.1",
     "larvitbase": "^0.1.14",
-    "larvitcss": "^0.1.0",
+    "larvitcss": "^0.1.1",
     "larvitdb": "^0.4.4",
     "larvitrouter": "^0.1.14",
     "larvitsession": "^0.1.5",
