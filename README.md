@@ -4,7 +4,10 @@ node.js admin GUI
 ## Installation
 
 ```bash
-npm i larvitadmingui
+npm i larvitadmingui;
+cd public;
+../node_modules/.bin/bower i;
+cd ..;
 ```
 
 or for latest HEAD:
@@ -14,6 +17,9 @@ cd apppath
 git clone https://github.com/larvit/larvitadmingui.git node_modules/larvitadmingui
 cd node_modules/larvitadmingui
 npm i
+cd public;
+../node_modules/.bin/bower i;
+cd ..;
 ```
 
 ## Usage
