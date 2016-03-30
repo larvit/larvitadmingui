@@ -1,59 +1,56 @@
-/* Template */
-.template
-{
-	display:                        none;
+.template                   { display:                        none;}
+.wrap_row                   { margin-bottom:                  3rem;}
+.wrap_small_row             { margin-bottom:                  1rem;}
+.wrap_medium_row            { margin-bottom:                  1.5rem;}
+.wrap_large_row             { margin-bottom:                  2.2rem;}
+.wrap_big_row               { margin-bottom:                  3.5rem;}
+.wrap_mega_row              { margin-bottom:                  5.5rem;}
+.strong                     { font-family:                    'montserratregular', Arial, sans-serif;}
+.text_center                { text-align:                     center;}
+.text_right                 { text-align:                     right;}
+.nowrap                     { white-space:                    nowrap;}
+.border_bot                 { border-bottom:                  1px solid #efefef;}
+::-webkit-input-placeholder { color:                          #999999;}
+:-moz-placeholder           { color:                          #999999;}
+.placeholder                { color:                          #999999;}
+.row                        { padding-top:                    0.5rem;}
+
+.clearfix {
+	overflow:                       auto;
+  zoom:                           1;
 }
 
-/* Rows */
-.wrap_row
-{
-	margin-bottom:                  3rem;
+.controls {
 }
 
-.wrap_small_row
-{
-	margin-bottom:                  1rem;
-}
+	.controls > .button {
+		margin:                         0.5rem;
+	}
 
-.wrap_medium_row
-{
-	margin-bottom:                  1.5rem;
-}
+		.controls > .button.right {
+			float:                          right;
+		}
 
-.wrap_large_row
-{
-	margin-bottom:                  2.2rem;
-}
-
-.wrap_big_row
-{
-	margin-bottom:                  3.5rem;
-}
-
-.wrap_mega_row
-{
-	margin-bottom:                  5.5rem;
-}
+		.controls > .button.left {
+			float:                          left;
+		}
 
 /* Visible/hidden */
 .visible_md,
 .visible_sm,
-.hidden
-{
+.hidden {
 	display:                        none;
 }
 
 /* Diverse */
-.target_fix
-{
+.target_fix {
 	display:                        block;
 	left:                           0;
 	position:                       fixed;
 	top:                            0;
 }
 
-.avatar
-{
+.avatar {
 	border-radius:                  4rem;
 	background-clip:                padding-box;
 	overflow:                       hidden;
@@ -61,102 +58,48 @@
 	height:                         3.2rem;
 }
 
-.strong
-{
-	font-family:                    'montserratregular', Arial, sans-serif;
-}
-
-.text_center
-{
-	text-align:                     center;
-}
-
-.text_right
-{
-	text-align:                     right;
-}
-
-.nowrap
-{
-	white-space:                    nowrap;
-}
-
-.ingress
-{
+.ingress {
 	font-size:                      1.6rem;
 	line-height:                    1.4rem;
 	color:                          #999999;
 }
 
-.border_bot
-{
-	border-bottom:                  1px solid #efefef;
-}
-
-::-webkit-input-placeholder
-{
-	color:                          #999999;
-}
-
-:-moz-placeholder
-{
-	color:                          #999999;
-}
-
-.placeholder
-{
-	color:                          #999999;
-}
-
-.row
-{
-	padding-top:                    0.5rem;
-}
-
-table.sortable
-{
+table.sortable {
 	border-collapse:                separate;
   border-spacing:                 0 0.3rem;
 }
 
-	table.sortable tbody:after
-	{
+	table.sortable tbody:after {
 		content:                        '';
 		display:                        block;
 		height:                         2rem;
 	}
 
-		table.sortable tbody tr
-		{
+		table.sortable tbody tr {
 			cursor:                         move;
 		}
 
 			table.sortable thead tr th,
-			table.sortable tbody tr td
-			{
+			table.sortable tbody tr td {
 				border:                         0;
 				padding:                        0.2rem 0.5rem;
 				position:                       relative;
 			}
 
-			table.sortable tbody tr td
-			{
+			table.sortable tbody tr td {
 				background:                     #efefef;
 				/*white-space:                    nowrap;*/
 			}
 
-				table.sortable tbody tr td:last-child
-				{
+				table.sortable tbody tr td:last-child {
 					padding-right:                  3rem;
 				}
 
-				table.sortable tbody tr td a
-				{
+				table.sortable tbody tr td a {
 					text-decoration:                underline;
 				}
 
-				table.sortable tbody tr td .handle
-				{
+				table.sortable tbody tr td .handle {
 					position:                       absolute;
 					right:                          1rem;
 					top:                            50%;
@@ -167,8 +110,7 @@ table.sortable
 				}
 
 					table.sortable tbody tr td .handle .top,
-					table.sortable tbody tr td .handle .bot
-					{
+					table.sortable tbody tr td .handle .bot {
 						display:                        block;
 						background-repeat:              no-repeat;
 						background-size:                0.5rem 0.3rem;
@@ -177,8 +119,7 @@ table.sortable
 						opacity:                        0;
 					}
 
-					table.sortable tbody tr td .handle .top
-					{
+					table.sortable tbody tr td .handle .top {
 						background-image:               url('../images/icons_colors/aeaeaf/drag_arrow_top.svg');
 						margin:                         0 auto 0.2rem auto;
 					}
@@ -195,8 +136,7 @@ table.sortable
 							opacity:                        1;
 						}
 
-					table.sortable tbody tr .handle .dots
-					{
+					table.sortable tbody tr .handle .dots {
 						display:                        block;
 						background-repeat:              no-repeat;
 						background-size:                1.3rem 0.7rem;
@@ -207,8 +147,7 @@ table.sortable
 					}
 
 /* Message box */
-.msg_box
-{
+.msg_box {
 	background:                     #efefef;
 	border:                         1px solid #d1d1d1;
 	color:                          inherit;
@@ -216,69 +155,58 @@ table.sortable
 	position:                       relative;
 }
 
-	.msg_box a.close
-	{
+	.msg_box a.close {
 		position:                       absolute;
 		top:                            50%;
 		right:                          1rem;
 	}
 
-	.msg_box p:last-child
-	{
+	.msg_box p:last-child {
 		margin:                         0;
 	}
 
-		.msg_box a.close
-		{
+		.msg_box a.close {
 			opacity:                        0.5;
 		}
 
-			.msg_box a.close:hover
-			{
+			.msg_box a.close:hover {
 				opacity:                        1;
 			}
 
-	.msg_box.happy
-	{
+	.msg_box.happy {
 		background:                     #dff0d8;
 		border:                         1px solid #d6e9c6;
 		color:                          #3c763d;
 	}
 
-		.msg_box.happy a.close:after
-		{
+		.msg_box.happy a.close:after {
 			background-image:               url('../images/icons_colors/3c763d/cross.svg');
 		}
 
-	.msg_box.sad
-	{
+	.msg_box.sad {
 		background:                     #f2dede;
 		border:                         1px solid #ebccd1;
 		color:                          #a94442;
 	}
 
-		.msg_box.sad a.close:after
-		{
+		.msg_box.sad a.close:after {
 			background-image:               url('../images/icons_colors/a94442/cross.svg');
 		}
 
-.page_wrapper
-{
+.page_wrapper {
 	position:                       relative;
 	height:                         100%;
 }
 
 .select_wrapper,
-.input_wrapper
-{
+.input_wrapper {
 	display:                        inline-block;
 	width:                          100%;
 	position:                       relative;
 }
 
 .select_wrapper .sel_wrap,
-.input_wrapper .input_wrap
-{
+.input_wrapper .input_wrap {
 	border:                         0;
 	display:                        inline-block;
 	width:                          100%;
@@ -287,8 +215,7 @@ table.sortable
 }
 
 .select_wrapper .sel_wrap:after,
-.input_wrapper .input_wrap.sel:after
-{
+.input_wrapper .input_wrap.sel:after {
 	position:                       absolute;
 	top:                            50%;
 	margin-top:                     -0.3rem;
@@ -299,16 +226,14 @@ table.sortable
 }
 
 .select_wrapper .sel_wrap.br_icon_calendar:after,
-.input_wrapper .input_wrap.sel.br_icon_calendar:after
-{
+.input_wrapper .input_wrap.sel.br_icon_calendar:after {
 	width:                          1.4rem;
 	height:                         1.4rem;
 	background-size:                1.4rem 1.4rem;
 	margin-top:                     -0.7rem;
 }
 
-	.input_wrapper .notice
-	{
+	.input_wrapper .notice {
 		position:                       absolute;
 		left:                           25%;
 		top:                            50%;
@@ -317,88 +242,74 @@ table.sortable
 		display:                        none;
 	}
 
-.hor_field_wrap label
-{
+.hor_field_wrap label {
 	display:                        block;
 	width:                          15rem;
 	float:                          left;
 }
 
 .hor_field_wrap .select_wrapper,
-.hor_field_wrap .input_wrapper
-{
+.hor_field_wrap .input_wrapper {
 	display:                        block;
 	width:                          auto;
 	overflow:                       hidden;
 }
 
-.hor_field_wrap .input_wrapper textarea.data_textarea
-{
+.hor_field_wrap .input_wrapper textarea.data_textarea {
 	/*height:                         10rem;*/
 }
 
-.hor_field_wrap .input_wrapper textarea.data_textarea.tight
-{
+.hor_field_wrap .input_wrapper textarea.data_textarea.tight {
 	height:                         5rem;
 }
 
-.vert_field_wrap
-{
+.vert_field_wrap {
 }
 
-	.vert_field_wrap.split
-	{
+	.vert_field_wrap.split {
 		float:                          left;
 		width:                          50%;
 	}
 
-	.vert_field_wrap label
-	{
+	.vert_field_wrap label {
 		display:                        block;
 		width:                          auto;
 		margin-bottom:                  1rem;
 	}
 
 	.vert_field_wrap .select_wrapper,
-	.vert_field_wrap .input_wrapper
-	{
+	.vert_field_wrap .input_wrapper {
 		display:                        inline-block;
 		width:                          25%;
 	}
 
 		.vert_field_wrap.full .select_wrapper,
-		.vert_field_wrap.full .input_wrapper
-		{
+		.vert_field_wrap.full .input_wrapper {
 			display:                        block;
 			width:                          100%;
 		}
 
 			.vert_field_wrap .select_wrapper.data_two_col,
-			.vert_field_wrap .input_wrapper.data_two_col
-			{
+			.vert_field_wrap .input_wrapper.data_two_col {
 				width:                          20rem;
 			}
 
-	.vert_field_wrap .input_wrapper textarea
-	{
+	.vert_field_wrap .input_wrapper textarea {
 		/*height:                         20rem;*/
 	}
 
 .input_wrapper.zebra,
-table.zebra
-{
+table.zebra {
 	background:                     transparent;
 	float:                          left;
 }
 
-.input_wrapper.zebra
-{
+.input_wrapper.zebra {
 	height:                         100%;
 	position:                       absolute;
 }
 
-	.input_wrapper.zebra textarea
-	{
+	.input_wrapper.zebra textarea {
 		line-height:                    25px;
 		padding:                        0 1rem;
 		height:                         100%;
@@ -411,16 +322,14 @@ table.zebra
 			background-color:               #efefef;
 		}
 
-		table.zebra th
-		{
+		table.zebra th {
 			padding:                        0 1.5rem;
 			border:                         0;
 			vertical-align:                 top;
 			line-height:                    20px;
 		}
 
-		table.zebra td
-		{
+		table.zebra td {
 			padding:                        0 1.5rem;
 			border:                         0;
 			line-height:                    25px;
@@ -429,27 +338,23 @@ table.zebra
 			position:                       relative;
 		}
 
-		table.zebra td.with_textarea
-		{
+		table.zebra td.with_textarea {
 			width:                          20rem;
 			padding:                        0;
 			position:                       relative;
 		}
 
-		table.zebra thead
-		{
+		table.zebra thead {
 			height:                         40px;
 		}
 
-		.input_wrapper.zebra label
-		{
+		.input_wrapper.zebra label {
 			height:                         39px;
 			margin:                         0;
 		}
 
 /* jQuery UI theming */
-.ui-widget-content
-{
+.ui-widget-content {
 	background:                     #fff;
 }
 
@@ -457,27 +362,23 @@ table.zebra
 .ui-widget input,
 .ui-widget select,
 .ui-widget textarea,
-.ui-widget button
-{
+.ui-widget button {
 	font-size:                      inherit;
 	font-family:                    Arial, sans-serif;
 }
 
-.ui-datepicker
-{
+.ui-datepicker {
 	cursor:                         pointer;
 }
 
 .ui-datepicker-prev,
-.ui-datepicker-next
-{
+.ui-datepicker-next {
 	cursor:                         pointer;
 }
 
 .ui-state-default,
 .ui-widget-content .ui-state-default,
-.ui-widget-header .ui-state-default
-{
+.ui-widget-header .ui-state-default {
 	background:                     transparent;
 	color:                          inherit;
 	font-weight:                    normal;
@@ -490,21 +391,18 @@ table.zebra
 .ui-widget-header .ui-state-focus,
 .ui-datepicker-next-hover,
 .ui-widget-content .ui-state-default.ui-state-active,
-.ui-widget-content .ui-state-hover
-{
+.ui-widget-content .ui-state-hover {
 	font-weight:                    normal;
 	background:                     #444;
 	color:                          #fff;
 	border:                         0;
 }
 
-.ui-widget-header .ui-icon
-{
+.ui-widget-header .ui-icon {
 	background-image:               url('../js/jquery-ui/images/ui-icons_ffffff_256x240.png');
 }
 
-.ui-autocomplete
-{
+.ui-autocomplete {
 	background-color:               #efefef;
 	z-index:                        9999;
 	border:                         0;
@@ -514,34 +412,22 @@ table.zebra
 	overflow-x:                     hidden;
 }
 
-.toolbar_fixed
-{
+.toolbar_fixed {
 	z-index:                        999;
 	background:                     #fff;
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1024px)
-{
-	.four.hor_field_wrap
-	{
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+	.four.hor_field_wrap {
 		width:                          70%;
 	}
 }
 
-@media only screen and (max-width: 767px)
-{
-	.visible_md
-	{
-		display:                        inline-block;
-	}
-	.hidden_md
-	{
-		display:                        none !important;
-	}
-	.four.hor_field_wrap
-	{
-		width:                          100%;
-	}
+@media only screen and (max-width: 767px) {
+	.visible_md          { display:                        inline-block;}
+	.hidden_md           { display:                        none !important;}
+	.four.hor_field_wrap { width:                          100%;}
+
 	.hor_field_wrap label,
 	.hor_field_wrap .select_wrapper,
 	.hor_field_wrap .input_wrapper,
@@ -549,50 +435,47 @@ table.zebra
 	.vert_field_wrap .select_wrapper,
 	.vert_field_wrap .input_wrapper/*,
 	.vert_field_wrap .select_wrapper.data_two_col,
-	.vert_field_wrap .input_wrapper.data_two_col*/
-	{
+	.vert_field_wrap .input_wrapper.data_two_col*/ {
 		display:                        block;
 		width:                          100%;
 		float:                          none;
 	}
-	.input_wrapper .notice
-	{
+
+	.input_wrapper .notice {
 		left:                           auto;
 		right:                          25%;
 		x:                              y;
 	}
 }
 
-@media only screen and (max-width: 550px)
-{
-	body
-	{
+@media only screen and (max-width: 550px) {
+	body {
 		overflow-x:                     hidden;
 		font-size:                      1.6rem;
 	}
-	body.overflow_x
-	{
+
+	body.overflow_x {
 		overflow-x:                     auto;
 	}
-	.visible_sm
-	{
+
+	.visible_sm {
 		display:                        inline-block;
 	}
-	.hidden_sm
-	{
+
+	.hidden_sm {
 		display:                        none !important;
 	}
+
 	select,
 	select:active,
 	select:focus,
 	input[type="text"],
 	input[type="password"],
-	textarea
-	{
+	textarea {
 		font-size:                      1.6rem;
 	}
-	.input_wrapper .notice
-	{
+
+	.input_wrapper .notice {
 		margin-top:                     -1.3rem;
 	}
 }

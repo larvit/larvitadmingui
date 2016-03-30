@@ -1,10 +1,11 @@
 'use strict';
 
-var router = require('larvitrouter')(),
-    acl;
+const router = require('larvitrouter')();
+
+let acl;
 
 exports = module.exports = function(customOptions) {
-	var returnObj;
+	let returnObj;
 
 	if (customOptions === undefined) {
 		customOptions = {};
@@ -15,12 +16,12 @@ exports = module.exports = function(customOptions) {
 	}
 
 	customOptions.customRoutes.push({
-		'regex': '^/$',
+		'regex':          '^/$',
 		'controllerName': 'login'
 	});
 
 	customOptions.customRoutes.push({
-		'regex': '\\.css$',
+		'regex':          '\\.css$',
 		'controllerName': 'css'
 	});
 
@@ -40,7 +41,7 @@ exports = module.exports = function(customOptions) {
 		returnObj = require('larvitbase')(customOptions);
 
 		returnObj.on('httpSession', function(req, res) {
-			var originalRunController = res.runController;
+			const originalRunController = res.runController;
 
 			if (customOptions.langs)
 				res.langs = customOptions.langs;
