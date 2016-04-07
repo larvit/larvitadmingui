@@ -1,8 +1,8 @@
 'use strict';
 
-const router = require('larvitrouter')(),
-      utils  = require('./utils'),
-			log    = require('winston');
+const utils = require('./utils'),
+      lfs   = require('larvitfs'),
+      log   = require('winston');
 
 function middleware(req, res, cb) {
 	res.globalData = {};
@@ -12,7 +12,7 @@ function middleware(req, res, cb) {
 	res.adminRights = false;
 
 	// Include menu structure config
-	res.globalData.menuStructure = require(router.fileExists('config/menuStructure.json'));
+	res.globalData.menuStructure = require(lfs.getPathSync('config/menuStructure.json'));
 
 	// Include the domain in global data
 	res.globalData.domain = req.headers.host;

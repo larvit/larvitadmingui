@@ -19,6 +19,7 @@
     "larvitbase": "^1.0.0",
     "larvitcss": "^0.1.2",
     "larvitdb": "^1.0.0",
+    "larvitfs": "^1.0.0",
     "larvitsession": "^0.2.0",
     "larvituser": "^0.4.18",
     "winston": "^2.1.1"
@@ -45,7 +46,7 @@
     "url": "https://github.com/larvit/larvitadmingui",
     "type": "git"
   },
-  "version": "0.1.8",
+  "version": "0.1.9",
   "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/larvit/larvitadmingui/issues"
