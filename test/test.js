@@ -1,10 +1,7 @@
 'use strict';
 
-var assert = require('assert');
-
-describe('Test', function() {
-	it('should something', function(done) {
-		assert(true === true);
+describe('foo', function() {
+	it('bar', function(done) {
 		done();
 	});
 });

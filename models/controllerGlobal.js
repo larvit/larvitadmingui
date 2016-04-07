@@ -1,8 +1,8 @@
 'use strict';
 
-var log           = require('winston'),
-    utils         = require('./utils'),
-    router        = require('larvitrouter')();
+const router = require('larvitrouter')(),
+      utils  = require('./utils'),
+			log    = require('winston');
 
 function middleware(req, res, cb) {
 	res.globalData = {};

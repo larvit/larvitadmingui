@@ -1,11 +1,11 @@
 'use strict';
 
-exports.run = function(request, response, callback) {
-	delete request.session.data.userUuid;
+exports.run = function(req, res, cb) {
+	delete req.session.data.userUuid;
 
 	// Redirect to the login page
-	response.statusCode = 302;
-	response.setHeader('Location', '/');
+	res.statusCode = 302;
+	res.setHeader('Location', '/');
 
-	callback(null, request, response);
+	cb(null, req, res);
 };

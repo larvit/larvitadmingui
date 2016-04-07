@@ -13,14 +13,14 @@
     }
   ],
   "dependencies": {
+    "async": "^1.5.2",
     "bower": "^1.7.7",
     "cookies": "^0.5.1",
-    "larvitbase": "^0.1.14",
-    "larvitcss": "^0.1.1",
-    "larvitdb": "^0.4.4",
-    "larvitrouter": "^0.1.14",
-    "larvitsession": "^0.1.5",
-    "larvituser": "^0.4.16",
+    "larvitbase": "^1.0.0",
+    "larvitcss": "^0.1.2",
+    "larvitdb": "^1.0.0",
+    "larvitsession": "^0.2.0",
+    "larvituser": "^0.4.18",
     "winston": "^2.1.1"
   },
   "description": "Generic admin GUI",
@@ -45,15 +45,14 @@
     "url": "https://github.com/larvit/larvitadmingui",
     "type": "git"
   },
-  "version": "0.1.7",
+  "version": "0.1.8",
   "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/larvit/larvitadmingui/issues"
   },
   "homepage": "https://github.com/larvit/larvitadmingui",
   "scripts": {
-    "test": "mocha",
-    "commit": "commit-wizard"
+    "test": "mocha"
   },
   "license": "MIT",
   "maintainers": [

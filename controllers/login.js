@@ -1,40 +1,40 @@
 'use strict';
 
-var userLib = require('larvituser'),
-    log     = require('winston');
+const userLib = require('larvituser'),
+      log     = require('winston');
 
-exports.run = function(request, response, callback) {
-	var data = {'global': response.globalData};
+exports.run = function(req, res, cb) {
+	const data = {'global': res.globalData};
 
-	if (request.formFields !== undefined && request.formFields.username !== undefined && request.formFields.password !== undefined) {
-		log.verbose('larvitadmingui: Login form POSTed, username: "' + request.formFields.username + '"');
+	if (req.formFields !== undefined && req.formFields.username !== undefined && req.formFields.password !== undefined) {
+		log.verbose('larvitadmingui: Login form POSTed, username: "' + req.formFields.username + '"');
 
-		userLib.fromUserAndPass(request.formFields.username, request.formFields.password, function(err, user) {
+		userLib.fromUserAndPass(req.formFields.username, req.formFields.password, function(err, user) {
 			if (err) {
 				throw err;
 			}
 
 			if ( ! user) {
-				log.verbose('larvitadmingui: Wrong username and/or password for username: "' + request.formFields.username + '"');
-				response.statusCode = 401; // Unauthorized
-				data.formErrors     = ['Wrong username or password'];
-				data.formFields     = request.formFields;
+				log.verbose('larvitadmingui: Wrong username and/or password for username: "' + req.formFields.username + '"');
+				res.statusCode  = 401; // Unauthorized
+				data.formErrors = ['Wrong username or password'];
+				data.formFields = req.formFields;
 				delete data.formFields.passowrd;
 
-				callback(null, request, response, data);
+				cb(null, req, res, data);
 			} else {
-				log.info('larvitadmingui: Username "' + request.formFields.username + '" logged in');
-				request.session.data.userUuid = user.uuid;
+				log.info('larvitadmingui: Username "' + req.formFields.username + '" logged in');
+				req.session.data.userUuid = user.uuid;
 
-				response.statusCode = 302;
-				response.setHeader('Location', '/home');
+				res.statusCode = 302;
+				res.setHeader('Location', '/home');
 
-				callback(null, request, response, data);
+				cb(null, req, res, data);
 			}
 		});
 
 		return;
 	}
 
-	callback(null, request, response, data);
+	cb(null, req, res, data);
 };

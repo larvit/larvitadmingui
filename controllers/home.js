@@ -1,7 +1,7 @@
 'use strict';
 
-exports.run = function(request, response, callback) {
-	var data = {'global': response.globalData};
+exports.run = function(req, res, cb) {
+	const data = {'global': res.globalData};
 
-	callback(null, request, response, data);
+	cb(null, req, res, data);
 };

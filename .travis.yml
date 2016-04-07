@@ -1,0 +1,42 @@
+language: node_js
+
+env:
+  - CXX=g++-4.8
+
+node_js:
+  - 0.12
+  - 4
+  - 5
+
+notifications:
+  email:
+    - lilleman@larvit.se
+
+before_install:
+  - $CXX --version
+
+install:
+  - if [[ $TRAVIS_OS_NAME == "linux" ]]; then export CXX=g++-4.8; fi
+  - npm i
+
+before_script:
+  - mysql -e 'CREATE DATABASE test'
+
+script: mocha test/test.js -confFile=db_travis.json
+
+services:
+  - mysql
+
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
+
+
+#addons:
+#  mariadb:
+#    - 5.5
+#    - 10.0
+#    - 10.1
