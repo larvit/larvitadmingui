@@ -17,7 +17,7 @@
     "bower": "^1.7.7",
     "cookies": "^0.5.1",
     "larvitbase": "^1.0.0",
-    "larvitcss": "^0.1.2",
+    "larvitcss": "^0.2.0",
     "larvitdb": "^1.0.0",
     "larvitfs": "^1.0.0",
     "larvitsession": "^0.2.0",
@@ -46,7 +46,7 @@
     "url": "https://github.com/larvit/larvitadmingui",
     "type": "git"
   },
-  "version": "0.1.9",
+  "version": "0.1.10",
   "readmeFilename": "README.md",
   "bugs": {
     "url": "https://github.com/larvit/larvitadmingui/issues"
