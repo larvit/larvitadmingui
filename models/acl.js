@@ -47,8 +47,15 @@ exports = module.exports = function(options) {
 		}
 
 		// Always allow access to static files
-		if (req.staticFilename !== undefined) {
-			log.debug('larvitadmingui: models/acl.js: checkAndRedirect() - Access granted. Static file requested: "' + req.staticFilename + '"');
+		if (req.routeResult.staticFilename !== undefined) {
+			log.debug('larvitadmingui: models/acl.js: checkAndRedirect() - Access granted. Static file requested: "' + req.routeResult.staticFilename + '"');
+			cb(null, true);
+			return;
+		}
+
+		// Always allow access to css files
+		if (RegExp('\\.css$').test(req.urlParsed.pathname)) {
+			log.debug('larvitadmingui: models/acl.js: checkAndRedirect() - Access granted, is css file.');
 			cb(null, true);
 			return;
 		}
