@@ -18,7 +18,7 @@ function middleware(req, res, cb) {
 	res.globalData.domain = req.headers.host;
 
 	// Include controller name in global data
-	res.globalData.controllerName = req.controllerName;
+	res.globalData.controllerName = req.routeResult.controllerName;
 
 	// Include urlParsed in global data
 	res.globalData.urlParsed = req.urlParsed;
