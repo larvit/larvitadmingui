@@ -6,7 +6,6 @@ $(document).ready(function() {
 	$('.rmParent').on('click', function() {
 		$(this).closest('.parent').remove();
 	});
-
 	$('.noPageReload').on('click', function(e) {
 		e.preventDefault();
 
@@ -14,7 +13,7 @@ $(document).ready(function() {
 			$.get($(this).attr('href'));
 		}
 
-		if ($(this).prop('nodeName') === 'button' || $(this).attr('type') === 'submit') {
+		if ($(this).prop('nodeName').toLowerCase() === 'button' || $(this).attr('type').toLowerCase() === 'submit') {
 			const form = $(this).closest('form');
 
 			let formData = form.serialize(),
