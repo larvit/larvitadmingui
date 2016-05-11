@@ -1,6 +1,35 @@
 'use strict';
 
 $(document).ready(function() {
+
+	// Remove a parent
+	$('.rmParent').on('click', function() {
+		$(this).closest('.parent').remove();
+	});
+
+	$('.noPageReload').on('click', function(e) {
+		e.preventDefault();
+
+		if ($(this).attr('href') !== undefined) {
+			$.get($(this).attr('href'));
+		}
+
+		if ($(this).prop('nodeName') === 'button' || $(this).attr('type') === 'submit') {
+			const form = $(this).closest('form');
+
+			let formData = form.serialize(),
+			    action   = form.attr('action');
+
+			if (action === undefined) {
+				action = window.location.href;
+			}
+
+			if (formData !== '') formData += '&';
+
+			$.post(action, formData + encodeURIComponent($(this).attr('name')) + '=' + encodeURIComponent($(this).attr('value')));
+		}
+	});
+
 	// Sortable init
 	$('table.sortable tbody').sortable({
 		helper: fixWidthHelper
