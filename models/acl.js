@@ -68,7 +68,7 @@ exports = module.exports = function(options) {
 		}
 
 		// Always redirect to options.redirectUnauthorizedTo if not logged in
-		if (( ! res.globalData.user || (res.globalData.user && res.globalData.user.fields.role.indexOf('admin') === - 1)) && trimmedPathname !== options.redirectUnauthorizedTo) {
+		if (( ! res.globalData.user || ! res.globalData.user.fields || ! res.globalData.user.fields.role || res.globalData.user.fields.role.indexOf('admin') === - 1) && trimmedPathname !== options.redirectUnauthorizedTo) {
 			log.verbose('larvitadmingui: models/acl.js: checkAndRedirect() - Access denied. No valid user set and pathname: "' + trimmedPathname + '" is not the login url: "' + options.redirectUnauthorizedTo + '"');
 			redirectUnauthorized();
 			return;
