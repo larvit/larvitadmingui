@@ -11,9 +11,9 @@ exports = module.exports = function(customOptions) {
 		customOptions = {};
 	}
 
-	if (customOptions.customRoutes === undefined) {
-		customOptions.customRoutes = [];
-	}
+	if (customOptions.customRoutes	=== undefined) { customOptions.customRoutes	= []; }
+	if (customOptions.middleware	=== undefined) { customOptions.middleware	= []; }
+	if (customOptions.afterware	=== undefined) { customOptions.afterware	= []; }
 
 	customOptions.customRoutes.push({
 		'regex':          '^/$',
@@ -27,15 +27,11 @@ exports = module.exports = function(customOptions) {
 
 	acl = require(__dirname + '/models/acl')(customOptions);
 
-	customOptions.middleware = [
-		require('cookies').express(),
-		require('larvitsession').middleware(), // Important that this is ran after the cookie middleware
-		require(lfs.getPathSync('models/controllerGlobal.js')).middleware()
-	];
+	customOptions.middleware.push(require('cookies').express());
+	customOptions.middleware.push(require('larvitsession').middleware()); // Important that this is ran after the cookie middleware
+	customOptions.middleware.push(require(lfs.getPathSync('models/controllerGlobal.js')).middleware());
 
-	customOptions.afterware = [
-		require('larvitsession').afterware()
-	];
+	customOptions.afterware.push(require('larvitsession').afterware());
 
 	returnObj = require('larvitbase')(customOptions);
 
