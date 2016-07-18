@@ -4,8 +4,8 @@ jQuery(function($) {
 	(function() {
 		var $window   = $(window),
 		    $content  = $('.section.content'),
-		    $toolbar  = $('.toolbar_fixed'),
-		    $mainNav  = $('.main_nav'),
+		    $toolbar  = $('.toolbarFixed'),
+		    $mainNav  = $('.mainNav'),
 		    $contWrap = $('#content_wrapper'),
 		    $contHead = $('#content_header'),
 		    mode      = 'inline',

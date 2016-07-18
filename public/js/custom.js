@@ -45,14 +45,14 @@ $(document).ready(function() {
 
 	// If desktop AND cookie says so - show left nav
 	if ($(window).width() > 768 && (Cookies.get('leftNav') === '1' || Cookies.get('leftNav') === undefined)) {
-		location.hash = 'main_nav';
+		location.hash = 'mainNav';
 	}
 
 	// If click hamburger AND left nav is hidden - set cookie AND show left nav
 	$('a.open_menu').on('click', function(event) {
 		event.preventDefault();
 		Cookies.set('leftNav', '1');
-		location.hash = 'main_nav';
+		location.hash = 'mainNav';
 
 		// Make sure stuff in the right place after DOM change
 		if (typeof doResizeActions === 'function') {
@@ -72,30 +72,30 @@ $(document).ready(function() {
 		}
 	});
 
-	// Close msg_box
+	// Close msgBox
 	window.addMsgBoxClose = function() {
-		$('.msg_box a.close').on('click', function(event) {
+		$('.msgBox a.close').on('click', function(event) {
 			event.preventDefault();
-			$(this).closest('.msg_box').remove();
+			$(this).closest('.msgBox').remove();
 		});
 	};
 
-	// Init close msg_box
+	// Init close msgBox
 	addMsgBoxClose();
 
 	// Cookies storing closed state main nav top lvls
 	$('.cp_nav').each(function() {
 		// If cookie says so, collapse this item
-		if (Cookies.get('main_nav_fold_' + $(this).attr('id')) === '1') {
+		if (Cookies.get('mainNav_fold_' + $(this).attr('id')) === '1') {
 			$(this).removeAttr('checked');
 		}
 		$(this).on('click', function() {
 			if ($(this).is(':checked')) {
 				// If cookie with this id exists, remove it
-				Cookies.remove('main_nav_fold_' + $(this).attr('id'));
+				Cookies.remove('mainNav_fold_' + $(this).attr('id'));
 			} else {
 				// Store cookie to keep this item collapsed
-				Cookies.set('main_nav_fold_' + $(this).attr('id'), '1');
+				Cookies.set('mainNav_fold_' + $(this).attr('id'), '1');
 			}
 		});
 	});

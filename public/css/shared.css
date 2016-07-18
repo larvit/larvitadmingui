@@ -147,7 +147,7 @@ table.sortable {
 					}
 
 /* Message box */
-.msg_box {
+.msgBox {
 	background:                     #efefef;
 	border:                         1px solid #d1d1d1;
 	color:                          inherit;
@@ -155,41 +155,41 @@ table.sortable {
 	position:                       relative;
 }
 
-	.msg_box a.close {
+	.msgBox a.close {
 		position:                       absolute;
 		top:                            50%;
 		right:                          1rem;
 	}
 
-	.msg_box p:last-child {
+	.msgBox p:last-child {
 		margin:                         0;
 	}
 
-		.msg_box a.close {
+		.msgBox a.close {
 			opacity:                        0.5;
 		}
 
-			.msg_box a.close:hover {
+			.msgBox a.close:hover {
 				opacity:                        1;
 			}
 
-	.msg_box.happy {
+	.msgBox.happy {
 		background:                     #dff0d8;
 		border:                         1px solid #d6e9c6;
 		color:                          #3c763d;
 	}
 
-		.msg_box.happy a.close:after {
+		.msgBox.happy a.close:after {
 			background-image:               url('../images/icons_colors/3c763d/cross.svg');
 		}
 
-	.msg_box.sad {
+	.msgBox.sad {
 		background:                     #f2dede;
 		border:                         1px solid #ebccd1;
 		color:                          #a94442;
 	}
 
-		.msg_box.sad a.close:after {
+		.msgBox.sad a.close:after {
 			background-image:               url('../images/icons_colors/a94442/cross.svg');
 		}
 
@@ -412,7 +412,7 @@ table.zebra {
 	overflow-x:                     hidden;
 }
 
-.toolbar_fixed {
+.toolbarFixed {
 	z-index:                        999;
 	background:                     #fff;
 }

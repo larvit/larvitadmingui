@@ -1,9 +1,9 @@
 <body<% if (obj.bodyClass !== undefined) { print(' class="' + obj.bodyClass + '"'); } %>>
 	<div class="page_wrapper">
-		<span class="target_fix" id="main_nav"></span>
+		<span class="target_fix" id="mainNav"></span>
 		<%= _.render('inc/header', obj) %>
 		<section class="section main_wrapper">
-			<%= _.render('inc/main_nav', obj) %>
+			<%= _.render('inc/mainNav', obj) %>
 			<section class="section content">
 				<div id="content_header" class="row">
 					<h1><%
@@ -27,17 +27,17 @@
 				</div>
 				<%= _.render('inc/breadcrumbs', obj) %>
 				<div id="content_wrapper" class="content_wrapper">
-					<%= _.render('inc/sub_nav', obj) %>
+					<%= _.render('inc/subNav', obj) %>
 					<div class="wrap">
 						<%
 							if (obj.global.messages instanceof Array) {
 								_.forEach(obj.global.messages, function(msgStr) {
-									print(_.render('inc/msg_box', {'msgClass': 'happy', 'msgTxt': msgStr}));
+									print(_.render('inc/msgBox', {'msgClass': 'happy', 'msgTxt': msgStr}));
 								});
 							}
 							if (obj.global.errors instanceof Array) {
 								_.forEach(obj.global.errors, function(errStr) {
-									print(_.render('inc/msg_box', {'msgClass': 'sad', 'msgTxt': errStr}));
+									print(_.render('inc/msgBox', {'msgClass': 'sad', 'msgTxt': errStr}));
 								});
 							}
 						%>

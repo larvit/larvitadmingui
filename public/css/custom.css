@@ -164,7 +164,7 @@
 }
 
 /* Main nav left */
-.main_nav
+.mainNav
 {
 	position:                       relative;/*fixed;*/
 	top:                            0;/*5rem;*/
@@ -181,29 +181,29 @@
 	z-index:                        9999;
 }
 
-	.main_nav ul
+	.mainNav ul
 	{
 		list-style:                     none;
 	}
 
-		.main_nav > ul > li
+		.mainNav > ul > li
 		{
 			margin:                         1rem;
 		}
 
-		.main_nav > ul > li input[type="checkbox"]
+		.mainNav > ul > li input[type="checkbox"]
 		{
 			display:                        none;
 		}
 
-	.main_nav a
+	.mainNav a
 	{
 		display:                        block;
 		color:                          #fff;
 		padding:                        0.5rem 0;
 	}
 
-		.main_nav > ul > li > label
+		.mainNav > ul > li > label
 		{
 			font-family:                    Arial, sans-serif;
 			background:                     #777;
@@ -218,33 +218,33 @@
 			font-weight:                    normal;
 		}
 
-		.main_nav > ul > li > label .plus,
-		.main_nav > ul > li > label .minus
+		.mainNav > ul > li > label .plus,
+		.mainNav > ul > li > label .minus
 		{
 			position:                       absolute;
 			right:                          1rem;
 			top:                            0.5rem;
 		}
 
-		.main_nav > ul > li > label .plus
+		.mainNav > ul > li > label .plus
 		{
 			display:                        inline-block;
 		}
 
-		.main_nav > ul > li > label .minus
+		.mainNav > ul > li > label .minus
 		{
 			display:                        none;
 		}
 
 		/* Override for plus/minus icons */
-		.main_nav > ul > li > label .br_icon_plus,
-		.main_nav > ul > li > label .br_icon_minus
+		.mainNav > ul > li > label .br_icon_plus,
+		.mainNav > ul > li > label .br_icon_minus
 		{
 			font-size:                      0.7rem;
 			vertical-align:                 middle;
 		}
 
-		.main_nav > ul > li > ul.content
+		.mainNav > ul > li > ul.content
 		{
 			height:                         0;
 			overflow:                       hidden;
@@ -255,7 +255,7 @@
 			transition:                     max-height .3s ease;
 		}
 
-			.main_nav > ul > li > ul.content li a
+			.mainNav > ul > li > ul.content li a
 			{
 				margin:                         0;
 				padding:                        0.5rem 1rem 0.5rem 2rem;
@@ -265,24 +265,24 @@
 				text-decoration:                none;
 			}
 
-				.main_nav > ul > li > ul.content li a:hover,
-				.main_nav > ul > li > ul.content li a.active
+				.mainNav > ul > li > ul.content li a:hover,
+				.mainNav > ul > li > ul.content li a.active
 				{
 					background:                     #999;
 				}
 
-			.main_nav > ul > li > input[type="checkbox"]:checked ~ ul.content
+			.mainNav > ul > li > input[type="checkbox"]:checked ~ ul.content
 			{
 				height:                         auto;
 				max-height:                     50rem;
 			}
 
-			.main_nav > ul > li > input[type="checkbox"]:checked + label .plus
+			.mainNav > ul > li > input[type="checkbox"]:checked + label .plus
 			{
 				display:                        none;
 			}
 
-			.main_nav > ul > li > input[type="checkbox"]:checked + label .minus
+			.mainNav > ul > li > input[type="checkbox"]:checked + label .minus
 			{
 				display:                        inline-block;
 			}
@@ -417,19 +417,19 @@
 			background:                     #ccc;
 		}
 
-	.section.content .content_wrapper ul.sub_nav
+	.section.content .content_wrapper ul.subNav
 	{
 		list-style:                     none;
 		padding:                        2rem 2rem 0 2rem;
 		border-bottom:                  1px solid #d1d1d1;
 	}
 
-		.section.content .content_wrapper > ul.sub_nav
+		.section.content .content_wrapper > ul.subNav
 		{
 			background:                     #fcfcfc;
 		}
 
-		.section.content .content_wrapper form ul.sub_nav
+		.section.content .content_wrapper form ul.subNav
 		{
 			min-height:                     8rem;
 			min-width:                      28rem;
@@ -439,13 +439,13 @@
 			margin-top:                     1rem;
 		}
 
-		.section.content .content_wrapper ul.sub_nav > li
+		.section.content .content_wrapper ul.subNav > li
 		{
 			display:                        inline-block;
 			margin:                         0 0.7rem 2rem 0;
 		}
 
-			.section.content .content_wrapper ul.sub_nav > li.u-pull-right
+			.section.content .content_wrapper ul.subNav > li.u-pull-right
 			{
 				margin:                         0 0 2rem 0.7rem;
 			}
@@ -456,23 +456,23 @@
 	}
 
 /* Active/shown left nav */
-#main_nav:target ~ .section.main_wrapper .main_nav
+#mainNav:target ~ .section.main_wrapper .mainNav
 {
 	left:                           0;
 }
 
-#main_nav:target ~ .section.main_wrapper .section.content
+#mainNav:target ~ .section.main_wrapper .section.content
 {
 	left:                           22rem;
 }
 
-#main_nav:target ~ .section.header ul li a.open_menu
+#mainNav:target ~ .section.header ul li a.open_menu
 {
 	display:                        none;
 }
 
-#main_nav:target ~ .section.header ul li a.close_menu
-/*#main_nav:target ~ a.page_overlay*/
+#mainNav:target ~ .section.header ul li a.close_menu
+/*#mainNav:target ~ a.page_overlay*/
 {
 	display:                        inline-block;
 }
@@ -512,12 +512,12 @@
 	{
 		width:                          40%;
 	}
-	.main_nav
+	.mainNav
 	{
 		left:                           -60%;
 		width:                          60%;
 	}
-	#main_nav:target ~ .section.main_wrapper .section.content
+	#mainNav:target ~ .section.main_wrapper .section.content
 	{
 		left:                           60%;
 	}*/
@@ -525,16 +525,16 @@
 
 @media only screen and (max-width: 420px)
 {
-	.section.content .content_wrapper form ul.sub_nav
+	.section.content .content_wrapper form ul.subNav
 	{
 		margin-left:                    -2rem;
 		margin-right:                   -2rem;
 	}
-	.section.content .content_wrapper ul.sub_nav > li .button,
-	.section.content .content_wrapper ul.sub_nav > li button,
-	.section.content .content_wrapper ul.sub_nav > li input[type="submit"],
-	.section.content .content_wrapper ul.sub_nav > li input[type="reset"],
-	.section.content .content_wrapper ul.sub_nav > li input[type="button"]
+	.section.content .content_wrapper ul.subNav > li .button,
+	.section.content .content_wrapper ul.subNav > li button,
+	.section.content .content_wrapper ul.subNav > li input[type="submit"],
+	.section.content .content_wrapper ul.subNav > li input[type="reset"],
+	.section.content .content_wrapper ul.subNav > li input[type="button"]
 	{
 		padding:                        0.7rem 0.8rem;
 	}
