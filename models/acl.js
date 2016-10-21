@@ -80,7 +80,7 @@ exports = module.exports = function(options) {
 			return;
 		}
 
-		if (res.globalData.user && res.globalData.user.fields.role.indexOf('admin') !== - 1 && trimmedPathname === options.redirectUnauthorizedTo) {
+		if (res.globalData.user && res.globalData.user.fields.role && res.globalData.user.fields.role.indexOf('admin') !== - 1 && trimmedPathname === options.redirectUnauthorizedTo) {
 			log.debug('larvitadmingui: models/acl.js: checkAndRedirect() - Access granted. Valid user logged in, but redirecting from login page.');
 			res.statusCode = 302;
 			res.setHeader('Location', options.redirectLoggedInTo);
@@ -88,7 +88,7 @@ exports = module.exports = function(options) {
 			return;
 		}
 
-		if (res.globalData.user && res.globalData.user.fields.role.indexOf('admin') !== - 1) {
+		if (res.globalData.user && res.globalData.user.fields.role && res.globalData.user.fields.role.indexOf('admin') !== - 1) {
 			log.debug('larvitadmingui: models/acl.js: checkAndRedirect() - Access granted. Valid user logged in.');
 			cb(null, true);
 			return;

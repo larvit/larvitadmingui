@@ -4,9 +4,9 @@ env:
   - CXX=g++-4.8
 
 node_js:
-  - 0.12
   - 4
   - 5
+  - 6
 
 notifications:
   email:
@@ -23,6 +23,7 @@ before_script:
   - mysql -e 'CREATE DATABASE test'
 
 script: mocha test/test.js -confFile=db_travis.json
+script: ./node_modules/eslint/bin/eslint.js ./
 
 services:
   - mysql

@@ -27,7 +27,9 @@
   },
   "description": "Generic admin GUI",
   "devDependencies": {
-    "mocha": "^3.1.2"
+    "eslint": "^3.5.0",
+    "mocha": "^3.1.2",
+    "mocha-eslint": "^3.0.1"
   },
   "keywords": [
     "admin",
