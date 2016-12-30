@@ -177,3 +177,9 @@ select::-ms-expand
 {
 	display:                        none;
 }
+
+.warning-text
+{
+	color:                          #f00;
+	font-weight:                    bold;
+}
