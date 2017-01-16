@@ -33,13 +33,15 @@ In your app, start the admin interface like this:
 ```javascript
 'use strict';
 
-var dbConf = {'host': '127.0.0.1', 'user': 'root', 'pass': 'foobar', 'database': 'test'};
+const	userLib	= require('larvituser'),
+	dbConf	= {'host': '127.0.0.1', 'user': 'root', 'pass': 'foobar', 'database': 'test'};
+
+// Set userLib to standalone mode (or use "slave" if another master-instance is running)
+userLib.dataWriter.mode	= 'master';
 
 // Setup database pool
 db.setup(dbConf, function(err) {
-	if (err) {
-		throw err;
-	}
+	if (err) { throw err; }
 
 	require('larvitadmingui')({
 		'host': '127.0.0.1',
@@ -56,10 +58,10 @@ Start it up and check your browser at http://127.0.0.1:8001 - be sure to setup y
 'use strict';
 
 exports.run = function(req, res, cb) {
-	var data = {'global': res.globalData};
+	const	data	= {'global': res.globalData};
 
-	data.global.messages = ['Happy message'];
-	data.global.errors   = ['Sad message'];
+	data.global.messages	= ['Happy message'];
+	data.global.errors	= ['Sad message'];
 
 	cb(null, req, res, data);
 };
@@ -71,9 +73,9 @@ To set messages to the next page load, do this:
 if ( ! req.session.data.nextCallData)
 	req.session.data.nextCallData = {};
 
-req.session.data.nextCallData = {'global': {'messages': ['Happy message']}};
+req.session.data.nextCallData	= {'global': {'messages': ['Happy message']}};
 // or
-req.session.data.nextCallData = {'global': {'errors': ['Sad message']}};
+req.session.data.nextCallData	= {'global': {'errors': ['Sad message']}};
 ```
 
 These will be loaded on the next page load, and then erased again.
