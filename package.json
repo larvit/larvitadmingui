@@ -22,7 +22,7 @@
     "larvitdb": "^1.1.0",
     "larvitfs": "^1.0.0",
     "larvitsession": "^1.0.0",
-    "larvituser": "^0.7.0",
+    "larvituser": "^0.8.0",
     "winston": "^2.2.0"
   },
   "description": "Generic admin GUI",
