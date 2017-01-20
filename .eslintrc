@@ -15,7 +15,7 @@
 		"no-shadow": [0],
 		"eol-last": [0],
 		"key-spacing": [0],
-		"no-mixed-spaces-and-tabs": [2, "smart-tabs"],
+		"indent": ["error", "tab"],
 		"space-unary-ops": [1, { "words": true, "nonwords": true }],
 		"no-underscore-dangle": [0],
 		"camelcase": [0],

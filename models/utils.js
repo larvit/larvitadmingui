@@ -1,7 +1,7 @@
 'use strict';
 
-const userLib = require('larvituser'),
-      log     = require('winston');
+const	userLib	= require('larvituser'),
+	log	= require('winston');
 
 exports.getUserFromSession = function(req, cb) {
 	log.silly('larvitadmingui: models/utils.js: getUserFromSession() - running');
@@ -10,10 +10,7 @@ exports.getUserFromSession = function(req, cb) {
 		log.debug('larvitadmingui: models/utils.js: getUserFromSession() - UserUuid: "' + req.session.data.userUuid + '" found in session');
 
 		userLib.fromUuid(req.session.data.userUuid, function(err, user) {
-			if (err) {
-				cb(err);
-				return;
-			}
+			if (err) { cb(err); return; }
 
 			req.user = user;
 
@@ -21,9 +18,9 @@ exports.getUserFromSession = function(req, cb) {
 				log.debug('larvitadmingui: models/utils.js: getUserFromSession() - UserUuid: "' + user.uuid + '" found in database');
 
 				cb(null, {
-					'uuid':     user.uuid,
-					'username': user.username,
-					'fields':   user.fields
+					'uuid':	user.uuid,
+					'username':	user.username,
+					'fields':	user.fields
 				});
 
 				return;

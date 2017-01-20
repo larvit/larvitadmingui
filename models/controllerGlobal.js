@@ -1,11 +1,13 @@
 'use strict';
 
-const utils = require('./utils'),
-      lfs   = require('larvitfs'),
-      log   = require('winston');
+const	utils	= require('./utils'),
+	lfs	= require('larvitfs'),
+	log	= require('winston');
 
 function middleware(req, res, cb) {
-	res.globalData = {};
+	if ( ! res.globalData) {
+		res.globalData = {};
+	}
 
 	// Default admin rights to be false
 	// In the bottom this gets set to true if a correct user is logged in

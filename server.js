@@ -1,11 +1,11 @@
 'use strict';
 
-const lfs = require('larvitfs');
+const	lfs	= require('larvitfs');
 
-let acl;
+let	acl;
 
 exports = module.exports = function(customOptions) {
-	let returnObj;
+	let	returnObj;
 
 	if (customOptions === undefined) {
 		customOptions = {};
@@ -16,16 +16,16 @@ exports = module.exports = function(customOptions) {
 	if (customOptions.afterware	=== undefined) { customOptions.afterware	= []; }
 
 	customOptions.customRoutes.push({
-		'regex':          '^/$',
-		'controllerName': 'login'
+		'regex':	'^/$',
+		'controllerName':	'login'
 	});
 
 	customOptions.customRoutes.push({
-		'regex':          '\\.css$',
-		'controllerName': 'css'
+		'regex':	'\\.css$',
+		'controllerName':	'css'
 	});
 
-	acl = require(__dirname + '/models/acl')(customOptions);
+	acl	= require(__dirname + '/models/acl')(customOptions);
 
 	customOptions.middleware.push(require('cookies').express());
 	customOptions.middleware.push(require('larvitsession').middleware()); // Important that this is ran after the cookie middleware
@@ -38,8 +38,9 @@ exports = module.exports = function(customOptions) {
 	returnObj.on('httpSession', function(req, res) {
 		const originalRunController = res.runController;
 
-		if (customOptions.langs)
+		if (customOptions.langs) {
 			res.langs = customOptions.langs;
+		}
 
 		res.runController = function() {
 			acl.checkAndRedirect(req, res, function(err, userGotAccess) {

@@ -1,7 +1,7 @@
 'use strict';
 
-const log = require('winston'),
-      _   = require('lodash');
+const	log	= require('winston'),
+	_	= require('lodash');
 
 exports = module.exports = function(options) {
 	const returnObj = {};
@@ -11,8 +11,8 @@ exports = module.exports = function(options) {
 	}
 
 	_.defaultsDeep(options, options, {
-		'redirectUnauthorizedTo': '', // In the admin, the login page should be the default "" path
-		'redirectLoggedInTo':     'home'
+		'redirectUnauthorizedTo':	'', // In the admin, the login page should be the default "" path
+		'redirectLoggedInTo':	'home'
 	});
 
 	log.debug('larvitadmingui: models/acl.js: Setting up module instance with options: ' + JSON.stringify(options));
@@ -25,7 +25,7 @@ exports = module.exports = function(options) {
 	 * @param func cb - callback(err, userGotAccess) - userGotAccess is a boolean
 	 */
 	returnObj.checkAndRedirect = function(req, res, cb) {
-		var trimmedPathname;
+		let	trimmedPathname;
 
 		log.silly('larvitadmingui: checkAndRedirect() - Running.');
 
