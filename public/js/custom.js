@@ -1,7 +1,6 @@
 'use strict';
 
-$(document).ready(function() {
-
+$(function() {
 	// Remove a parent
 	$('.rmParent').on('click', function() {
 		$(this).closest('.parent').remove();
@@ -100,4 +99,25 @@ $(document).ready(function() {
 		});
 	});
 
+});
+
+// Tab menues
+$(function() {
+	const	activeTabContent	= $('a.tab.active').attr('showcontent');
+
+	$('#' + activeTabContent).css('display', 'block');
+
+	$('.tab[showcontent]').on('click', function(e) {
+		const	className	= $(this).attr('showcontent');
+
+		if ($(this).hasClass('active')) return;
+
+		$(this).siblings().removeClass('active');
+		$(this).addClass('active');
+
+		console.log(className);
+
+		$('body.js .tab_content').css('display', 'none');
+		$('body.js #' + className).css('display', 'block');
+	});
 });
