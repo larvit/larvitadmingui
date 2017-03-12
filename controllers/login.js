@@ -1,10 +1,10 @@
 'use strict';
 
-const userLib = require('larvituser'),
-      log     = require('winston');
+const	userLib	= require('larvituser'),
+	log	= require('winston');
 
 exports.run = function(req, res, cb) {
-	const data = {'global': res.globalData};
+	const	data	= {'global': res.globalData};
 
 	if (req.formFields !== undefined && req.formFields.username !== undefined && req.formFields.password !== undefined) {
 		log.verbose('larvitadmingui: Login form POSTed, username: "' + req.formFields.username + '"');

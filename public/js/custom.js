@@ -107,7 +107,7 @@ $(function() {
 
 	$('#' + activeTabContent).css('display', 'block');
 
-	$('.tab[showcontent]').on('click', function(e) {
+	$('.tab[showcontent]').on('click', function() {
 		const	className	= $(this).attr('showcontent');
 
 		if ($(this).hasClass('active')) return;
