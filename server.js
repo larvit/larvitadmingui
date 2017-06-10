@@ -1,10 +1,15 @@
 'use strict';
 
-const	lfs	= require('larvitfs');
+const	lfs	= require('larvitfs'),
+	_	= require('lodash');
 
 let	acl;
 
-exports = module.exports = function(customOptions) {
+// Extend lodash
+_.defaultsDeep	= require('lodash.defaultsdeep');
+_.trim	= require('lodash.trim');
+
+exports = module.exports = function (customOptions) {
 	let	returnObj;
 
 	if (customOptions === undefined) {
@@ -35,15 +40,15 @@ exports = module.exports = function(customOptions) {
 
 	returnObj = require('larvitbase')(customOptions);
 
-	returnObj.on('httpSession', function(req, res) {
+	returnObj.on('httpSession', function (req, res) {
 		const originalRunController = res.runController;
 
 		if (customOptions.langs) {
 			res.langs = customOptions.langs;
 		}
 
-		res.runController = function() {
-			acl.checkAndRedirect(req, res, function(err, userGotAccess) {
+		res.runController = function () {
+			acl.checkAndRedirect(req, res, function (err, userGotAccess) {
 				if (err) {
 					throw err;
 				}

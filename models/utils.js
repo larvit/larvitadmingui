@@ -1,36 +1,39 @@
 'use strict';
 
-const	userLib	= require('larvituser'),
+const	topLogPrefix	= 'larvitadmingui: models/utils.js: ',
+	userLib	= require('larvituser'),
 	log	= require('winston');
 
-exports.getUserFromSession = function(req, cb) {
-	log.silly('larvitadmingui: models/utils.js: getUserFromSession() - running');
+function getUserFromSession(req, cb) {
+	const	logPrefix	= topLogPrefix + 'getUserFromSession() - ';
+
+	log.silly(logPrefix + 'running');
 
 	if (req.session.data.userUuid !== undefined) {
-		log.debug('larvitadmingui: models/utils.js: getUserFromSession() - UserUuid: "' + req.session.data.userUuid + '" found in session');
+		log.debug(logPrefix + 'UserUuid: "' + req.session.data.userUuid + '" found in session');
 
-		userLib.fromUuid(req.session.data.userUuid, function(err, user) {
-			if (err) { cb(err); return; }
+		userLib.fromUuid(req.session.data.userUuid, function (err, user) {
+			if (err) return cb(err);
 
 			req.user = user;
 
 			if (user.uuid !== undefined) {
-				log.debug('larvitadmingui: models/utils.js: getUserFromSession() - UserUuid: "' + user.uuid + '" found in database');
+				log.debug(logPrefix + 'UserUuid: "' + user.uuid + '" found in database');
 
-				cb(null, {
+				return cb(null, {
 					'uuid':	user.uuid,
 					'username':	user.username,
 					'fields':	user.fields
 				});
-
-				return;
 			}
 
 			cb();
 		});
 	} else {
-		log.silly('larvitadmingui: models/utils.js: getUserFromSession() - No userUuid found in session');
+		log.silly(logPrefix + 'No userUuid found in session');
 		req.user = undefined;
 		cb();
 	}
 };
+
+exports.getUserFromSession	= getUserFromSession;

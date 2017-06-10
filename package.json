@@ -1,6 +1,6 @@
 {
   "name": "larvitadmingui",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "author": {
     "name": "Mikael 'Lilleman' Göransson",
     "email": "lilleman@larvit.se"
@@ -23,6 +23,8 @@
     "larvitfs": "^1.0.0",
     "larvitsession": "^2.0.0",
     "larvituser": "^0.10.0",
+    "lodash.defaultsdeep": "^4.6.0",
+    "lodash.trim": "^4.5.1",
     "winston": "^2.2.0"
   },
   "description": "Generic admin GUI",

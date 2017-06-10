@@ -1,6 +1,7 @@
 'use strict';
 
-const	utils	= require('./utils'),
+const	topLogPrefix	= 'larvitadmingui: models/controllerGlobal.js: ',
+	utils	= require('./utils'),
 	lfs	= require('larvitfs'),
 	log	= require('winston');
 
@@ -35,17 +36,16 @@ function middleware(req, res, cb) {
 	// Something went wrong with setting up the session
 	if (req.session === undefined) {
 		log.warn('larvitadmingui: models/controllerGlobal.js - No req.session found');
-		cb(null);
-		return;
+		return cb(null);
 	}
 
 	// Set the logged in user
-	utils.getUserFromSession(req, function(err, user) {
+	utils.getUserFromSession(req, function (err, user) {
 		if (user) {
-			log.debug('larvitadmingui: models/controllerGlobal.js - User found in session. UserUuid: "' + user.uuid + '"');
+			log.debug(topLogPrefix + 'User found in session. UserUuid: "' + user.uuid + '"');
 
 			if (user.fields && user.fields.role && user.fields.role.indexOf('admin') !== - 1) {
-				log.debug('larvitadmingui: models/controllerGlobal.js - User have admin role set, setting adminRights to true');
+				log.debug(topLogPrefix + 'User have admin role set, setting adminRights to true');
 				res.adminRights = true;
 			}
 
@@ -56,6 +56,6 @@ function middleware(req, res, cb) {
 	});
 }
 
-exports.middleware = function() {
+exports.middleware = function () {
 	return middleware;
 };
