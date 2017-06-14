@@ -36,6 +36,11 @@
 									print(_.render('inc/msgBox', {'msgClass': 'happy', 'msgTxt': msgStr}));
 								});
 							}
+							if (obj.global.warnings instanceof Array) {
+								_.forEach(obj.global.warnings, function(warningStr) {
+									print(_.render('inc/msgBox', {'msgClass': 'warn', 'msgTxt': warningStr}));
+								});
+							}
 							if (obj.global.errors instanceof Array) {
 								_.forEach(obj.global.errors, function(errStr) {
 									print(_.render('inc/msgBox', {'msgClass': 'sad', 'msgTxt': errStr}));

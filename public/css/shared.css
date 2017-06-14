@@ -225,6 +225,16 @@ table.sortable {
 			background-image:               url('../images/icons_colors/3c763d/cross.svg');
 		}
 
+	.msgBox.warn {
+		background:                     #ffebcc;
+		border:                         1px solid #ffd699;
+		color:                          #ff9900;
+	}
+
+		.msgBox.warn a.close:after {
+			background-image:               url('../images/icons_colors/ff9900/cross.svg');
+		}
+
 	.msgBox.sad {
 		background:                     #f2dede;
 		border:                         1px solid #ebccd1;
