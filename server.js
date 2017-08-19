@@ -1,16 +1,16 @@
 'use strict';
 
-const	lfs	= require('larvitfs'),
+const	Acl	= require(__dirname + '/models/acl.js'),
+	lfs	= require('larvitfs'),
 	_	= require('lodash');
-
-let	acl;
 
 // Extend lodash
 _.defaultsDeep	= require('lodash.defaultsdeep');
 _.trim	= require('lodash.trim');
 
 exports = module.exports = function (customOptions) {
-	let	returnObj;
+	let	returnObj,
+		acl;
 
 	if (customOptions === undefined) {
 		customOptions = {};
@@ -30,7 +30,7 @@ exports = module.exports = function (customOptions) {
 		'controllerName':	'css'
 	});
 
-	acl	= require(__dirname + '/models/acl')(customOptions);
+	acl	= new Acl(customOptions);
 
 	customOptions.middleware.push(require('cookies').express());
 	customOptions.middleware.push(require('larvitsession').middleware()); // Important that this is ran after the cookie middleware
