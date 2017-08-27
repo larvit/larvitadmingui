@@ -20,6 +20,9 @@ function middleware(req, res, cb) {
 	// Include the domain in global data
 	res.globalData.domain = req.headers.host;
 
+	// Include referer
+	res.globalData.referer	= req.headers.referer;
+
 	// Include controller name in global data
 	res.globalData.controllerName = req.routeResult.controllerName;
 
