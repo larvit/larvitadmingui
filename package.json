@@ -20,6 +20,7 @@
     "larvitbase": "^1.0.3",
     "larvitcss": "^0.2.0",
     "larvitdb": "^1.1.0",
+    "larvitdbmigration": "^2.0.5",
     "larvitfs": "^1.0.0",
     "larvitsession": "^2.0.0",
     "larvituser": "^0.10.0",
@@ -29,9 +30,9 @@
   },
   "description": "Generic admin GUI",
   "devDependencies": {
-    "eslint": "^3.5.0",
+    "eslint": "^4.5.0",
     "mocha": "^3.1.2",
-    "mocha-eslint": "^3.0.1"
+    "mocha-eslint": "^4.1.0"
   },
   "keywords": [
     "admin",
