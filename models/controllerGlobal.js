@@ -10,10 +10,6 @@ function middleware(req, res, cb) {
 		res.globalData = {};
 	}
 
-	// Default admin rights to be false
-	// In the bottom this gets set to true if a correct user is logged in
-	res.adminRights = false;
-
 	// Include menu structure config
 	res.globalData.menuStructure = require(lfs.getPathSync('config/menuStructure.json'));
 
@@ -46,11 +42,6 @@ function middleware(req, res, cb) {
 	utils.getUserFromSession(req, function (err, user) {
 		if (user) {
 			log.debug(topLogPrefix + 'User found in session. UserUuid: "' + user.uuid + '"');
-
-			if (user.fields && user.fields.role && user.fields.role.indexOf('admin') !== - 1) {
-				log.debug(topLogPrefix + 'User have admin role set, setting adminRights to true');
-				res.adminRights = true;
-			}
 
 			res.globalData.user = user;
 		}

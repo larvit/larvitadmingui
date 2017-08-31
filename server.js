@@ -1,14 +1,45 @@
 'use strict';
 
-const	Acl	= require(__dirname + '/models/acl.js'),
+const	topLogPrefix	= 'larvitadmingui: server.js: ',
+	DbMigration	= require('larvitdbmigration'),
+	options	= {},
+	Events	= require('events'),
+	emitter	= new Events(),
+	Acl	= require(__dirname + '/models/acl.js'),
 	lfs	= require('larvitfs'),
+	log	= require('winston'),
 	_	= require('lodash');
+
+let	dbMigration,
+	dbReady	= false;
 
 // Extend lodash
 _.defaultsDeep	= require('lodash.defaultsdeep');
 _.trim	= require('lodash.trim');
 
-exports = module.exports = function (customOptions) {
+options.dbType	= 'larvitdb';
+options.dbDriver	= require('larvitdb');
+options.tableName	= 'admingui_db_version';
+options.migrationScriptsPath	= __dirname + '/dbmigration';
+
+dbMigration	= new DbMigration(options);
+dbMigration.run(function (err) {
+	if (err) {
+		throw err; // Fatal
+	}
+
+	emitter.emit('dbReady');
+	dbReady	= true;
+});
+
+function ready(cb) {
+	if (dbReady) return cb();
+	emitter.on('dbReady', cb);
+}
+
+exports = module.exports = function runServer(customOptions) {
+	const	logPrefix	= topLogPrefix + 'runServer() - ';
+
 	let	returnObj,
 		acl;
 
@@ -47,22 +78,34 @@ exports = module.exports = function (customOptions) {
 			res.langs = customOptions.langs;
 		}
 
-		res.runController = function () {
-			acl.checkAndRedirect(req, res, function (err, userGotAccess) {
-				if (err) {
-					throw err;
-				}
+		// Default admin rights to be false
+		// In the bottom this gets set to true if a correct user is logged in
+		res.adminRights = false;
 
-				// User got access, proceed with executing the controller
-				if (userGotAccess) {
-					originalRunController();
-				} else {
-					// If userGotAccess is false, we should not execute the controller.
-					// Instead just run sendToClient directly, circumventing the afterware as well.
-					res.sendToClient(null, req, res);
-				}
-			});
-		};
+		ready(function (err) {
+			if (err) throw err;
+
+			res.runController = function () {
+				acl.checkAndRedirect(req, res, function (err, userGotAccess) {
+					if (err) {
+						log.error(logPrefix + err.message);
+						res.end('Server error');
+						return;
+					}
+
+					// User got access, proceed with executing the controller
+					if (userGotAccess) {
+						res.adminRights	= true;
+
+						originalRunController();
+					} else {
+						// If userGotAccess is false, we should not execute the controller.
+						// Instead just run sendToClient directly, circumventing the afterware as well.
+						res.sendToClient(null, req, res);
+					}
+				});
+			};
+		})
 
 		res.next();
 	});
