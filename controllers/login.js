@@ -26,12 +26,26 @@ function run(req, res, cb) {
 				return cb(null, req, res, data);
 			}
 
-			log.info(logPrefix + 'Username "' + req.formFields.username + '" logged in');
-			req.session.data.userUuid	= user.uuid;
-			res.statusCode	= 302;
-			res.setHeader('Location', '/home');
+			req.acl.checkAndRedirect(req, res, function (err, userGotAccess) {
+				if (err) return cb(err, req, res, data);
 
-			cb(null, req, res, data);
+				if ( ! userGotAccess) {
+					log.verbose(logPrefix + 'acl.gotAccessTo() returned false for username: "' + req.formFields.username + '"');
+					res.statusCode  = 401; // Unauthorized
+					data.formErrors = ['Invalid rights'];
+					data.formFields = req.formFields;
+					delete data.formFields.passowrd;
+
+					return cb(null, req, res, data);
+				}
+
+				log.info(logPrefix + 'Username "' + req.formFields.username + '" logged in');
+				req.session.data.userUuid	= user.uuid;
+				res.statusCode	= 302;
+				res.setHeader('Location', '/home');
+
+				cb(null, req, res, data);
+			});
 		});
 
 		return;

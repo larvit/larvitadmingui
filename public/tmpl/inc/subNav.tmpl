@@ -7,11 +7,11 @@
 					|| (obj.global.menuControllerName === undefined && menuItem.controllerName === obj.global.controllerName)
 				) {
 					if (menuItem.subNav !== undefined) {
-						_.forEach(menuItem.subNav, function(subNavItem) {%>
+						_.forEach(menuItem.subNav, function(subNavItem) { if (subNavItem.loggedInUserGotAccess) { %>
 							<li>
 								<a class="button dblue<% if (obj.global.urlParsed.pathname === subNavItem.href) { print(' active'); } %>" href="<%= subNavItem.href %>"><%= subNavItem.label %></a>
 							</li>
-						<%});
+						<% }});
 					}
 				}
 			});

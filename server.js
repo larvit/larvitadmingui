@@ -82,6 +82,9 @@ exports = module.exports = function runServer(customOptions) {
 		// In the bottom this gets set to true if a correct user is logged in
 		res.adminRights = false;
 
+		// Make ACL object available for other parts of the system
+		req.acl	= acl;
+
 		ready(function (err) {
 			if (err) throw err;
 
@@ -101,7 +104,8 @@ exports = module.exports = function runServer(customOptions) {
 					} else {
 						// If userGotAccess is false, we should not execute the controller.
 						// Instead just run sendToClient directly, circumventing the afterware as well.
-						res.sendToClient(null, req, res);
+						res.end('Access denied');
+						//res.sendToClient(null, req, res);
 					}
 				});
 			};

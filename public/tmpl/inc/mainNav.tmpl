@@ -2,25 +2,26 @@
 	<ul class="accordion">
 		<%
 		if (obj.global !== undefined && obj.global.menuStructure !== undefined) {
-			var i = 0,
-			    found;
+			let	i	= 0;
 
 			_.forEach(obj.global.menuStructure, function(menuItems, groupName) {
+				let	visibleMenuItems	= false;
 				i ++;
-				found = false;
+
+				// Check if there are any visible items in this group name
+				_.forEach(menuItems, function(menuItem) {
+					if (menuItem.loggedInUserGotAccess) {
+						visibleMenuItems	= true;
+					}
+				});
+
+				if (visibleMenuItems) {
 				%>
 				<li>
-					<%
-					_.forEach(menuItems, function(menuItem) {
-						if (obj.global.controllerName === menuItem.controllerName) {
-							found = true;
-						}
-					});
-					%>
 					<input class="cp_nav" type="checkbox" name="cp_<%= i %>" id="cp_<%= i %>" checked="checked" />
 					<label for="cp_<%= i %>"><%= groupName %><div class="after_icon plus"></div><div class="after_icon minus"></div></label>
 					<ul class="content">
-						<% _.forEach(menuItems, function(menuItem) { %>
+						<% _.forEach(menuItems, function(menuItem) { if (menuItem.loggedInUserGotAccess) { %>
 							<li>
 								<a
 									class="before_icon caret_right<%
@@ -31,10 +32,10 @@
 									href="<%= menuItem.href %>"
 								><%= menuItem.label %></a>
 							</li>
-						<% }); %>
+						<% }}); %>
 					</ul>
 				</li>
-			<% }); %>
+			<% }}); %>
 		<% } %>
 	</ul>
 </nav>
