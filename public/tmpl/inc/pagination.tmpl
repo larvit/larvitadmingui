@@ -11,7 +11,7 @@
 		 */
 
 		function buildUrl(urlParsed) {
-			var urlStr = urlParsed.href.split('?')[0] + '?';
+			var urlStr = urlParsed.path.split('?')[0] + '?';
 
 			for (var param in urlParsed.query) {
 				urlStr += (param + '=' + urlParsed.query[param] + '&');
