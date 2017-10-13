@@ -1,7 +1,6 @@
 'use strict';
 
 const	topLogPrefix	= 'larvitadmingui: models/acl.js: ',
-	async	= require('async'),
 	log	= require('winston'),
 	url	= require('url'),
 	db	= require('larvitdb'),
@@ -36,8 +35,7 @@ Acl.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 	const	logPrefix	= topLogPrefix + 'Acl.prototype.checkAndRedirect() - ',
 		that	= this;
 
-	let	userGotAccess	= false,
-		trimmedPathname;
+	let	trimmedPathname;
 
 	log.silly(logPrefix + 'Running.');
 
@@ -163,6 +161,6 @@ Acl.prototype.gotAccessTo = function (user, req, cb) {
 		log.verbose(logPrefix + 'Access denied. No matching rules found for logged in user.');
 		return cb(null, false); // No rules was matched
 	});
-}
+};
 
 exports = module.exports = Acl;

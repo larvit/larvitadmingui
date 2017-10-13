@@ -109,7 +109,7 @@ exports = module.exports = function runServer(customOptions) {
 					}
 				});
 			};
-		})
+		});
 
 		res.next();
 	});
