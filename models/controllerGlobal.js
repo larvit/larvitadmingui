@@ -36,6 +36,8 @@ function middleware(req, res, cb) {
 		res.globalData.formFields = req.formFields;
 	}
 
+	res.globalData.urlUtil = new utils.urlUtil(req.urlParsed.href);
+
 	// Something went wrong with setting up the session
 	if (req.session === undefined) {
 		log.warn(logPrefix + 'No req.session found');
