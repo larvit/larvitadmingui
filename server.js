@@ -5,6 +5,7 @@ const	topLogPrefix	= 'larvitadmingui: server.js: ',
 	options	= {},
 	Events	= require('events'),
 	emitter	= new Events(),
+	userLib	= require('larvituser'),
 	Acl	= require(__dirname + '/models/acl.js'),
 	lfs	= require('larvitfs'),
 	log	= require('winston'),
@@ -23,13 +24,15 @@ options.tableName	= 'admingui_db_version';
 options.migrationScriptsPath	= __dirname + '/dbmigration';
 
 dbMigration	= new DbMigration(options);
-dbMigration.run(function (err) {
-	if (err) {
-		throw err; // Fatal
-	}
+userLib.dataWriter.ready(function (err) {
+	if (err) throw err; // Fatal
 
-	emitter.emit('dbReady');
-	dbReady	= true;
+	dbMigration.run(function (err) {
+		if (err) throw err; // Fatal
+
+		emitter.emit('dbReady');
+		dbReady	= true;
+	});
 });
 
 function ready(cb) {
