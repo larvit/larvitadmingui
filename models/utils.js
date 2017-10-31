@@ -39,21 +39,20 @@ function getUserFromSession(req, cb) {
 };
 
 
-function urlUtil(currentUrl) {
-	this.currentUrl	= url.parse(currentUrl, true);
-	this.formatedUrl	= currentUrl;
+function urlUtil() {};
+
+urlUtil.setParam = function (currentUrl, param, value) {
+	currentUrl = url.parse(currentUrl, true);
+	currentUrl.query[param] = value;
+	currentUrl.search = querystring.stringify(currentUrl.query);
+	return url.format(currentUrl);
 };
 
-urlUtil.prototype.setParam = function (param, value) {
-	this.currentUrl.query[param] = value;
-	this.currentUrl.search = querystring.stringify(this.currentUrl.query);
-	return url.format(this.currentUrl);
-};
-
-urlUtil.prototype.removeParam = function (param) {
-	delete this.currentUrl.query[param];
-	this.currentUrl.search = querystring.stringify(this.currentUrl.query);
-	return url.format(this.currentUrl);
+urlUtil.removeParam = function (currentUrl, param) {
+	currentUrl = url.parse(currentUrl, true);
+	delete currentUrl.query[param];
+	currentUrl.search = querystring.stringify(currentUrl.query);
+	return url.format(currentUrl);
 };
 
 exports.getUserFromSession	= getUserFromSession;

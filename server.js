@@ -15,6 +15,7 @@ let	dbMigration,
 
 // Extend lodash
 _.defaultsDeep	= require('lodash.defaultsdeep');
+_.urlUtil	= require(__dirname + '/models/utils.js').urlUtil;
 _.trim	= require('lodash.trim');
 
 options.dbType	= 'larvitdb';
