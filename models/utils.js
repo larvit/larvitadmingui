@@ -41,16 +41,21 @@ function getUserFromSession(req, cb) {
 
 function urlUtil() {};
 
-urlUtil.setParam = function (currentUrl, param, value) {
+urlUtil.setParam = function (currentUrl, params) {
 	currentUrl = url.parse(currentUrl, true);
-	currentUrl.query[param] = value;
+
+	for (const key in params) {
+		currentUrl.query[key] = params[key];
+	}
 	currentUrl.search = querystring.stringify(currentUrl.query);
 	return url.format(currentUrl);
 };
 
-urlUtil.removeParam = function (currentUrl, param) {
+urlUtil.removeParam = function (currentUrl, params) {
 	currentUrl = url.parse(currentUrl, true);
-	delete currentUrl.query[param];
+	for (let i = 0; params[i] !== undefined; i ++) {
+		delete currentUrl.query[params[i]];
+	}
 	currentUrl.search = querystring.stringify(currentUrl.query);
 	return url.format(currentUrl);
 };
