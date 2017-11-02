@@ -88,8 +88,7 @@ jQuery(function($) {
 			doResizeActions();
 		}).trigger('resize');
 
-		// do it again in a few hundred ms to correct for other UI initialisation
+		// Do it again in a few hundred ms to correct for other UI initialisation
 		setTimeout(doResizeActions, 200);
-
 	})();
 });

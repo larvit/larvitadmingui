@@ -42,28 +42,36 @@ $(function() {
 		return ui;
 	}
 
-	// If desktop AND cookie says so - show left nav
-	if ($(window).width() > 768 && (Cookies.get('leftNav') === '1' || Cookies.get('leftNav') === undefined)) {
-		location.hash = 'mainNav';
+	function showMainNav() {
+		$('.mainNav').css('left', '0');
+		$('.section.content').css('left', '22rem');
 	}
 
-	// If click hamburger AND left nav is hidden - set cookie AND show left nav
-	$('a.open_menu').on('click', function(event) {
-		event.preventDefault();
-		Cookies.set('leftNav', '1');
-		location.hash = 'mainNav';
+	function hideMainNav() {
+		$('.mainNav').css('left', '-22rem');
+		$('.section.content').css('left', '0rem');
+	}
 
-		// Make sure stuff in the right place after DOM change
-		if (typeof doResizeActions === 'function') {
-			doResizeActions();
+	// Hide/Show mainNav
+	if (Cookies.get('leftNav') === '1') {
+		showMainNav();
+	} else if (Cookies.get('leftNav') === '0') {
+		hideMainNav();
+	} else if ($(window).width() > 768) { // Desktop
+		showMainNav();
+	} else {
+		showMainNav();
+	}
+
+	$('a.toggle_menu').on('click', function(event) {
+		event.preventDefault();
+		if (Cookies.get('leftNav') === '0') {
+			Cookies.set('leftNav', '1');
+			showMainNav();
+		} else {
+			Cookies.set('leftNav', '0');
+			hideMainNav();
 		}
-	});
-
-	// If click hamburger AND left nav is visible - remove cookie AND hide left nav
-	$('a.close_menu').on('click', function(event) {
-		event.preventDefault();
-		Cookies.set('leftNav', '0');
-		location.hash = '';
 
 		// Make sure stuff in the right place after DOM change
 		if (typeof doResizeActions === 'function') {
@@ -98,10 +106,9 @@ $(function() {
 			}
 		});
 	});
-
 });
 
-// Tab menues
+// Tab menus
 $(function() {
 	const	activeTabContent	= $('a.tab.active').attr('showcontent');
 
@@ -114,8 +121,6 @@ $(function() {
 
 		$(this).siblings().removeClass('active');
 		$(this).addClass('active');
-
-		console.log(className);
 
 		$('body.js .tab_content').css('display', 'none');
 		$('body.js #' + className).css('display', 'block');
