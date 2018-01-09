@@ -34,7 +34,7 @@
     "eslint": "^4.12.1",
     "freeport": "^1.0.5",
     "istanbul": "^0.4.5",
-    "larvituser-api": "^0.2.0",
+    "larvituser-api": "^0.2.2",
     "request": "^2.83.0",
     "tape": "^4.8.0",
     "tape-eslint": "^1.2.1"
