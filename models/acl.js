@@ -1,9 +1,9 @@
 'use strict';
 
 const	topLogPrefix	= 'larvitadmingui: models/acl.js: ',
+	request	= require('request'),
 	log	= require('winston'),
 	url	= require('url'),
-	db	= require('larvitdb'),
 	_	= require('lodash');
 
 function Acl(options) {
@@ -11,7 +11,7 @@ function Acl(options) {
 		that	= this;
 
 	if (options === undefined) {
-		options = {};
+		options	= {};
 	}
 
 	_.defaultsDeep(options, options, {
@@ -139,16 +139,19 @@ Acl.prototype.gotAccessTo = function (user, req, cb) {
 
 	// If we get down here, we have a logged in user and pathname is not the login url.
 	// Lets see if the logged in users roles give it access
-	db.query('SELECT * FROM user_roles_rights', function (err, rows) {
-		if (err) return cb(err, false);
+	request({
+		'url':	that.options.userApiUrl + '/roles_rights',
+		'json':	true
+	}, function (err, response, body) {
+		if (err) return cb(err);
 
-		for (let i = 0; rows[i] !== undefined; i ++) {
-			const	row	= rows[i];
+		for (let i = 0; body[i] !== undefined; i ++) {
+			const	rule	= body[i];
 
 			for (let i = 0; user.fields.role[i] !== undefined; i ++) {
-				const	role	= user.fields.role[i];
+				const	userRole	= user.fields.role[i];
 
-				if (role === row.role) {
+				if (userRole === rule.role) {
 					const	matches	= trimmedPathname.match(new RegExp(row.uri, 'g'));
 					if (matches) {
 						log.debug(logPrefix + 'Access granted. Matched regex: "' + row.uri + '" for uri: "' + trimmedPathname + '" for role: "' + role + '"');

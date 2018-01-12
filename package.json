@@ -19,12 +19,11 @@
     "cookies": "^0.7.0",
     "larvitbase": "^1.0.3",
     "larvitcss": "^0.2.0",
-    "larvitdb": "^1.1.0",
-    "larvitdbmigration": "^2.0.5",
     "larvitfs": "^1.0.0",
     "larvitsession": "^2.0.0",
     "lodash.defaultsdeep": "^4.6.0",
     "lodash.trim": "^4.5.1",
+    "request": "^2.83.0",
     "winston": "^2.2.0"
   },
   "description": "Generic admin GUI",
@@ -34,7 +33,7 @@
     "eslint": "^4.12.1",
     "freeport": "^1.0.5",
     "istanbul": "^0.4.5",
-    "larvituser-api": "^0.2.2",
+    "larvituser-api": "^0.3.0",
     "request": "^2.83.0",
     "tape": "^4.8.0",
     "tape-eslint": "^1.2.1"

@@ -15,7 +15,6 @@ test('start server', function (t) {
 		port	= result;
 
 		require(__dirname + '/../server.js')({
-			'host':	'127.0.0.1',
 			'port':	port,
 			'userApiUrl':	'http://127.0.0.1:' + UserApi.instance.api.lBase.httpServer.address().port
 		});
@@ -30,7 +29,6 @@ test('start server', function (t) {
 			t.equal($('h1').text(),	'Larv IT Admin GUI - Login');
 
 			t.end();
-			process.exit();
 		});
 	});
 });

@@ -8,17 +8,7 @@ node.js admin GUI
 npm i larvitadmingui;
 ```
 
-or for latest HEAD:
-
-```bash
-cd apppath
-git clone https://github.com/larvit/larvitadmingui.git node_modules/larvitadmingui
-cd node_modules/larvitadmingui
-npm i
-```
-
 ## Usage
-
 
 ### Application startup
 
@@ -28,24 +18,15 @@ In your app, start the admin interface like this:
 ```javascript
 'use strict';
 
-const	userLib	= require('larvituser'),
-	dbConf	= {'host': '127.0.0.1', 'user': 'root', 'pass': 'foobar', 'database': 'test'};
-
-// Set userLib to standalone mode (or use "slave" if another master-instance is running)
-userLib.dataWriter.mode	= 'master';
-
-// Setup database pool
-db.setup(dbConf, function(err) {
-	if (err) { throw err; }
-
-	require('larvitadmingui')({
-		'host': '127.0.0.1',
-		'port': 8001
-	});
+require('larvitadmingui')({
+	'port':	8001,
+	'userApiUrl':	'http://somewhere.com'
 });
 ```
 
-Start it up and check your browser at http://127.0.0.1:8001 - be sure to setup your MySQL or MariaDB correctly with your database settings in this file.
+The GUI require a user API compatible with [larvituser-api](https://github.com/larvit/larvituser-api). Just follow the instructions in that package to set one up.
+
+Start it up and check your browser at http://127.0.0.1:8001
 
 ### Set messages or errors in the GUI from a controller
 

@@ -1,47 +1,17 @@
 'use strict';
 
 const	topLogPrefix	= 'larvitadmingui: server.js: ',
-	DbMigration	= require('larvitdbmigration'),
-	options	= {},
-	Events	= require('events'),
-	emitter	= new Events(),
-	userLib	= require('larvituser'),
 	Acl	= require(__dirname + '/models/acl.js'),
 	lfs	= require('larvitfs'),
 	log	= require('winston'),
 	_	= require('lodash');
-
-let	dbMigration,
-	dbReady	= false;
 
 // Extend lodash
 _.defaultsDeep	= require('lodash.defaultsdeep');
 _.urlUtil	= require(__dirname + '/models/utils.js').urlUtil;
 _.trim	= require('lodash.trim');
 
-options.dbType	= 'larvitdb';
-options.dbDriver	= require('larvitdb');
-options.tableName	= 'admingui_db_version';
-options.migrationScriptsPath	= __dirname + '/dbmigration';
-
-dbMigration	= new DbMigration(options);
-userLib.dataWriter.ready(function (err) {
-	if (err) throw err; // Fatal
-
-	dbMigration.run(function (err) {
-		if (err) throw err; // Fatal
-
-		emitter.emit('dbReady');
-		dbReady	= true;
-	});
-});
-
-function ready(cb) {
-	if (dbReady) return cb();
-	emitter.on('dbReady', cb);
-}
-
-exports = module.exports = function runServer(customOptions) {
+function runServer(customOptions) {
 	const	logPrefix	= topLogPrefix + 'runServer() - ';
 
 	let	returnObj,
@@ -49,6 +19,11 @@ exports = module.exports = function runServer(customOptions) {
 
 	if (customOptions === undefined) {
 		customOptions = {};
+	}
+
+	if (customOptions.userApiUrl === undefined) {
+		const	err	= new Error('userApiUrl is missing');
+		return cb(err);
 	}
 
 	if (customOptions.customRoutes	=== undefined) { customOptions.customRoutes	= []; }
@@ -73,13 +48,14 @@ exports = module.exports = function runServer(customOptions) {
 
 	customOptions.afterware.push(require('larvitsession').afterware());
 
-	returnObj = require('larvitbase')(customOptions);
+	returnObj	= require('larvitbase')(customOptions);
+	returnObj.customOptions	= customOptions;
 
 	returnObj.on('httpSession', function (req, res) {
-		const originalRunController = res.runController;
+		const	originalRunController	= res.runController;
 
 		if (customOptions.langs) {
-			res.langs = customOptions.langs;
+			res.langs	= customOptions.langs;
 		}
 
 		// Default admin rights to be false
@@ -89,34 +65,36 @@ exports = module.exports = function runServer(customOptions) {
 		// Make ACL object available for other parts of the system
 		req.acl	= acl;
 
-		ready(function (err) {
-			if (err) throw err;
+		res.runController = function () {
+			acl.checkAndRedirect(req, res, function (err, userGotAccess) {
+				if (err) {
+					log.error(logPrefix + err.message);
+					res.end('Server error');
+					return;
+				}
 
-			res.runController = function () {
-				acl.checkAndRedirect(req, res, function (err, userGotAccess) {
-					if (err) {
-						log.error(logPrefix + err.message);
-						res.end('Server error');
-						return;
-					}
+				// User got access, proceed with executing the controller
+				if (userGotAccess) {
+					res.adminRights	= true;
 
-					// User got access, proceed with executing the controller
-					if (userGotAccess) {
-						res.adminRights	= true;
-
-						originalRunController();
-					} else {
-						// If userGotAccess is false, we should not execute the controller.
-						// Instead just run sendToClient directly, circumventing the afterware as well.
-						res.end('Access denied');
-						//res.sendToClient(null, req, res);
-					}
-				});
-			};
-		});
+					originalRunController();
+				} else {
+					// If userGotAccess is false, we should not execute the controller.
+					// Instead just run sendToClient directly, circumventing the afterware as well.
+					res.end('Access denied');
+					//res.sendToClient(null, req, res);
+				}
+			});
+		};
 
 		res.next();
 	});
 
+	runServer.instances.push(returnObj);
+
 	return returnObj;
-};
+}
+
+runServer.instances	= [];
+
+exports = module.exports = runServer;
