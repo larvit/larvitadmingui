@@ -17,9 +17,9 @@
     "async": "^2.1.2",
     "bower": "^1.7.9",
     "cookies": "^0.7.0",
-    "larvitbase": "^1.0.3",
+    "larvitbase": "^2.0.0",
     "larvitcss": "^0.2.0",
-    "larvitfs": "^1.0.0",
+    "larvitfs": "^2.0.2",
     "larvitsession": "^2.0.0",
     "lodash.defaultsdeep": "^4.6.0",
     "lodash.trim": "^4.5.1",
@@ -31,7 +31,6 @@
     "cheerio": "^1.0.0-rc.2",
     "coveralls": "^3.0.0",
     "eslint": "^4.12.1",
-    "freeport": "^1.0.5",
     "istanbul": "^0.4.5",
     "larvituser-api": "^0.3.0",
     "request": "^2.83.0",
@@ -45,7 +44,7 @@
     "dashboard",
     "menu"
   ],
-  "main": "server.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/larvit/larvitadmingui"

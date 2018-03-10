@@ -1,39 +1,44 @@
 'use strict';
 
-const	topLogPrefix	= 'larvitadmingui: models/controllerGlobal.js: ',
+const	topLogPrefix	= require('winston').appLogPrefix + __filename + ': ',
 	async	= require('async'),
-	utils	= require('./utils'),
-	lfs	= require('larvitfs'),
+	utils	= require(__dirname + '/utils'),
+	Lfs	= require('larvitfs'),
 	log	= require('winston');
 
-function middleware(req, res, cb) {
-	const	logPrefix	= topLogPrefix + 'middleware() - ',
-		tasks	= [];
+function Middleware() {
+	this.lfs	= new Lfs({'basePath': __dirname + '/..'});
+}
+
+Middleware.prototype.run = function run(req, res, cb) {
+	const	logPrefix	= topLogPrefix + 'Middleware.prototype.run() - ',
+		tasks	= [],
+		that	= this;
 
 	if ( ! res.globalData) {
-		res.globalData = {};
+		res.globalData	= {};
 	}
 
 	// Include menu structure config
-	res.globalData.menuStructure = require(lfs.getPathSync('config/menuStructure.json'));
+	res.globalData.menuStructure	= require(that.lfs.getPathSync('config/menuStructure.json'));
 
 	// Include the domain in global data
-	res.globalData.domain = req.headers.host;
+	res.globalData.domain	= req.headers.host;
 
 	// Include referer
 	res.globalData.referer	= req.headers.referer;
 
 	// Include controller name in global data
-	res.globalData.controllerName = req.routeResult.controllerName;
+	res.globalData.controllerName	= req.routeResult.controllerName;
 
 	// Include urlParsed in global data
-	res.globalData.urlParsed = req.urlParsed;
+	res.globalData.urlParsed	= req.urlParsed;
 
 	// Include form fields in global data
 	if (req.formFields === undefined) {
-		res.globalData.formFields = {};
+		res.globalData.formFields	= {};
 	} else {
-		res.globalData.formFields = req.formFields;
+		res.globalData.formFields	= req.formFields;
 	}
 
 	// Something went wrong with setting up the session
@@ -88,8 +93,6 @@ function middleware(req, res, cb) {
 	});
 
 	async.series(tasks, cb);
-}
-
-exports.middleware = function () {
-	return middleware;
 };
+
+exports = module.exports = Middleware;
