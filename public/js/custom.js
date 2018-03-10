@@ -1,10 +1,6 @@
 'use strict';
 
 $(function() {
-	// Remove a parent
-	$('.rmParent').on('click', function() {
-		$(this).closest('.parent').remove();
-	});
 	$('.noPageReload').on('click', function(e) {
 		e.preventDefault();
 
@@ -26,6 +22,13 @@ $(function() {
 
 			$.post(action, formData + encodeURIComponent($(this).attr('name')) + '=' + encodeURIComponent($(this).attr('value')));
 		}
+	});
+
+	// Remove a parent
+	// Remember to put this after for example .noPageReload since the parent might
+	// contain useful stuff and it will not be used if it is removed first
+	$('.rmParent').on('click', function() {
+		$(this).closest('.parent').remove();
 	});
 
 	// Sortable init
