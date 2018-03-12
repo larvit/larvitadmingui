@@ -84,7 +84,7 @@ $(function () {
 
 	// Close msgBox
 	window.addMsgBoxClose = function () {
-		$('.msgBox a.close').on('click', function (e) {
+		$(document).on('click', '.msgBox a.close', function (e) {
 			e.preventDefault();
 			$(this).closest('.msgBox').remove();
 		});
