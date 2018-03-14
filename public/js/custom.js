@@ -1,7 +1,12 @@
 'use strict';
 
+<<<<<<< HEAD
 $(function () {
 	$(document).on('click', '.noPageReload', function (e) {
+=======
+$(function() {
+	$('.noPageReload').on('click', function(e) {
+>>>>>>> 011543c83eb573acbdda1f511ee3842648485f9e
 		e.preventDefault();
 
 		if ($(this).attr('href') !== undefined) {
@@ -27,7 +32,11 @@ $(function () {
 	// Remove a parent
 	// Remember to put this after for example .noPageReload since the parent might
 	// contain useful stuff and it will not be used if it is removed first
+<<<<<<< HEAD
 	$(document).on('click', '.rmParent', function () {
+=======
+	$('.rmParent').on('click', function() {
+>>>>>>> 011543c83eb573acbdda1f511ee3842648485f9e
 		$(this).closest('.parent').remove();
 	});
 

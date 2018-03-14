@@ -9,7 +9,11 @@
 					if (menuItem.subNav !== undefined) {
 						_.forEach(menuItem.subNav, function(subNavItem) { if (subNavItem.loggedInUserGotAccess) { %>
 							<li>
-								<a class="button dblue<% if (obj.global.urlParsed.pathname === subNavItem.href) { print(' active'); } %>" href="<%= subNavItem.href %>"><%= subNavItem.label %></a>
+								<a class="button dblue<%
+									if (subNavItem.href.substring(0, obj.global.urlParsed.pathname.length) === obj.global.urlParsed.pathname) {
+										print(' active');
+									}
+								%>" href="<%= subNavItem.href %>"><%= subNavItem.label %></a>
 							</li>
 						<% }});
 					}
