@@ -20,7 +20,8 @@ Middleware.prototype.run = function run(req, res, cb) {
 	}
 
 	// Include menu structure config
-	res.globalData.menuStructure	= require(that.lfs.getPathSync('config/menuStructure.json'));
+	// Do it through stringify/parse to not screw up the original structure
+	res.globalData.menuStructure	= JSON.parse(JSON.stringify(require(lfs.getPathSync('config/menuStructure.json'))));
 
 	// Include the domain in global data
 	res.globalData.domain	= req.headers.host;

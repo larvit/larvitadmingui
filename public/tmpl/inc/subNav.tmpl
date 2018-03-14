@@ -10,7 +10,7 @@
 						_.forEach(menuItem.subNav, function(subNavItem) { if (subNavItem.loggedInUserGotAccess) { %>
 							<li>
 								<a class="button dblue<%
-									if (subNavItem.href.substring(0, obj.global.urlParsed.pathname.length) === obj.global.urlParsed.pathname) {
+									if (subNavItem.href === obj.global.urlParsed.path) {
 										print(' active');
 									}
 								%>" href="<%= subNavItem.href %>"><%= subNavItem.label %></a>
