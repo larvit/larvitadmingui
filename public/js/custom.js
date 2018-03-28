@@ -1,7 +1,7 @@
 'use strict';
 
 $(function() {
-	$('.noPageReload').on('click', function(e) {
+	$(document).on('click', '.noPageReload', function(e) {
 		e.preventDefault();
 
 		if ($(this).attr('href') !== undefined) {
@@ -27,7 +27,7 @@ $(function() {
 	// Remove a parent
 	// Remember to put this after for example .noPageReload since the parent might
 	// contain useful stuff and it will not be used if it is removed first
-	$('.rmParent').on('click', function() {
+	$(document).on('click', '.rmParent', function () {
 		$(this).closest('.parent').remove();
 	});
 
@@ -84,7 +84,7 @@ $(function() {
 
 	// Close msgBox
 	window.addMsgBoxClose = function() {
-		$('.msgBox a.close').on('click', function(event) {
+		$(document).on('click', '.msgBox a.close', function (event) {
 			event.preventDefault();
 			$(this).closest('.msgBox').remove();
 		});
