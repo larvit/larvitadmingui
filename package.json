@@ -1,6 +1,6 @@
 {
   "name": "larvitadmingui",
-  "version": "0.9.5",
+  "version": "0.9.6",
   "author": {
     "name": "Mikael 'Lilleman' Göransson",
     "email": "lilleman@larvit.se"
@@ -21,7 +21,7 @@
     "larvitcss": "^0.2.0",
     "larvitdb": "^1.1.0",
     "larvitdbmigration": "^2.0.5",
-    "larvitfs": "^1.0.0",
+    "larvitfs": "^2.0.4",
     "larvitsession": "^2.0.0",
     "larvituser": "^0.13.4",
     "lodash.defaultsdeep": "^4.6.0",
@@ -31,7 +31,7 @@
   "description": "Generic admin GUI",
   "devDependencies": {
     "eslint": "^4.5.0",
-    "mocha": "^4.0.1",
+    "mocha": "^5.2.0",
     "mocha-eslint": "^4.1.0"
   },
   "keywords": [
