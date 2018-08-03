@@ -20,6 +20,7 @@ test('Basic request', function (t) {
 	tasks.push(function (cb) {
 		freeport(function (err, result) {
 			port	= result;
+			console.log(port);
 			cb(err);
 		});
 	});
