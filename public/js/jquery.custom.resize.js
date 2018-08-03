@@ -1,7 +1,7 @@
 'use strict';
 
-jQuery(function($) {
-	(function() {
+jQuery(function ($) {
+	(function () {
 		var $window   = $(window),
 		    $content  = $('.section.content'),
 		    $toolbar  = $('.toolbarFixed'),
@@ -23,20 +23,20 @@ jQuery(function($) {
 		$wrap         = $toolbar.parent().css('height', toolbarHeight);
 
 		$toolbar.css({
-			width: $toolbar.parent().width() + 'px',
-			position: 'absolute'
+			'width': $toolbar.parent().width() + 'px',
+			'position': 'absolute'
 		});
 
 		windowSize = {
-			x: $window.width(),
-			y: $window.height()
+			'x': $window.width(),
+			'y': $window.height()
 		};
 		contentSize = {
-			x: $content.width(),
-			y: $content.height()
+			'x': $content.width(),
+			'y': $content.height()
 		};
 
-		window.doResizeActions = function() {
+		window.doResizeActions = function () {
 			var maxY  = $wrap.offset().top  + toolbarHeight,
 			    viewY = $window.scrollTop() + $window.height(),
 			    newSize,
@@ -45,13 +45,13 @@ jQuery(function($) {
 			    contentSizeChanged;
 
 			newSize = {
-				x: $window.width(),
-				y: $window.height()
+				'x': $window.width(),
+				'y': $window.height()
 			};
 
 			newContentSize = {
-				x: $content.width(),
-				y: $content.height()
+				'x': $content.width(),
+				'y': $content.height()
 			};
 
 			sizeChanged        = (newSize.x != windowSize.x || newSize.y != windowSize.y);
@@ -62,18 +62,18 @@ jQuery(function($) {
 				windowSize = newSize;
 				contentSize = newContentSize;
 				$toolbar.css({
-					top:      0,
-					position: 'absolute',
-					width:    $toolbar.parent().width() + 'px'
+					'top':      0,
+					'position': 'absolute',
+					'width':    $toolbar.parent().width() + 'px'
 				});
 			} else if (viewY <= maxY && (sizeChanged || contentSizeChanged || mode == 'inline')) {
 				mode = 'fixed';
 				windowSize = newSize;
 				contentSize = newContentSize;
 				$toolbar.css({
-					top:      $window.height() - toolbarHeight,
-					position: 'fixed',
-					width:    $toolbar.parent().width() + 'px'
+					'top':      $window.height() - toolbarHeight,
+					'position': 'fixed',
+					'width':    $toolbar.parent().width() + 'px'
 				});
 			}
 
@@ -84,7 +84,7 @@ jQuery(function($) {
 		$window.scroll(doResizeActions);
 		$window.on('redraw', doResizeActions);
 		$mainNav.on('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', doResizeActions);
-		$window.bind('resize', function() {
+		$window.bind('resize', function () {
 			doResizeActions();
 		}).trigger('resize');
 

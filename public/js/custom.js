@@ -1,7 +1,7 @@
 'use strict';
 
-$(function() {
-	$(document).on('click', '.noPageReload', function(e) {
+$(function () {
+	$(document).on('click', '.noPageReload', function (e) {
 		e.preventDefault();
 
 		if ($(this).attr('href') !== undefined) {
@@ -33,12 +33,12 @@ $(function() {
 
 	// Sortable init
 	$('table.sortable tbody').sortable({
-		helper: fixWidthHelper
+		'helper': fixWidthHelper
 	}).disableSelection();
 
 	// Helper to keep full width of sortable tr's
 	function fixWidthHelper(e, ui) {
-		ui.children().each(function() {
+		ui.children().each(function () {
 			$(this).width($(this).width());
 		});
 
@@ -66,7 +66,7 @@ $(function() {
 		showMainNav();
 	}
 
-	$('a.toggle_menu').on('click', function(event) {
+	$('a.toggle_menu').on('click', function (event) {
 		event.preventDefault();
 		if (Cookies.get('leftNav') === '0') {
 			Cookies.set('leftNav', '1');
@@ -83,7 +83,7 @@ $(function() {
 	});
 
 	// Close msgBox
-	window.addMsgBoxClose = function() {
+	window.addMsgBoxClose = function () {
 		$(document).on('click', '.msgBox a.close', function (event) {
 			event.preventDefault();
 			$(this).closest('.msgBox').remove();
@@ -94,12 +94,12 @@ $(function() {
 	addMsgBoxClose();
 
 	// Cookies storing closed state main nav top lvls
-	$('.cp_nav').each(function() {
+	$('.cp_nav').each(function () {
 		// If cookie says so, collapse this item
 		if (Cookies.get('mainNav_fold_' + $(this).attr('id')) === '1') {
 			$(this).removeAttr('checked');
 		}
-		$(this).on('click', function() {
+		$(this).on('click', function () {
 			if ($(this).is(':checked')) {
 				// If cookie with this id exists, remove it
 				Cookies.remove('mainNav_fold_' + $(this).attr('id'));
@@ -112,12 +112,12 @@ $(function() {
 });
 
 // Tab menus
-$(function() {
+$(function () {
 	const	activeTabContent	= $('a.tab.active').attr('showcontent');
 
 	$('#' + activeTabContent).css('display', 'block');
 
-	$('.tab[showcontent]').on('click', function() {
+	$('.tab[showcontent]').on('click', function () {
 		const	className	= $(this).attr('showcontent');
 
 		if ($(this).hasClass('active')) return;
