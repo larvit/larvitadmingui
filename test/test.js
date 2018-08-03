@@ -27,6 +27,13 @@ test('Basic request', function (t) {
 		});
 	});
 
+	tasks.push(function (cb) {
+		db.end(function (err) {
+			console.log('höhö');
+			cb(err);
+		});
+	});
+
 	async.series(tasks, function (err) {
 		if (err) throw err;
 		t.end();
