@@ -16,6 +16,8 @@ db.setup(require(__dirname + '/../' + process.env.DBCONFFILE));
 test('Basic request', function (t) {
 	const	tasks	= [];
 
+	let	port;
+
 	// Get free port
 	tasks.push(function (cb) {
 		freeport(function (err, result) {
