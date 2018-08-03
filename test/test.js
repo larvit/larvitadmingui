@@ -1,7 +1,31 @@
 'use strict';
 
-describe('foo', function() {
-	it('bar', function(done) {
-		done();
+const	freeport	= require('freeport'),
+	//request	= require('requestretry'),
+	async	= require('async'),
+	test	= require('tape'),
+	//App	= require(__dirname + '/../index.js'),
+	db	= require('larvitdb');
+
+if ( ! process.env.DBCONFFILE) {
+	process.env.DBCONFFILE	= 'config/db_test.json';
+}
+
+db.setup(require(__dirname + '/../' + process.env.DBCONFFILE));
+
+test('Basic request', function (t) {
+	const	tasks	= [];
+
+	// Get free port
+	tasks.push(function (cb) {
+		freeport(function (err, result) {
+			port	= result;
+			cb(err);
+		});
+	});
+
+	async.series(tasks, function (err) {
+		if (err) throw err;
+		t.end();
 	});
 });

@@ -1,6 +1,6 @@
 {
   "name": "larvitadmingui",
-  "version": "0.9.6",
+  "version": "0.10.0",
   "author": {
     "name": "Mikael 'Lilleman' Göransson",
     "email": "lilleman@larvit.se"
@@ -30,9 +30,13 @@
   },
   "description": "Generic admin GUI",
   "devDependencies": {
-    "eslint": "^4.5.0",
-    "mocha": "^5.2.0",
-    "mocha-eslint": "^4.1.0"
+    "coveralls": "^3.0.2",
+    "eslint": "^5.2.0",
+    "freeport": "^1.0.5",
+    "istanbul": "^0.4.5",
+    "requestretry": "^2.0.2",
+    "tape": "^4.9.1",
+    "tape-eslint": "^1.2.1"
   },
   "keywords": [
     "admin",

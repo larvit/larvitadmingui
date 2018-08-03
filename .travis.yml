@@ -2,12 +2,12 @@ language: node_js
 
 env:
   - CXX=g++-4.8
+  - DBCONFFILE=config/db_travis.json
 
 node_js:
-  - 4
   - 6
-  - 7
   - 8
+  - 10
 
 notifications:
   email:
@@ -23,11 +23,9 @@ install:
 before_script:
   - mysql -e 'CREATE DATABASE test'
 
-script: mocha test/test.js -confFile=db_travis.json
-script: ./node_modules/eslint/bin/eslint.js ./
+script: node_modules/.bin/istanbul cover node_modules/.bin/tape ./test/*
 
-services:
-  - mysql
+after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
 
 addons:
   apt:
@@ -36,9 +34,5 @@ addons:
     packages:
     - g++-4.8
 
-
-#addons:
-#  mariadb:
-#    - 5.5
-#    - 10.0
-#    - 10.1
+addons:
+  mariadb: 10.3
