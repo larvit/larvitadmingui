@@ -1,8 +1,7 @@
 language: node_js
 
 env:
-  - CXX=g++-4.8
-  - DBCONFFILE=config/db_travis.json
+  - CXX=g++-4.8 DBCONFFILE=config/db_travis.json
 
 node_js:
   - 6
