@@ -22,7 +22,7 @@ install:
 before_script:
   - mysql -e 'CREATE DATABASE test'
 
-script: node_modules/.bin/istanbul cover node_modules/.bin/tape ./test/*
+script: node_modules/.bin/istanbul cover npm test
 
 after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
 

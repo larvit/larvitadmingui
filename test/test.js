@@ -28,7 +28,7 @@ test('Basic request', function (t) {
 	});
 
 	tasks.push(function (cb) {
-		db.end(function (err) {
+		db.pool.end(function (err) {
 			console.log('höhö');
 			cb(err);
 		});
