@@ -3,7 +3,8 @@
 const	topLogPrefix	= 'larvitadmingui: models/controllerGlobal.js: ',
 	async	= require('async'),
 	utils	= require('./utils'),
-	lfs	= require('larvitfs'),
+	Lfs	= require('larvitfs'),
+	lfs	= new Lfs(),
 	log	= require('winston');
 
 function middleware(req, res, cb) {

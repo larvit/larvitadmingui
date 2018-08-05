@@ -30,6 +30,7 @@
   },
   "description": "Generic admin GUI",
   "devDependencies": {
+    "cheerio": "^1.0.0-rc.2",
     "coveralls": "^3.0.2",
     "eslint": "^5.2.0",
     "freeport": "^1.0.5",

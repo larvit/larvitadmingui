@@ -7,7 +7,8 @@ const	topLogPrefix	= 'larvitadmingui: server.js: ',
 	emitter	= new Events(),
 	userLib	= require('larvituser'),
 	Acl	= require(__dirname + '/models/acl.js'),
-	lfs	= require('larvitfs'),
+	Lfs	= require('larvitfs'),
+	lfs	= new Lfs(),
 	log	= require('winston'),
 	_	= require('lodash');
 
@@ -73,7 +74,7 @@ exports = module.exports = function runServer(customOptions) {
 
 	customOptions.afterware.push(require('larvitsession').afterware());
 
-	returnObj = require('larvitbase')(customOptions);
+	returnObj	= require('larvitbase')(customOptions);
 
 	returnObj.on('httpSession', function (req, res) {
 		const originalRunController = res.runController;
