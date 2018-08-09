@@ -78,20 +78,20 @@ test('startup', function (t) {
 });
 
 // Check if the GUI is up
-//test('Basic request', function (t) {
-//	request('http://127.0.0.1:' + port, function (err, response, body) {
-//		let	$;
-//
-//		if (err) throw err;
-//
-//		$	= cheerio.load(body);
-//
-//		t.equal(response.statusCode,	200);
-//		t.equal($('#login_form').length,	1);
-//
-//		t.end();
-//	});
-//});
+test('Basic request', function (t) {
+	request('http://127.0.0.1:' + port, function (err, response, body) {
+		let	$;
+
+		if (err) throw err;
+
+		$	= cheerio.load(body);
+
+		t.equal(response.statusCode,	200);
+		t.equal($('#login_form').length,	1);
+
+		t.end();
+	});
+});
 
 test('Login', function (t) {
 	const	reqOptions	= {},

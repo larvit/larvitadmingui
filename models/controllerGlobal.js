@@ -12,30 +12,30 @@ function middleware(req, res, cb) {
 		tasks	= [];
 
 	if ( ! res.globalData) {
-		res.globalData = {};
+		res.globalData	= {};
 	}
 
 	// Include menu structure config
 	// Do it through stringify/parse to not screw up the original structure
-	res.globalData.menuStructure = JSON.parse(JSON.stringify(require(lfs.getPathSync('config/menuStructure.json'))));
+	res.globalData.menuStructure	= JSON.parse(JSON.stringify(require(lfs.getPathSync('config/menuStructure.json'))));
 
 	// Include the domain in global data
-	res.globalData.domain = req.headers.host;
+	res.globalData.domain	= req.headers.host;
 
 	// Include referer
 	res.globalData.referer	= req.headers.referer;
 
 	// Include controller name in global data
-	res.globalData.controllerName = req.routeResult.controllerName;
+	res.globalData.controllerName	= req.routeResult.controllerName;
 
 	// Include urlParsed in global data
-	res.globalData.urlParsed = req.urlParsed;
+	res.globalData.urlParsed	= req.urlParsed;
 
 	// Include form fields in global data
 	if (req.formFields === undefined) {
-		res.globalData.formFields = {};
+		res.globalData.formFields	= {};
 	} else {
-		res.globalData.formFields = req.formFields;
+		res.globalData.formFields	= req.formFields;
 	}
 
 	// Something went wrong with setting up the session

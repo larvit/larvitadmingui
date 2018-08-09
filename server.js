@@ -2,6 +2,8 @@
 
 const	topLogPrefix	= 'larvitadmingui: server.js: ',
 	DbMigration	= require('larvitdbmigration'),
+	Session	= require('larvitsession'),
+	session	= new Session({'db': require('larvitdb'), 'log': require('winston')}),
 	options	= {},
 	Events	= require('events'),
 	emitter	= new Events(),
@@ -10,6 +12,7 @@ const	topLogPrefix	= 'larvitadmingui: server.js: ',
 	Lfs	= require('larvitfs'),
 	lfs	= new Lfs(),
 	log	= require('winston'),
+	db	= require('larvitdb'),
 	_	= require('lodash');
 
 let	dbMigration,
@@ -20,10 +23,11 @@ _.defaultsDeep	= require('lodash.defaultsdeep');
 _.urlUtil	= require(__dirname + '/models/utils.js').urlUtil;
 _.trim	= require('lodash.trim');
 
-options.dbType	= 'larvitdb';
-options.dbDriver	= require('larvitdb');
+options.dbType	= 'mariadb';
+options.dbDriver	= db;
 options.tableName	= 'admingui_db_version';
 options.migrationScriptsPath	= __dirname + '/dbmigration';
+options.log	= log;
 
 dbMigration	= new DbMigration(options);
 userLib.dataWriter.ready(function (err) {
@@ -49,7 +53,7 @@ exports = module.exports = function runServer(customOptions) {
 		acl;
 
 	if (customOptions === undefined) {
-		customOptions = {};
+		customOptions	= {};
 	}
 
 	if (customOptions.customRoutes	=== undefined) { customOptions.customRoutes	= []; }
@@ -69,23 +73,23 @@ exports = module.exports = function runServer(customOptions) {
 	acl	= new Acl(customOptions);
 
 	customOptions.middleware.push(require('cookies').express());
-	customOptions.middleware.push(require('larvitsession').middleware()); // Important that this is ran after the cookie middleware
+	customOptions.middleware.push(function (req, res, cb) { session.start(req, res, cb); }); // Important that this is ran after the cookie middleware
 	customOptions.middleware.push(require(lfs.getPathSync('models/controllerGlobal.js')).middleware());
 
-	customOptions.afterware.push(require('larvitsession').afterware());
+	customOptions.afterware.push(function (req, res, data, cb) { session.writeToDb(req, res, cb);});
 
 	returnObj	= require('larvitbase')(customOptions);
 
 	returnObj.on('httpSession', function (req, res) {
-		const originalRunController = res.runController;
+		const	originalRunController	= res.runController;
 
 		if (customOptions.langs) {
-			res.langs = customOptions.langs;
+			res.langs	= customOptions.langs;
 		}
 
 		// Default admin rights to be false
 		// In the bottom this gets set to true if a correct user is logged in
-		res.adminRights = false;
+		res.adminRights	= false;
 
 		// Make ACL object available for other parts of the system
 		req.acl	= acl;
@@ -104,7 +108,6 @@ exports = module.exports = function runServer(customOptions) {
 					// User got access, proceed with executing the controller
 					if (userGotAccess) {
 						res.adminRights	= true;
-
 						originalRunController();
 					} else {
 						// If userGotAccess is false, we should not execute the controller.
@@ -114,9 +117,9 @@ exports = module.exports = function runServer(customOptions) {
 					}
 				});
 			};
-		});
 
-		res.next();
+			res.next();
+		});
 	});
 
 	return returnObj;
