@@ -1,20 +1,20 @@
 'use strict';
 
-const	Intercom	= require('larvitamintercom'),
-	freeport	= require('freeport'),
+const	freeport	= require('freeport'),
 	request	= require('requestretry'),
-	userLib	= require('larvituser'),
+	UserLib	= require('larvituser'),
 	cheerio	= require('cheerio'),
+	LUtils	= require('larvitutils'),
+	lUtils	= new LUtils(),
 	async	= require('async'),
 	test	= require('tape'),
-	//App	= require(__dirname + '/../index.js'),
+	log	= new lUtils.Log(),
+	App	= require(__dirname + '/../index.js'),
 	db	= require('larvitdb');
 
-let	port,
+let	userLib,
+	port,
 	app;
-
-userLib.dataWriter.mode	= 'master';
-userLib.dataWriter.intercom	= new Intercom('loopback interface');
 
 if ( ! process.env.DBCONFFILE) {
 	process.env.DBCONFFILE	= 'config/db_test.json';
@@ -24,6 +24,12 @@ function startStuff(cb) {
 	const	tasks	= [];
 
 	db.setup(require(__dirname + '/../' + process.env.DBCONFFILE));
+
+	// Start userLib
+	tasks.push(function (cb) {
+		userLib	= new UserLib({'log': log, 'db': db});
+		cb();
+	});
 
 	// Get free port
 	tasks.push(function (cb) {
@@ -35,10 +41,13 @@ function startStuff(cb) {
 
 	// Start gui http server
 	tasks.push(function (cb) {
-		app	= require(__dirname + '/../server.js')({
-			'port':	port
+		app	= new App({
+			'httpOptions':	port,
+			'userLib':	userLib,
+			'log':	log,
+			'db':	db
 		});
-		cb();
+		app.start(cb);
 	});
 
 	// Create admin user

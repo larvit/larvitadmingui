@@ -1,6 +1,6 @@
 {
   "name": "larvitadmingui",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "author": {
     "name": "Mikael 'Lilleman' Göransson",
     "email": "lilleman@larvit.se"
@@ -23,10 +23,10 @@
     "larvitdbmigration": "^4.0.0",
     "larvitfs": "^2.0.4",
     "larvitsession": "^5.0.0",
-    "larvituser": "^0.14.0",
+    "larvituser": "^0.15.0",
+    "larvitutils": "^2.0.0",
     "lodash.defaultsdeep": "^4.6.0",
-    "lodash.trim": "^4.5.1",
-    "winston": "^2.2.0"
+    "lodash.trim": "^4.5.1"
   },
   "description": "Generic admin GUI",
   "devDependencies": {
@@ -46,7 +46,7 @@
     "dashboard",
     "menu"
   ],
-  "main": "server.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/larvit/larvitadmingui"

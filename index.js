@@ -1,50 +1,100 @@
 'use strict';
 
-const	topLogPrefix	= 'larvitadmingui: server.js: ',
+const	topLogPrefix	= 'larvitadmingui: index.js: ',
 	DbMigration	= require('larvitdbmigration'),
 	Session	= require('larvitsession'),
-	session	= new Session({'db': require('larvitdb'), 'log': require('winston')}),
-	options	= {},
+	LUtils	= require('larvitutils'),
 	Events	= require('events'),
 	emitter	= new Events(),
-	userLib	= require('larvituser'),
 	Acl	= require(__dirname + '/models/acl.js'),
 	Lfs	= require('larvitfs'),
 	lfs	= new Lfs(),
-	log	= require('winston'),
-	db	= require('larvitdb'),
 	_	= require('lodash');
 
-let	dbMigration,
-	dbReady	= false;
+let	dbReady	= false,
+	session;
 
 // Extend lodash
 _.defaultsDeep	= require('lodash.defaultsdeep');
 _.urlUtil	= require(__dirname + '/models/utils.js').urlUtil;
 _.trim	= require('lodash.trim');
 
-options.dbType	= 'mariadb';
-options.dbDriver	= db;
-options.tableName	= 'admingui_db_version';
-options.migrationScriptsPath	= __dirname + '/dbmigration';
-options.log	= log;
+function App(options) {
+	const	logPrefix	= topLogPrefix + 'App() - ',
+		that	= this;
 
-dbMigration	= new DbMigration(options);
-userLib.dataWriter.ready(function (err) {
-	if (err) throw err; // Fatal
+	that.options	= options || {};
+	that.emitter	= new Events();
+	that.dbReady	= false;
 
-	dbMigration.run(function (err) {
-		if (err) throw err; // Fatal
+	if ( ! that.options.log) {
+		const	lUtils	= new LUtils();
 
-		emitter.emit('dbReady');
-		dbReady	= true;
-	});
-});
+		that.options.log	= new lUtils.Log();
+	}
+	that.log	= that.options.log;
 
-function ready(cb) {
-	if (dbReady) return cb();
-	emitter.on('dbReady', cb);
+	if ( ! that.options.db) {
+		const	err	= new Error('Required option "db" is missing');
+		that.log.error(logPrefix + err.message);
+		throw err;
+	}
+	that.db	= that.options.db;
+
+	if ( ! that.options.userLib) {
+		const	err	= new Error('Required option "userLib" is missing');
+		that.log.error(logPrefix + err.message);
+		throw err;
+	}
+	that.userLib	= that.options.userLib;
+
+	that.runDbMigrations();
 }
+
+App.prototype.runDbMigrations = function runDbMigrations() {
+	const	logPrefix	= topLogPrefix + 'App.runDbMigrations() - ',
+		options	= {},
+		that	= this;
+
+	let	dbMigration;
+
+	options.dbType	= 'mariadb';
+	options.dbDriver	= that.db;
+	options.tableName	= 'admingui_db_version';
+	options.migrationScriptsPath	= __dirname + '/dbmigration';
+	options.log	= that.log;
+
+	dbMigration	= new DbMigration(options);
+	that.userLib.dataWriter.ready(function (err) {
+		if (err) {
+			that.log.error(logPrefix + err.message);
+			throw err;
+		}
+
+		dbMigration.run(function (err) {
+			if (err) {
+				that.log.error(logPrefix + err.message);
+				throw err;
+			}
+
+			that.emitter.emit('dbReady');
+			that.dbReady	= true;
+		});
+	});
+};
+
+App.prototype.ready = function ready(cb) {
+	const	that	= this;
+
+	if (that.dbReady) return cb();
+	that.emitter.on('dbReady', cb);
+};
+
+App.prototype.start = function start(cb) {
+	const	logPrefix	= topLogPrefix + 'App.start() - ',
+		that	= this;
+
+};
 
 exports = module.exports = function runServer(customOptions) {
 	const	logPrefix	= topLogPrefix + 'runServer() - ';

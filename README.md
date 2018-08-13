@@ -8,40 +8,39 @@ node.js admin GUI
 npm i larvitadmingui;
 ```
 
-or for latest HEAD:
-
-```bash
-cd apppath
-git clone https://github.com/larvit/larvitadmingui.git node_modules/larvitadmingui
-cd node_modules/larvitadmingui
-npm i
-```
-
 ## Usage
-
 
 ### Application startup
 
 In your app, start the admin interface like this:
 
-
 ```javascript
 'use strict';
 
-const	userLib	= require('larvituser'),
-	dbConf	= {'host': '127.0.0.1', 'user': 'root', 'pass': 'foobar', 'database': 'test'};
+const	Intercom	= require('larvitamintercom'),
+	UserLib	= require('larvituser'),
+	winston	= require('winston'),
+	log	= winston.createLogger({'transports': [new winston.transports.Console()]}),
+	App	= require('larvitadmingui'),
+	db	= require('larvitdb');
 
-// Set userLib to standalone mode (or use "slave" if another master-instance is running)
-userLib.dataWriter.mode	= 'master';
+let	userLib,
+	app;
 
-// Setup database pool
-db.setup(dbConf, function(err) {
-	if (err) { throw err; }
+db.setup(...); // See https://github.com/larvit/larvitdb on how to configure the database
 
-	require('larvitadmingui')({
-		'host': '127.0.0.1',
-		'port': 8001
-	});
+userLib = new UserLib({
+	'db':	db,
+	'log':	log,
+	'mode':	'master',
+	'intercom':	new Intercom({'conStr': 'loopback interface', 'log': log})
+});
+
+app = new App({
+	'httpOptions':	8001, // Listening port
+	'userLib':	userLib,
+	'log':	log,
+	'db':	db
 });
 ```
 

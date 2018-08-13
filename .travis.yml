@@ -27,11 +27,9 @@ script: node_modules/.bin/istanbul cover npm test
 after_script: "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
 
 addons:
+  mariadb: 10.3
   apt:
     sources:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
-
-addons:
-  mariadb: 10.3
