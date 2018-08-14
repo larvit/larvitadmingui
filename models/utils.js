@@ -2,25 +2,23 @@
 
 const	topLogPrefix	= 'larvitadmingui: models/utils.js: ',
 	querystring	= require('querystring'),
-	userLib	= require('larvituser'),
-	log	= require('winston'),
 	url	= require('url');
 
 function getUserFromSession(req, cb) {
 	const	logPrefix	= topLogPrefix + 'getUserFromSession() - ';
 
-	log.silly(logPrefix + 'running');
+	req.log.silly(logPrefix + 'running');
 
 	if (req.session.data.userUuid !== undefined) {
-		log.debug(logPrefix + 'UserUuid: "' + req.session.data.userUuid + '" found in session');
+		req.log.debug(logPrefix + 'UserUuid: "' + req.session.data.userUuid + '" found in session');
 
-		userLib.fromUuid(req.session.data.userUuid, function (err, user) {
+		req.userLib.fromUuid(req.session.data.userUuid, function (err, user) {
 			if (err) return cb(err);
 
 			req.user = user;
 
 			if (user.uuid !== undefined) {
-				log.debug(logPrefix + 'UserUuid: "' + user.uuid + '" found in database');
+				req.log.debug(logPrefix + 'UserUuid: "' + user.uuid + '" found in database');
 
 				return cb(null, {
 					'uuid':	user.uuid,
@@ -32,31 +30,30 @@ function getUserFromSession(req, cb) {
 			cb();
 		});
 	} else {
-		log.silly(logPrefix + 'No userUuid found in session');
+		req.log.silly(logPrefix + 'No userUuid found in session');
 		req.user = undefined;
 		cb();
 	}
 };
 
-
 function urlUtil() {};
 
 urlUtil.setParam = function (currentUrl, params) {
-	currentUrl = url.parse(currentUrl, true);
+	currentUrl	= url.parse(currentUrl, true);
 
 	for (const key in params) {
 		currentUrl.query[key] = params[key];
 	}
-	currentUrl.search = querystring.stringify(currentUrl.query);
+	currentUrl.search	= querystring.stringify(currentUrl.query);
 	return url.format(currentUrl);
 };
 
 urlUtil.removeParam = function (currentUrl, params) {
-	currentUrl = url.parse(currentUrl, true);
+	currentUrl	= url.parse(currentUrl, true);
 	for (let i = 0; params[i] !== undefined; i ++) {
 		delete currentUrl.query[params[i]];
 	}
-	currentUrl.search = querystring.stringify(currentUrl.query);
+	currentUrl.search	= querystring.stringify(currentUrl.query);
 	return url.format(currentUrl);
 };
 

@@ -5,14 +5,10 @@ const	topLogPrefix	= 'larvitadmingui: index.js: ',
 	Session	= require('larvitsession'),
 	LUtils	= require('larvitutils'),
 	Events	= require('events'),
-	emitter	= new Events(),
 	Acl	= require(__dirname + '/models/acl.js'),
 	Lfs	= require('larvitfs'),
 	lfs	= new Lfs(),
 	_	= require('lodash');
-
-let	dbReady	= false,
-	session;
 
 // Extend lodash
 _.defaultsDeep	= require('lodash.defaultsdeep');
@@ -47,6 +43,36 @@ function App(options) {
 		throw err;
 	}
 	that.userLib	= that.options.userLib;
+
+	if ( ! that.options.session) {
+		that.options.session = new Session({
+			'db':	that.db,
+			'log':	that.log
+		});
+	}
+	that.session	= that.options.session;
+
+	if (that.options.customRoutes	=== undefined) { that.options.customRoutes	= []; }
+	if (that.options.middleware	=== undefined) { that.options.middleware	= []; }
+	if (that.options.afterware	=== undefined) { that.options.afterware	= []; }
+
+	that.options.customRoutes.push({
+		'regex':	'^/$',
+		'controllerName':	'login'
+	});
+
+	that.options.customRoutes.push({
+		'regex':	'\\.css$',
+		'controllerName':	'css'
+	});
+
+	that.acl	= new Acl(that.options);
+
+	that.options.middleware.push(require('cookies').express());
+	that.options.middleware.push(function (req, res, cb) { that.session.start(req, res, cb); }); // Important that this is ran after the cookie middleware
+	that.options.middleware.push(require(lfs.getPathSync('models/controllerGlobal.js')).middleware());
+
+	that.options.afterware.push(function (req, res, data, cb) { that.session.writeToDb(req, res, cb);});
 
 	that.runDbMigrations();
 }
@@ -94,47 +120,14 @@ App.prototype.start = function start(cb) {
 	const	logPrefix	= topLogPrefix + 'App.start() - ',
 		that	= this;
 
-};
+	that.lBase	= require('larvitbase')(that.options);
+	cb();
 
-exports = module.exports = function runServer(customOptions) {
-	const	logPrefix	= topLogPrefix + 'runServer() - ';
-
-	let	returnObj,
-		acl;
-
-	if (customOptions === undefined) {
-		customOptions	= {};
-	}
-
-	if (customOptions.customRoutes	=== undefined) { customOptions.customRoutes	= []; }
-	if (customOptions.middleware	=== undefined) { customOptions.middleware	= []; }
-	if (customOptions.afterware	=== undefined) { customOptions.afterware	= []; }
-
-	customOptions.customRoutes.push({
-		'regex':	'^/$',
-		'controllerName':	'login'
-	});
-
-	customOptions.customRoutes.push({
-		'regex':	'\\.css$',
-		'controllerName':	'css'
-	});
-
-	acl	= new Acl(customOptions);
-
-	customOptions.middleware.push(require('cookies').express());
-	customOptions.middleware.push(function (req, res, cb) { session.start(req, res, cb); }); // Important that this is ran after the cookie middleware
-	customOptions.middleware.push(require(lfs.getPathSync('models/controllerGlobal.js')).middleware());
-
-	customOptions.afterware.push(function (req, res, data, cb) { session.writeToDb(req, res, cb);});
-
-	returnObj	= require('larvitbase')(customOptions);
-
-	returnObj.on('httpSession', function (req, res) {
+	that.lBase.on('httpSession', function (req, res) {
 		const	originalRunController	= res.runController;
 
-		if (customOptions.langs) {
-			res.langs	= customOptions.langs;
+		if (that.options.langs) {
+			res.langs	= that.options.langs;
 		}
 
 		// Default admin rights to be false
@@ -142,15 +135,22 @@ exports = module.exports = function runServer(customOptions) {
 		res.adminRights	= false;
 
 		// Make ACL object available for other parts of the system
-		req.acl	= acl;
+		req.acl	= that.acl;
 
-		ready(function (err) {
-			if (err) throw err;
+		req.db	= that.db;
+		req.userLib	= that.userLib;
+		req.log	= that.log;
+
+		that.ready(function (err) {
+			if (err) {
+				that.log.error(logPrefix + err.message);
+				return;
+			}
 
 			res.runController = function () {
-				acl.checkAndRedirect(req, res, function (err, userGotAccess) {
+				that.acl.checkAndRedirect(req, res, function (err, userGotAccess) {
 					if (err) {
-						log.error(logPrefix + err.message);
+						that.log.error(logPrefix + err.message);
 						res.end('Server error');
 						return;
 					}
@@ -171,6 +171,6 @@ exports = module.exports = function runServer(customOptions) {
 			res.next();
 		});
 	});
-
-	return returnObj;
 };
+
+exports = module.exports = App;

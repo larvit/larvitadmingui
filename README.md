@@ -37,7 +37,7 @@ userLib = new UserLib({
 });
 
 app = new App({
-	'httpOptions':	8001, // Listening port
+	'port':	8001, // Listening port
 	'userLib':	userLib,
 	'log':	log,
 	'db':	db

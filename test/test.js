@@ -8,7 +8,7 @@ const	freeport	= require('freeport'),
 	lUtils	= new LUtils(),
 	async	= require('async'),
 	test	= require('tape'),
-	log	= new lUtils.Log(),
+	log	= new lUtils.Log('warn'),
 	App	= require(__dirname + '/../index.js'),
 	db	= require('larvitdb');
 
@@ -23,7 +23,14 @@ if ( ! process.env.DBCONFFILE) {
 function startStuff(cb) {
 	const	tasks	= [];
 
-	db.setup(require(__dirname + '/../' + process.env.DBCONFFILE));
+	// Setup database
+	tasks.push(function (cb) {
+		const	dbConf	= require(__dirname + '/../' + process.env.DBCONFFILE);
+
+		dbConf.log	= log;
+		db.setup(dbConf);
+		cb();
+	});
 
 	// Start userLib
 	tasks.push(function (cb) {
@@ -42,7 +49,7 @@ function startStuff(cb) {
 	// Start gui http server
 	tasks.push(function (cb) {
 		app	= new App({
-			'httpOptions':	port,
+			'port':	port,
 			'userLib':	userLib,
 			'log':	log,
 			'db':	db
@@ -63,7 +70,7 @@ function stopStuff(cb) {
 
 	// Shut down the http server
 	tasks.push(function (cb) {
-		app.server.close(cb);
+		app.lBase.server.close(cb);
 	});
 
 	// Clean out the database
