@@ -21,7 +21,7 @@ function Acl(options) {
 
 	that.options	= options;
 
-	log.debug(logPrefix + 'Setting up module instance with options: ' + JSON.stringify(options));
+	log.debug(logPrefix + 'Setting up module instance');
 }
 
 /**
