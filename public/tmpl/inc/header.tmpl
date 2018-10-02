@@ -1,48 +1,58 @@
-<header id="header" class="section header">
-	<ul>
-		<li><a href="/" class="site_logo">Larv IT Admin GUI</a></li>
-		<li class="nav_trigger">
-			<a class="toggle_menu">
-				<span class="br_icon_hamburger"></span>
-			</a>
-		</li>
-		<li class="right">
-			<div class="txt user"><!--  hidden_md -->
-				<a href="/logout">Log out</a>
-				<!--form>
-					<div class="select_wrapper">
-						<div class="sel_wrap br_icon_down_arrow">
-							<select name="user" id="user">
-								<option value="">Namn Namnsson</option>
-								<option value="profil">Profil</option>
-								<option value="loggaut">Logga ut</option>
-							</select>
-						</div>
-					</div>
-				</form-->
-			</div>
-			<!--span class="avatar">
-				<img src="images/avatar.png" alt="avatar" />
-			</span-->
-		</li>
-		<!--li class="right">
-			<div class="txt hidden_md">
-				<form method="post">
-					<div class="input_wrapper">
-						<div class="input_wrap">
-							<input type="text" name="search" id="search" placeholder="Sök" />
-							<button type="submit">
-								<span class="br_icon_search"></span>
-							</button>
-						</div>
-					</div>
-				</form>
-			</div>
-			<div class="visible_md">
-				<a href="#">
-					<span class="br_icon_search"></span>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<a class="navbar-brand" href="#">Larv IT Admin GUI</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+	 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="#">Link</a>
+			</li>
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+				 aria-expanded="false">
+					Dropdown
 				</a>
-			</div>
-		</li-->
-	</ul>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<a class="dropdown-item" href="#">Action</a>
+					<a class="dropdown-item" href="#">Another action</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item" href="#">Something else here</a>
+				</div>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link disabled" href="#">Disabled</a>
+			</li>
+		</ul>
+
+		<div class=" my-2 my-lg-0">
+			<a class="btn btn-warning" role="button" href="/logout">Log out</a>
+		</div>
+
+	</div>
+</nav>
+<!--
+<header id="header" class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar">
+	<div class="navbar-nav-scroll">
+		<ul class="navbar-nav bd-navbar-nav flex-row">
+			<li class="nav-item">
+				<a href="/" class="site_logo">Larv IT Admin GUI</a>
+			</li>
+			<li class="nav-item">
+				<a class="toggle_menu">
+					<span class="br_icon_hamburger"></span>
+				</a>
+			</li>
+		</ul>
+	</div>
+	<ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex"><li>&nbsp;</li></ul>
+	<div class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3">
+		<a href="/logout">Log out</a>
+	</div>
 </header>
+-->
