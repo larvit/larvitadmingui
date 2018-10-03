@@ -82,7 +82,9 @@ function App(options) {
 		function mwSendStatic(req, res, cb)	{ that.basewww.mwSendStatic(req, res, cb);	},
 		function setPropertiesOnRequest(req, res, cb) { that.setPropertiesOnRequest(req, res, cb); },
 		require(lfs.getPathSync('models/controllerGlobal.js')).middleware(),
-		function checkAndRedirect(req, res, cb) { that.checkAndRedirect(req, res, cb); },
+	/*	function checkAndRedirect(req, res, cb) { 
+			that.checkAndRedirect(req, res, cb); 
+		},*/
 		function mwRunController(req, res, cb)	{ that.basewww.mwRunController(req, res, cb);	},
 		function mwRender(req, res, cb)	{ that.basewww.mwRender(req, res, cb);	},
 		function mwSendToClient(req, res, cb)	{ that.basewww.mwSendToClient(req, res, cb);	},
