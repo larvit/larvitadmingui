@@ -29,7 +29,7 @@ function startStuff(cb) {
 
 		dbConf.log	= log;
 		db.setup(dbConf);
-		cb();
+		db.removeAllTables(cb);
 	});
 
 	// Start userLib
