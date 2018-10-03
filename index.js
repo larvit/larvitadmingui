@@ -82,9 +82,7 @@ function App(options) {
 		function mwSendStatic(req, res, cb)	{ that.basewww.mwSendStatic(req, res, cb);	},
 		function setPropertiesOnRequest(req, res, cb) { that.setPropertiesOnRequest(req, res, cb); },
 		require(lfs.getPathSync('models/controllerGlobal.js')).middleware(),
-	/*	function checkAndRedirect(req, res, cb) { 
-			that.checkAndRedirect(req, res, cb); 
-		},*/
+		function checkAndRedirect(req, res, cb) { that.checkAndRedirect(req, res, cb); },
 		function mwRunController(req, res, cb)	{ that.basewww.mwRunController(req, res, cb);	},
 		function mwRender(req, res, cb)	{ that.basewww.mwRender(req, res, cb);	},
 		function mwSendToClient(req, res, cb)	{ that.basewww.mwSendToClient(req, res, cb);	},
@@ -147,6 +145,8 @@ App.prototype.setPropertiesOnRequest = function setPropertiesOnRequest(req, res,
 App.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 	const that	= this;
 
+	if (req.finished) return cb();
+
 	that.acl.checkAndRedirect(req, res, function (err, userGotAccess) {
 		if (err) {
 			that.log.error(logPrefix + err.message);
@@ -160,6 +160,7 @@ App.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 			// If userGotAccess is false, we should not execute the controller.
 			// Instead just run sendToClient directly, circumventing the afterware as well.
 			res.end('Access denied');
+			req.finished = true;
 			//res.sendToClient(null, req, res);
 		}
 
