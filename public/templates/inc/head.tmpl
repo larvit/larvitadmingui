@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title><% if (obj.global !== undefined && obj.global.title !== undefined) { print(obj.global.title); } else { print('LarvIT Admin GUI'); } %></title>
+		<title><%= (data.global && data.global.title) ? data.global.title : 'LarvIT Admin GUI' %></title>
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />

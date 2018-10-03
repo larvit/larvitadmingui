@@ -1,0 +1,49 @@
+<body class="<%= data.bodyClass ? data.bodyClass : '' %>">
+	<script>document.body.className = document.body.className === '' ? 'js' : document.body.className + ' js';</script>
+	<div class="page_wrapper">
+		<span class="target_fix" id="mainNav"></span>
+		<%- include('inc/header', data) %>
+		<section class="section main_wrapper">
+			<%- include('inc/mainNav', data) %>
+			<section class="section content">
+				<div id="content_header" class="row">
+					<h1><%
+						var pageHeader = false;
+						if (data.global !== undefined && data.global.menuStructure !== undefined) {
+							_.forEach(data.global.menuStructure, function(menuItems, groupName) {
+								_.forEach(menuItems, function(menuItem) {
+									if ((menuItem.controllerName === data.global.controllerName || menuItem.controllerName === data.global.menuControllerName) && menuItem.pageHeader !== undefined) {
+										pageHeader = menuItem.pageHeader;
+									}
+								});
+							});
+						}
+
+						if (pageHeader) { %>
+							<%= pageHeader %>
+						<% } else { %>
+							No header found
+						<% }
+					%></h1>
+				</div>
+				<%- include('inc/breadcrumbs', data) %>
+				<div id="content_wrapper" class="content_wrapper">
+					<%- include('inc/subNav', data) %>
+					<div class="wrap">
+						<%
+							if (data.global.messages instanceof Array) {
+								_.forEach(data.global.messages, function(msgStr) { %>
+									<%- include('inc/msgBox', {'msgClass': 'happy', 'msgTxt': msgStr}) %>
+								<% });
+							}
+							if (data.global.warnings instanceof Array) {
+								_.forEach(data.global.warnings, function(warningStr) { %>
+									<%- include('inc/msgBox', {'msgClass': 'warn', 'msgTxt': warningStr}) %>
+								<% });
+							}
+							if (data.global.errors instanceof Array) {
+								_.forEach(data.global.errors, function(errStr) { %>
+									<%- include('inc/msgBox', {'msgClass': 'sad', 'msgTxt': errStr}) %>
+								<% });
+							}
+						%>

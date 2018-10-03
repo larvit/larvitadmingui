@@ -25,8 +25,8 @@ function middleware(req, res, cb) {
 	// Include referer
 	res.globalData.referer	= req.headers.referer;
 
-	// Include controller name in global data
-	res.globalData.controllerName	= req.routeResult.controllerName;
+	// Include controller path in global data
+	res.globalData.controllerPath	= req.routed.controllerPath;
 
 	// Include urlParsed in global data
 	res.globalData.urlParsed	= req.urlParsed;

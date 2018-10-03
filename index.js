@@ -4,6 +4,7 @@ const	topLogPrefix	= 'larvitadmingui: index.js: ',
 	DbMigration	= require('larvitdbmigration'),
 	Session	= require('larvitsession'),
 	LUtils	= require('larvitutils'),
+	lbwww	= require('larvitbase-www'),
 	Events	= require('events'),
 	Acl	= require(__dirname + '/models/acl.js'),
 	Lfs	= require('larvitfs'),
@@ -20,6 +21,9 @@ function App(options) {
 		that	= this;
 
 	that.options	= options || {};
+	that.options.baseOptions	= that.options.baseOptions || {};
+	that.options.routerOptions	= that.options.routerOptions || {};
+	that.options.baseOptions.httpOptions	= that.options.baseOptions.httpOptions || {};
 	that.emitter	= new Events();
 	that.dbReady	= false;
 
@@ -52,27 +56,39 @@ function App(options) {
 	}
 	that.session	= that.options.session;
 
-	if (that.options.customRoutes	=== undefined) { that.options.customRoutes	= []; }
-	if (that.options.middleware	=== undefined) { that.options.middleware	= []; }
-	if (that.options.afterware	=== undefined) { that.options.afterware	= []; }
+	if (that.options.baseOptions.afterware	=== undefined) { that.options.baseOptions.afterware	= []; }
+	if (that.options.routerOptions.routes	=== undefined) { that.options.routerOptions.routes	= []; }
 
-	that.options.customRoutes.push({
-		'regex':	'^/$',
-		'controllerName':	'login'
+	that.options.routerOptions.routes.push({
+		'regex':	'^/default$',
+		'controllerPath':	'login.js',
+		'templatePath':	'login.tmpl'
 	});
 
-	that.options.customRoutes.push({
+	that.options.routerOptions.routes.push({
 		'regex':	'\\.css$',
-		'controllerName':	'css'
+		'controller':	'css'
 	});
+
+	that.options.baseOptions.httpOptions.port = options.port;
 
 	that.acl	= new Acl(that.options);
-
-	that.options.middleware.push(require('cookies').express());
-	that.options.middleware.push(function (req, res, cb) { that.session.start(req, res, cb); }); // Important that this is ran after the cookie middleware
-	that.options.middleware.push(require(lfs.getPathSync('models/controllerGlobal.js')).middleware());
-
-	that.options.afterware.push(function (req, res, data, cb) { that.session.writeToDb(req, res, cb);});
+	that.basewww	= new lbwww(that.options);
+	that.basewww.options.baseOptions.middleware = [
+		require('cookies').express(),
+		function (req, res, cb) { that.session.start(req, res, cb); },
+		function mwParse(req, res, cb)	{ that.basewww.mwParse(req, res, cb);	},
+		function mwRoute(req, res, cb)	{ that.basewww.mwRoute(req, res, cb);	},
+		function mwSendStatic(req, res, cb)	{ that.basewww.mwSendStatic(req, res, cb);	},
+		function setPropertiesOnRequest(req, res, cb) { that.setPropertiesOnRequest(req, res, cb); },
+		require(lfs.getPathSync('models/controllerGlobal.js')).middleware(),
+		function checkAndRedirect(req, res, cb) { that.checkAndRedirect(req, res, cb); },
+		function mwRunController(req, res, cb)	{ that.basewww.mwRunController(req, res, cb);	},
+		function mwRender(req, res, cb)	{ that.basewww.mwRender(req, res, cb);	},
+		function mwSendToClient(req, res, cb)	{ that.basewww.mwSendToClient(req, res, cb);	},
+		function mwCleanup(req, res, cb)	{ that.basewww.mwCleanup(req, res, cb);	},
+		function writeSessionToDb(req, res, cb)	{ that.session.writeToDb(req, res, cb); }
+	];
 
 	that.runDbMigrations();
 }
@@ -109,6 +125,46 @@ App.prototype.runDbMigrations = function runDbMigrations() {
 	});
 };
 
+App.prototype.setPropertiesOnRequest = function setPropertiesOnRequest(req, res, cb) {
+	const that	= this;
+
+	// Default admin rights to be false
+	// In the bottom this gets set to true if a correct user is logged in
+	res.adminRights	= false;
+
+	// Make ACL object available for other parts of the system
+	req.acl	= that.acl;
+
+	req.db	= that.db;
+	req.userLib	= that.userLib;
+	req.log	= that.log;
+
+	return cb();
+};
+
+App.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
+	const that	= this;
+
+	that.acl.checkAndRedirect(req, res, function (err, userGotAccess) {
+		if (err) {
+			that.log.error(logPrefix + err.message);
+			return cb(err);
+		}
+
+		// User got access, proceed with executing the controller
+		if (userGotAccess) {
+			res.adminRights	= true;
+		} else {
+			// If userGotAccess is false, we should not execute the controller.
+			// Instead just run sendToClient directly, circumventing the afterware as well.
+			res.end('Access denied');
+			//res.sendToClient(null, req, res);
+		}
+
+		cb();
+	});
+};
+
 App.prototype.ready = function ready(cb) {
 	const	that	= this;
 
@@ -117,60 +173,11 @@ App.prototype.ready = function ready(cb) {
 };
 
 App.prototype.start = function start(cb) {
-	const	logPrefix	= topLogPrefix + 'App.start() - ',
-		that	= this;
+	this.basewww.start(cb);
+};
 
-	that.lBase	= require('larvitbase')(that.options);
-	cb();
-
-	that.lBase.on('httpSession', function (req, res) {
-		const	originalRunController	= res.runController;
-
-		if (that.options.langs) {
-			res.langs	= that.options.langs;
-		}
-
-		// Default admin rights to be false
-		// In the bottom this gets set to true if a correct user is logged in
-		res.adminRights	= false;
-
-		// Make ACL object available for other parts of the system
-		req.acl	= that.acl;
-
-		req.db	= that.db;
-		req.userLib	= that.userLib;
-		req.log	= that.log;
-
-		that.ready(function (err) {
-			if (err) {
-				that.log.error(logPrefix + err.message);
-				return;
-			}
-
-			res.runController = function () {
-				that.acl.checkAndRedirect(req, res, function (err, userGotAccess) {
-					if (err) {
-						that.log.error(logPrefix + err.message);
-						res.end('Server error');
-						return;
-					}
-
-					// User got access, proceed with executing the controller
-					if (userGotAccess) {
-						res.adminRights	= true;
-						originalRunController();
-					} else {
-						// If userGotAccess is false, we should not execute the controller.
-						// Instead just run sendToClient directly, circumventing the afterware as well.
-						res.end('Access denied');
-						//res.sendToClient(null, req, res);
-					}
-				});
-			};
-
-			res.next();
-		});
-	});
+App.prototype.stop = function stop(cb) {
+	this.basewww.stop(cb);
 };
 
 exports = module.exports = App;

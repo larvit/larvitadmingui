@@ -1,10 +1,10 @@
 <nav class="mainNav">
 	<ul class="accordion">
 		<%
-		if (obj.global !== undefined && obj.global.menuStructure !== undefined) {
+		if (data.global !== undefined && data.global.menuStructure !== undefined) {
 			let	i	= 0;
 
-			_.forEach(obj.global.menuStructure, function(menuItems, groupName) {
+			_.forEach(data.global.menuStructure, function(menuItems, groupName) {
 				let	visibleMenuItems	= false;
 				i ++;
 
@@ -25,9 +25,9 @@
 							<li>
 								<a
 									class="before_icon caret_right<%
-										if (obj.global.controllerName === menuItem.controllerName || obj.global.menuControllerName === menuItem.controllerName) {
-											print(' active');
-										}
+										if (data.global.controllerName === menuItem.controllerName || data.global.menuControllerName === menuItem.controllerName) { %>
+											<%= 'active' %>
+										<% }
 									%>"
 									href="<%= menuItem.href %>"
 								><%= menuItem.label %></a>

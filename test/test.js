@@ -70,7 +70,7 @@ function stopStuff(cb) {
 
 	// Shut down the http server
 	tasks.push(function (cb) {
-		app.lBase.server.close(cb);
+		app.stop(cb);
 	});
 
 	// Clean out the database

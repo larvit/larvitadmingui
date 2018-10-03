@@ -1,6 +1,8 @@
-<%= _.render('inc/head', obj) %>
-<%= _.render('inc/pageTop', obj) %>
+<%- include('inc/head', data) %>
+<%- include('inc/pageTop', data) %>
+
 <h2>Example table</h2>
+
 <table>
 	<thead>
 		<tr>
@@ -23,4 +25,4 @@
 <form>
 	<input />
 </form>
-<%= _.render('inc/pageBottom', obj) %>
+<%- include('inc/pageBottom', data) %>
