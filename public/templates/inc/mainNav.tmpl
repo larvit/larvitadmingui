@@ -1,41 +1,41 @@
-<nav class="mainNav">
-	<ul class="accordion">
-		<%
-		if (data.global !== undefined && data.global.menuStructure !== undefined) {
-			let	i	= 0;
+<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+	<%
+	if (data.global !== undefined && data.global.menuStructure !== undefined) {
+		let	i	= 0;
 
-			_.forEach(data.global.menuStructure, function(menuItems, groupName) {
-				let	visibleMenuItems	= false;
-				i ++;
+		_.forEach(data.global.menuStructure, function(menuItems, groupName) {
+			let	visibleMenuItems	= false;
+			i ++;
 
-				// Check if there are any visible items in this group name
-				_.forEach(menuItems, function(menuItem) {
-					if (menuItem.loggedInUserGotAccess) {
-						visibleMenuItems	= true;
-					}
-				});
+			// Check if there are any visible items in this group name
+			_.forEach(menuItems, function(menuItem) {
+				if (menuItem.loggedInUserGotAccess) {
+					visibleMenuItems	= true;
+				}
+			});
 
-				if (visibleMenuItems) {
-				%>
-				<li>
-					<input class="cp_nav" type="checkbox" name="cp_<%= i %>" id="cp_<%= i %>" checked="checked" />
-					<label for="cp_<%= i %>"><%= groupName %><div class="after_icon plus"></div><div class="after_icon minus"></div></label>
-					<ul class="content">
-						<% _.forEach(menuItems, function(menuItem) { if (menuItem.loggedInUserGotAccess) { %>
-							<li>
-								<a
-									class="before_icon caret_right<%
-										if (data.global.controllerName === menuItem.controllerName || data.global.menuControllerName === menuItem.controllerName) { %>
-											<%= 'active' %>
-										<% }
-									%>"
-									href="<%= menuItem.href %>"
-								><%= menuItem.label %></a>
-							</li>
-						<% }}); %>
-					</ul>
-				</li>
-			<% }}); %>
-		<% } %>
-	</ul>
-</nav>
+			if (visibleMenuItems) {
+			%>
+
+			<a class="nav-link active" data-toggle="collapse" href="#collapse-<%- groupName %>" role="button" aria-controls="collapse-<%- groupName %>" aria-selected="true"><%- groupName %></a>
+			<% if (menuItems && menuItems.length > 0) { %>
+				<% _.forEach(menuItems, function(menuItem) { if (menuItem.loggedInUserGotAccess) { %>
+					<div class="collapse" id="collapse-<%- groupName %>">
+						<li>
+							<a
+								class="before_icon caret_right<%
+									if (data.global.controllerName === menuItem.controllerName || data.global.menuControllerName === menuItem.controllerName) { %>
+										<%= 'active' %>
+									<% }
+								%>"
+								href="<%= menuItem.href %>"
+							><%- menuItem.label %></a>
+						</li>
+					</div>
+				<% }}); %>
+			<% } %>
+
+		<% }
+		});
+	} %>
+</div>
