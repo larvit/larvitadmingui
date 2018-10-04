@@ -1,5 +1,5 @@
-<ul id="content_top_nav" class="subNav"><%
-	if (data.global !== undefined && data.global.menuStructure !== undefined) {
+<ul class="nav nav-tabs" role="tablist">
+	<% if (data.global !== undefined && data.global.menuStructure !== undefined) {
 		_.forEach(data.global.menuStructure, function(menuItems, groupName) {
 			_.forEach(menuItems, function(menuItem) {
 				if (
@@ -8,17 +8,15 @@
 				) {
 					if (menuItem.subNav !== undefined) {
 						_.forEach(menuItem.subNav, function(subNavItem) { if (subNavItem.loggedInUserGotAccess) { %>
-							<li>
-								<a class="button dblue<%
-									if (subNavItem.href === data.global.urlParsed.path) {
-										print(' active');
-									}
-								%>" href="<%= subNavItem.href %>"><%= subNavItem.label %></a>
+							<% const act = subNavItem.href === data.global.urlParsed.path %>
+
+							<li class="nav-item">
+								<a class="nav-link <%- act ? 'active' : '' %>" href="<%= subNavItem.href %>" role="tab" aria-selected="<%- act ? 'true' : 'false' %>"><%= subNavItem.label %></a>
 							</li>
 						<% }});
 					}
 				}
 			});
 		});
-	}
-%></ul>
+	} %>
+</ul>

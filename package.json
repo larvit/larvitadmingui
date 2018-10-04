@@ -16,7 +16,7 @@
   "dependencies": {
     "async": "^2.1.2",
     "cookies": "^0.7.0",
-    "larvitbase-www": "^0.4.0",
+    "larvitbase-www": "0.5.1",
     "larvitcss": "^0.2.4",
     "larvitdb": "^2.1.0",
     "larvitdbmigration": "^4.0.2",

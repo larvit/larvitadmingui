@@ -1,51 +1,70 @@
-<div class="row">
-	<%
-		/**
-		 * Expects an object like this:
-		 *
-		 *	{
-		 *		"totalElements":	int,
-		 *		"urlParsed":	obj, // From url.parse()
-		 *		"elementsPerPage":	int
-		 *	}
-		 */
+<%
+	/**
+		* Expects an object like this:
+		*
+		*	{
+		*		"totalElements":	int,
+		*		"urlParsed":	obj, // From url.parse()
+		*		"elementsPerPage":	int
+		*	}
+		*/
 
-		function buildUrl(urlParsed) {
-			var urlStr = urlParsed.path.split('?')[0] + '?';
+	function buildUrl(urlParsed) {
+		var urlStr = urlParsed.path.split('?')[0] + '?';
 
-			for (var param in urlParsed.query) {
-				urlStr += (param + '=' + urlParsed.query[param] + '&');
-			}
-
-			if (urlStr.substring(urlStr.length - 1) === '&') {
-				urlStr = urlStr.substring(0, urlStr.length - 1);
-			}
-
-			return urlStr;
+		for (var param in urlParsed.query) {
+			urlStr += (param + '=' + urlParsed.query[param] + '&');
 		}
 
-		var localUrlParsed = _.cloneDeep(obj.urlParsed);
+		if (urlStr.substring(urlStr.length - 1) === '&') {
+			urlStr = urlStr.substring(0, urlStr.length - 1);
+		}
 
-		localUrlParsed.query.offset = 0;
-		var firstPageUrl	= buildUrl(localUrlParsed);
+		return urlStr;
+	}
 
-		localUrlParsed.query.offset = Math.floor(obj.totalElements / elementsPerPage) * elementsPerPage;
-		if (localUrlParsed.query.offset === totalElements) localUrlParsed.query.offset -= elementsPerPage;
-		if (localUrlParsed.query.offset < 0) localUrlParsed.query.offset = 0;
-		var lastPageUrl	= buildUrl(localUrlParsed);
+	var localUrlParsed = _.cloneDeep(obj.urlParsed);
 
-		localUrlParsed.query.offset = (parseInt(obj.urlParsed.query.offset) || 0) - elementsPerPage;
-		if (localUrlParsed.query.offset < 0) localUrlParsed.query.offset = 0;
-		var prevPageUrl = buildUrl(localUrlParsed);
+	localUrlParsed.query.offset = 0;
+	var firstPageUrl	= buildUrl(localUrlParsed);
 
-		localUrlParsed.query.offset = (parseInt(obj.urlParsed.query.offset) || 0) + elementsPerPage;
-		if (localUrlParsed.query.offset >= totalElements) localUrlParsed.query.offset -= elementsPerPage;
-		var nextPageUrl = buildUrl(localUrlParsed);
+	localUrlParsed.query.offset = Math.floor(obj.totalElements / elementsPerPage) * elementsPerPage;
+	if (localUrlParsed.query.offset === totalElements) localUrlParsed.query.offset -= elementsPerPage;
+	if (localUrlParsed.query.offset < 0) localUrlParsed.query.offset = 0;
+	var lastPageUrl	= buildUrl(localUrlParsed);
 
-		var currentPage	= ((obj.urlParsed.query.offset || 0) / obj.elementsPerPage) + 1;
+	localUrlParsed.query.offset = (parseInt(obj.urlParsed.query.offset) || 0) - elementsPerPage;
+	if (localUrlParsed.query.offset < 0) localUrlParsed.query.offset = 0;
+	var prevPageUrl = buildUrl(localUrlParsed);
 
-		var totalPages	= Math.floor(obj.totalElements / elementsPerPage) + 1;
-		if (((totalPages * elementsPerPage) - elementsPerPage) === totalElements) totalPages -= 1;
-	%>
-	<a href="<%= firstPageUrl %>">&lt; &lt;</a> <a href="<%= prevPageUrl %>">&lt;</a> Page <%= currentPage %> of <%= totalPages %> <a href="<%= nextPageUrl %>">&gt;</a> <a href="<%= lastPageUrl %>">&gt; &gt;</a>
-</div>
+	localUrlParsed.query.offset = (parseInt(obj.urlParsed.query.offset) || 0) + elementsPerPage;
+	if (localUrlParsed.query.offset >= totalElements) localUrlParsed.query.offset -= elementsPerPage;
+	var nextPageUrl = buildUrl(localUrlParsed);
+
+	var currentPage	= ((obj.urlParsed.query.offset || 0) / obj.elementsPerPage) + 1;
+
+	var totalPages	= Math.floor(obj.totalElements / elementsPerPage) + 1;
+	if (((totalPages * elementsPerPage) - elementsPerPage) === totalElements) totalPages -= 1;
+%>
+<a href="<%= firstPageUrl %>">&lt; &lt;</a> <a href="<%= prevPageUrl %>">&lt;</a> Page <%= currentPage %> of <%= totalPages %> <a href="<%= nextPageUrl %>">&gt;</a> <a href="<%= lastPageUrl %>">&gt; &gt;</a>
+
+<nav aria-label="Pagination ">
+	<ul class="pagination">
+		<li class="page-item"><a class="page-link" href="<%- firstPageUrl %>">First</a></li>
+		<li class="page-item">
+			<a class="page-link" href="<%- prevPageUrl %>" aria-label="Previous">
+				<span aria-hidden="true">&laquo;</span>
+				<span class="sr-only">Previous</span>
+			</a>
+		</li>
+		<li class="page-item"><a class="page-link" href="#">1</a></li>
+		<li class="page-item"><a class="page-link" href="#">2</a></li>
+		<li class="page-item"><a class="page-link" href="#">3</a></li>
+		<li class="page-item">
+		<a class="page-link" href="#" aria-label="Next">
+			<span aria-hidden="true">&raquo;</span>
+			<span class="sr-only">Next</span>
+		</a>
+		</li>
+	</ul>
+</nav>
