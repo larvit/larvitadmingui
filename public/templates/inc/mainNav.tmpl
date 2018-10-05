@@ -1,46 +1,46 @@
-<div class="nav flex-column h-100" aria-orientation="vertical">
-	<ul id="sidebar" class="list-unstyled components w-100">
-		<%
-		if (data.global !== undefined && data.global.menuStructure !== undefined) {
-			let	i	= 0;
-
-			_.forEach(data.global.menuStructure, function(menuItems, groupName) {
-				let	visibleMenuItems	= false;
-				i ++;
-
-				// Check if there are any visible items in this group name
-				_.forEach(menuItems, function(menuItem) {
-					if (menuItem.loggedInUserGotAccess) {
-						visibleMenuItems	= true;
-					}
+<nav id="sidebar">
+	<ul class="list-unstyled components">
+			<%
+			if (data !== undefined && data.global !== undefined && data.global.menuStructure !== undefined) {
+				let	i	= 0;
+	
+				_.forEach(data.global.menuStructure, function(menuItems, groupName) {
+					let	visibleMenuItems	= false;
+					i ++;
+	
+					// Check if there are any visible items in this group name
+					_.forEach(menuItems, function(menuItem) {
+						if (menuItem.loggedInUserGotAccess) {
+							visibleMenuItems	= true;
+						}
+					});
+	
+					if (visibleMenuItems) {
+					%>
+					<li>
+						<a class="<% if (menuItems && menuItems.length > 0) { print('dropdown-toggle') } %>" href="#collapse-<%- groupName %>" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse-<%- groupName %>">
+							<span><i class="fas fa-chart-bar"></i> <%- groupName %></span>
+						</a>
+					</li>
+	
+	
+					<% if (menuItems && menuItems.length > 0) { %>
+						
+						<ul class="collapse list-unstyled ml-3" id="collapse-<%- groupName %>">
+							<% _.forEach(menuItems, function(menuItem) { if (menuItem.loggedInUserGotAccess) { %>
+								<li>
+									<a href="<%= menuItem.href %>" class="<%
+										if (data.global.controllerName === menuItem.controllerName || data.global.menuControllerName === menuItem.controllerName) { %>
+											<%= 'active' %>
+										<% }
+									%>""><%- menuItem.label %></a>
+								</li>
+							<% }}); %>
+						</ul>
+					<% } %>
+	
+				<% }
 				});
-
-				if (visibleMenuItems) {
-				%>
-
-				<li class="w-100 m-0 p-0 border-bottom border-dark">
-					<a class="dropdown-toggle w-100 p-2 d-block"  data-toggle="collapse" role="button" aria-controls="collapse-<%- groupName %>" aria-selected="true" href="#collapse-<%- groupName %>" >
-						<span><i class="fas fa-chart-bar"></i><%- groupName %></span>
-					</a>
-				</li>
-
-				<% if (menuItems && menuItems.length > 0) { %>
-					
-					<ul class="collapse list-unstyled sub-nav" id="collapse-<%- groupName %>">
-						<% _.forEach(menuItems, function(menuItem) { if (menuItem.loggedInUserGotAccess) { %>
-							<li>
-								<a href="<%= menuItem.href %>" class="<%
-									if (data.global.controllerName === menuItem.controllerName || data.global.menuControllerName === menuItem.controllerName) { %>
-										<%= 'active' %>
-									<% }
-								%>""><%- menuItem.label %></a>
-							</li>
-						<% }}); %>
-					</ul>
-				<% } %>
-
-			<% }
-			});
-		} %>
-	</ul>
-</div>
+			} %>
+		</ul>
+</nav>

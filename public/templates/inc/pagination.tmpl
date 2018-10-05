@@ -1,10 +1,10 @@
 <%
 	/**
-		* Expects an object like this:
+		* Expects an dataect like this:
 		*
 		*	{
 		*		"totalElements":	int,
-		*		"urlParsed":	obj, // From url.parse()
+		*		"urlParsed":	data, // From url.parse()
 		*		"elementsPerPage":	int
 		*	}
 		*/
@@ -23,48 +23,55 @@
 		return urlStr;
 	}
 
-	var localUrlParsed = _.cloneDeep(obj.urlParsed);
+	var localUrlParsed = _.cloneDeep(data.pagination.urlParsed);
+	const elementsPerPage = data.pagination.elementsPerPage;
+	const totalElements = data.pagination.totalElements;
 
 	localUrlParsed.query.offset = 0;
 	var firstPageUrl	= buildUrl(localUrlParsed);
 
-	localUrlParsed.query.offset = Math.floor(obj.totalElements / elementsPerPage) * elementsPerPage;
+	localUrlParsed.query.offset = Math.floor(data.pagination.totalElements / elementsPerPage) * elementsPerPage;
 	if (localUrlParsed.query.offset === totalElements) localUrlParsed.query.offset -= elementsPerPage;
 	if (localUrlParsed.query.offset < 0) localUrlParsed.query.offset = 0;
 	var lastPageUrl	= buildUrl(localUrlParsed);
 
-	localUrlParsed.query.offset = (parseInt(obj.urlParsed.query.offset) || 0) - elementsPerPage;
+	localUrlParsed.query.offset = (parseInt(data.pagination.urlParsed.query.offset) || 0) - elementsPerPage;
 	if (localUrlParsed.query.offset < 0) localUrlParsed.query.offset = 0;
 	var prevPageUrl = buildUrl(localUrlParsed);
 
-	localUrlParsed.query.offset = (parseInt(obj.urlParsed.query.offset) || 0) + elementsPerPage;
+	localUrlParsed.query.offset = (parseInt(data.pagination.urlParsed.query.offset) || 0) + elementsPerPage;
 	if (localUrlParsed.query.offset >= totalElements) localUrlParsed.query.offset -= elementsPerPage;
 	var nextPageUrl = buildUrl(localUrlParsed);
 
-	var currentPage	= ((obj.urlParsed.query.offset || 0) / obj.elementsPerPage) + 1;
+	var currentPage	= ((data.pagination.urlParsed.query.offset || 0) / data.pagination.elementsPerPage) + 1;
 
-	var totalPages	= Math.floor(obj.totalElements / elementsPerPage) + 1;
+	var totalPages	= Math.floor(data.pagination.totalElements / elementsPerPage) + 1;
 	if (((totalPages * elementsPerPage) - elementsPerPage) === totalElements) totalPages -= 1;
-%>
-<a href="<%= firstPageUrl %>">&lt; &lt;</a> <a href="<%= prevPageUrl %>">&lt;</a> Page <%= currentPage %> of <%= totalPages %> <a href="<%= nextPageUrl %>">&gt;</a> <a href="<%= lastPageUrl %>">&gt; &gt;</a>
 
-<nav aria-label="Pagination ">
-	<ul class="pagination">
-		<li class="page-item"><a class="page-link" href="<%- firstPageUrl %>">First</a></li>
+%>
+
+<nav class="d-flex flex-row-reverse" aria-label="Page navigation example">
+	<ul class="pagination mr-3">
+		<li class="page-item">
+			<a class="page-link" href="<%- firstPageUrl %>">First</a>
+		</li>
 		<li class="page-item">
 			<a class="page-link" href="<%- prevPageUrl %>" aria-label="Previous">
 				<span aria-hidden="true">&laquo;</span>
 				<span class="sr-only">Previous</span>
 			</a>
 		</li>
-		<li class="page-item"><a class="page-link" href="#">1</a></li>
-		<li class="page-item"><a class="page-link" href="#">2</a></li>
-		<li class="page-item"><a class="page-link" href="#">3</a></li>
 		<li class="page-item">
-		<a class="page-link" href="#" aria-label="Next">
-			<span aria-hidden="true">&raquo;</span>
-			<span class="sr-only">Next</span>
-		</a>
+			<a class="page-link" href="#">Page <%= currentPage %> of <%= totalPages %></a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="#" aria-label="Next">
+				<span aria-hidden="true">&raquo;</span>
+				<span class="sr-only">Next</span>
+			</a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="<%- lastPageUrl %>">Last</a>
 		</li>
 	</ul>
 </nav>

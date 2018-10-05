@@ -1,5 +1,5 @@
-<ul class="nav nav-tabs" role="tablist">
-	<% if (data.global !== undefined && data.global.menuStructure !== undefined) {
+<ul class="nav nav-tabs px-3" role="tablist">
+	<% if (data && data.global !== undefined && data.global.menuStructure !== undefined) {
 		_.forEach(data.global.menuStructure, function(menuItems, groupName) {
 			_.forEach(menuItems, function(menuItem) {
 				if (
