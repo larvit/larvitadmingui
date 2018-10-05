@@ -1,1 +1,4 @@
 /* Populate with CSS overrides */
+html, body {
+    height: 100% !important;
+}

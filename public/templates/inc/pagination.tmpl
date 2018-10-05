@@ -1,51 +1,113 @@
-<div class="row">
-	<%
-		/**
-		 * Expects an object like this:
-		 *
-		 *	{
-		 *		"totalElements":	int,
-		 *		"urlParsed":	obj, // From url.parse()
-		 *		"elementsPerPage":	int
-		 *	}
-		 */
+<%
+	/**
+	* Expects an dataect like this:
+	*
+	*	{
+	*		"totalElements":	int,
+	*		"urlParsed":	data, // From url.parse()
+	*		"elementsPerPage":	int
+	*	}
+	*/
 
-		function buildUrl(urlParsed) {
-			var urlStr = urlParsed.path.split('?')[0] + '?';
+	function buildUrl(urlParsed) {
+		var urlStr = urlParsed.path.split('?')[0] + '?';
 
-			for (var param in urlParsed.query) {
-				urlStr += (param + '=' + urlParsed.query[param] + '&');
-			}
-
-			if (urlStr.substring(urlStr.length - 1) === '&') {
-				urlStr = urlStr.substring(0, urlStr.length - 1);
-			}
-
-			return urlStr;
+		for (var param in urlParsed.query) {
+			urlStr += (param + '=' + urlParsed.query[param] + '&');
 		}
 
-		var localUrlParsed = _.cloneDeep(obj.urlParsed);
+		if (urlStr.substring(urlStr.length - 1) === '&') {
+			urlStr = urlStr.substring(0, urlStr.length - 1);
+		}
 
-		localUrlParsed.query.offset = 0;
-		var firstPageUrl	= buildUrl(localUrlParsed);
+		return urlStr;
+	}
 
-		localUrlParsed.query.offset = Math.floor(obj.totalElements / elementsPerPage) * elementsPerPage;
-		if (localUrlParsed.query.offset === totalElements) localUrlParsed.query.offset -= elementsPerPage;
-		if (localUrlParsed.query.offset < 0) localUrlParsed.query.offset = 0;
-		var lastPageUrl	= buildUrl(localUrlParsed);
+	function getPageUrl(urlParsed, page) {
+		urlParsed.query.offset = (page - 1) * elementsPerPage;
+		if (urlParsed.query.offset === totalElements) urlParsed.query.offset -= elementsPerPage;
+		if (urlParsed.query.offset < 0) urlParsed.query.offset = 0;
 
-		localUrlParsed.query.offset = (parseInt(obj.urlParsed.query.offset) || 0) - elementsPerPage;
-		if (localUrlParsed.query.offset < 0) localUrlParsed.query.offset = 0;
-		var prevPageUrl = buildUrl(localUrlParsed);
+		var urlStr = urlParsed.path.split('?')[0] + '?';
 
-		localUrlParsed.query.offset = (parseInt(obj.urlParsed.query.offset) || 0) + elementsPerPage;
-		if (localUrlParsed.query.offset >= totalElements) localUrlParsed.query.offset -= elementsPerPage;
-		var nextPageUrl = buildUrl(localUrlParsed);
+		for (var param in urlParsed.query) {
+			urlStr += (param + '=' + urlParsed.query[param] + '&');
+		}
 
-		var currentPage	= ((obj.urlParsed.query.offset || 0) / obj.elementsPerPage) + 1;
+		if (urlStr.substring(urlStr.length - 1) === '&') {
+			urlStr = urlStr.substring(0, urlStr.length - 1);
+		}
 
-		var totalPages	= Math.floor(obj.totalElements / elementsPerPage) + 1;
-		if (((totalPages * elementsPerPage) - elementsPerPage) === totalElements) totalPages -= 1;
-	%>
-	<a href="<%= firstPageUrl %>">&lt; &lt;</a> <a href="<%= prevPageUrl %>">&lt;</a> Page <%= currentPage %> of <%= totalPages %> <a href="<%= nextPageUrl %>">&gt;</a> <a href="<%= lastPageUrl %>">&gt; &gt;</a>
-</div>
+		return urlStr;
+	}
+
+	var localUrlParsed = _.cloneDeep(data.pagination.urlParsed);
+
+	const elementsPerPage = data.pagination.elementsPerPage;
+	const totalElements = data.pagination.totalElements;
+
+	localUrlParsed.query.offset = 0;
+	var firstPageUrl	= buildUrl(localUrlParsed);
+
+	localUrlParsed.query.offset = Math.floor(totalElements / elementsPerPage) * elementsPerPage;
+	if (localUrlParsed.query.offset === totalElements) localUrlParsed.query.offset -= elementsPerPage;
+	if (localUrlParsed.query.offset < 0) localUrlParsed.query.offset = 0;
+	var lastPageUrl	= buildUrl(localUrlParsed);
+
+	localUrlParsed.query.offset = (parseInt(data.pagination.urlParsed.query.offset) || 0) - elementsPerPage;
+	if (localUrlParsed.query.offset < 0) localUrlParsed.query.offset = 0;
+	var prevPageUrl = buildUrl(localUrlParsed);
+
+	localUrlParsed.query.offset = (parseInt(data.pagination.urlParsed.query.offset) || 0) + elementsPerPage;
+	if (localUrlParsed.query.offset >= totalElements) localUrlParsed.query.offset -= elementsPerPage;
+	var nextPageUrl = buildUrl(localUrlParsed);
+
+	var currentPage	= ((data.pagination.urlParsed.query.offset || 0) / elementsPerPage) + 1;
+
+	var totalPages	= Math.floor(totalElements / elementsPerPage) + 1;
+	if (((totalPages * elementsPerPage) - elementsPerPage) === totalElements) totalPages -= 1;
+
+	const pagesToShow = Math.min(totalPages, 5);
+	const pagesBefore = currentPage === 1 ? 0 : currentPage - 1;
+	const pagesAfter = totalPages - currentPage;
+	let offset = 0;
+
+	if (pagesBefore >= 1) offset--;
+	if (pagesAfter === 0 && pagesBefore >= 1) offset--;
+%>
+
+<nav class="d-flex flex-row-reverse" aria-label="Page navigation example">
+	<ul class="pagination mr-3">
+		<li class="page-item">
+			<a href="<%= firstPageUrl %>" class="page-link">First</a>
+		</li>
+		<li class="page-item">
+			<a href="<%= prevPageUrl %>" class="page-link">Prev</a>
+		</li>
+		
+		<% if (pagesBefore >= 2) {%>
+			<li class="page-item">
+				<span class="page-link disabled">&hellip;</span>
+			</li>
+		<% } %>
+		
+		<% for (let i = offset; i < pagesToShow + offset; i++) { %>
+			<li class="page-item">
+				<a class="page-link <% if (i === 0) { print('current-page'); } %>" href="<%= getPageUrl(_.cloneDeep(data.pagination.urlParsed), currentPage + i) %>"><%= currentPage + i %></a>
+			</li>
+		<% } %>
+
+		<% if (pagesAfter >= 2) {%>
+			<li class="page-item">
+				<span class="page-link disabled">&hellip;</span>
+			</li>
+		<% } %>
+		
+		<li class="page-item">
+			<a class="page-link" href="<%- nextPageUrl %>" aria-label="Next">Next</a>
+		</li>
+		<li class="page-item">
+			<a class="page-link" href="<%- lastPageUrl %>">Last</a>
+		</li>
+	</ul>
+</nav>
