@@ -41,7 +41,7 @@ function middleware(req, res, cb) {
 	// Something went wrong with setting up the session
 	if (req.session === undefined) {
 		log.warn(logPrefix + 'No req.session found');
-		return cb(null);
+		return cb(null, req, res);
 	}
 
 	// Set the logged in user
@@ -67,7 +67,7 @@ function middleware(req, res, cb) {
 				tasks.push(function (cb) {
 					req.acl.gotAccessTo(res.globalData.user, menuItem.href, function (err, result) {
 						menuItem.loggedInUserGotAccess	= result;
-						cb(err);
+						return cb(err);
 					});
 				});
 
@@ -78,11 +78,13 @@ function middleware(req, res, cb) {
 						tasks.push(function (cb) {
 							req.acl.gotAccessTo(res.globalData.user, subMenuItem.href, function (err, result) {
 								subMenuItem.loggedInUserGotAccess	= result;
-								cb(err);
+								return cb(err);
 							});
 						});
 					}
 				}
+
+				return cb();
 			}
 		}
 

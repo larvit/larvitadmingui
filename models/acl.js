@@ -3,7 +3,6 @@
 const	topLogPrefix	= 'larvitadmingui: models/acl.js: ',
 	log	= require('winston'),
 	url	= require('url'),
-	db	= require('larvitdb'),
 	_	= require('lodash');
 
 function Acl(options) {
@@ -20,6 +19,13 @@ function Acl(options) {
 	});
 
 	that.options	= options;
+
+	if ( ! that.options.db) {
+		const	err	= new Error('Required option "db" is missing');
+		throw err;
+	}
+
+	that.db	= that.options.db;
 
 	log.debug(logPrefix + 'Setting up module instance');
 }
@@ -139,7 +145,7 @@ Acl.prototype.gotAccessTo = function (user, req, cb) {
 
 	// If we get down here, we have a logged in user and pathname is not the login url.
 	// Lets see if the logged in users roles give it access
-	db.query('SELECT * FROM user_roles_rights', function (err, rows) {
+	that.db.query('SELECT * FROM user_roles_rights', function (err, rows) {
 		if (err) return cb(err, false);
 
 		for (let i = 0; rows[i] !== undefined; i ++) {
