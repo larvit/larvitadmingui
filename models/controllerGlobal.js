@@ -1,17 +1,16 @@
 'use strict';
 
-const	topLogPrefix	= 'larvitadmingui: models/controllerGlobal.js: ',
-	async	= require('async'),
-	utils	= require('./utils'),
-	Lfs	= require('larvitfs'),
-	lfs	= new Lfs(),
-	log	= require('winston');
+const	topLogPrefix	= 'larvitadmingui: models/controllerGlobal.js: ';
+const async	= require('async');
+const utils	= require('./utils');
+const Lfs	= require('larvitfs');
+const lfs	= new Lfs();
 
-function middleware(req, res, cb) {
-	const	logPrefix	= topLogPrefix + 'middleware() - ',
-		tasks	= [];
+module.exports = function controllerGlobal(req, res, cb) {
+	const	logPrefix	= topLogPrefix + 'controllerGlobal() - ';
+	const tasks	= [];
 
-	if ( ! res.globalData) {
+	if (! res.globalData) {
 		res.globalData	= {};
 	}
 
@@ -41,6 +40,7 @@ function middleware(req, res, cb) {
 	// Something went wrong with setting up the session
 	if (req.session === undefined) {
 		log.warn(logPrefix + 'No req.session found');
+
 		return cb(null, req, res);
 	}
 
@@ -48,7 +48,7 @@ function middleware(req, res, cb) {
 	tasks.push(function (cb) {
 		utils.getUserFromSession(req, function (err, user) {
 			if (user) {
-				log.debug(logPrefix + 'User found in session. UserUuid: "' + user.uuid + '"');
+				req.log.debug(logPrefix + 'User found in session. UserUuid: "' + user.uuid + '"');
 
 				res.globalData.user	= user;
 			}
@@ -64,9 +64,11 @@ function middleware(req, res, cb) {
 		for (const groupName of Object.keys(res.globalData.menuStructure)) {
 			for (let i = 0; res.globalData.menuStructure[groupName][i] !== undefined; i ++) {
 				const	menuItem	= res.globalData.menuStructure[groupName][i];
+
 				tasks.push(function (cb) {
 					req.acl.gotAccessTo(res.globalData.user, menuItem.href, function (err, result) {
 						menuItem.loggedInUserGotAccess	= result;
+
 						return cb(err);
 					});
 				});
@@ -78,6 +80,7 @@ function middleware(req, res, cb) {
 						tasks.push(function (cb) {
 							req.acl.gotAccessTo(res.globalData.user, subMenuItem.href, function (err, result) {
 								subMenuItem.loggedInUserGotAccess	= result;
+
 								return cb(err);
 							});
 						});
@@ -92,8 +95,4 @@ function middleware(req, res, cb) {
 	});
 
 	async.series(tasks, cb);
-}
-
-exports.middleware = function () {
-	return middleware;
 };

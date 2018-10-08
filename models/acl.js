@@ -1,7 +1,7 @@
 'use strict';
 
 const	topLogPrefix	= 'larvitadmingui: models/acl.js: ',
-	log	= require('winston'),
+	lUtils = new (require('larvitutils'))(),
 	url	= require('url'),
 	_	= require('lodash');
 
@@ -18,6 +18,12 @@ function Acl(options) {
 		'redirectLoggedInTo':	'home'
 	});
 
+	if ( ! options.log) {
+		options.log = new lUtils.Log('warning');
+	}
+
+	that.log = options.log;
+
 	that.options	= options;
 
 	if ( ! that.options.db) {
@@ -27,7 +33,7 @@ function Acl(options) {
 
 	that.db	= that.options.db;
 
-	log.debug(logPrefix + 'Setting up module instance');
+	that.log.debug(logPrefix + 'Setting up module instance');
 }
 
 /**
@@ -43,7 +49,7 @@ Acl.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 
 	let	trimmedPathname;
 
-	log.silly(logPrefix + 'Running.');
+	that.log.silly(logPrefix + 'Running.');
 
 	trimmedPathname = _.trim(req.urlParsed.pathname, '/');
 	if (trimmedPathname.substring(- 5) === '.json') {
@@ -60,12 +66,12 @@ Acl.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 		if (err) return cb(err);
 
 		if (result && trimmedPathname === that.options.redirectUnauthorizedTo && res.globalData.user) {
-			log.debug(logPrefix + 'Access granted. Valid user logged in, but redirecting from login page.');
+			that.log.debug(logPrefix + 'Access granted. Valid user logged in, but redirecting from login page.');
 			res.statusCode	= 302;
 			res.setHeader('Location',	that.options.redirectLoggedInTo);
 			return cb(null, true);
 		} else if (result) {
-			log.debug(logPrefix + 'Access granted.');
+			that.log.debug(logPrefix + 'Access granted.');
 			return cb(null, true);
 		} else if (trimmedPathname !== that.options.redirectUnauthorizedTo && ! res.globalData.user) {
 			res.statusCode = 302;
@@ -78,7 +84,7 @@ Acl.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 		}
 
 		// Default to no access false
-		log.verbose(logPrefix + 'Access denied. No rules matched.');
+		that.log.verbose(logPrefix + 'Access denied. No rules matched.');
 		res.statusCode	= 403;
 		cb(null, false);
 	});
@@ -111,35 +117,35 @@ Acl.prototype.gotAccessTo = function (user, req, cb) {
 
 	// Always allow access to static files
 	if (req.routeResult !== undefined && req.routeResult.staticFilename !== undefined) {
-		log.debug(logPrefix + 'Access granted. Static file requested: "' + req.routeResult.staticFilename + '"');
+		that.log.debug(logPrefix + 'Access granted. Static file requested: "' + req.routeResult.staticFilename + '"');
 		return cb(null, true);
 	}
 
 	// Always allow access to css files
 	if (RegExp('\\.css$').test(req.urlParsed.pathname)) {
-		log.debug(logPrefix + 'Access granted, is css file.');
+		that.log.debug(logPrefix + 'Access granted, is css file.');
 		return cb(null, true);
 	}
 
 	// Give access to configured public paths
 	if (that.options.publicPaths !== undefined && that.options.publicPaths.indexOf(trimmedPathname) !== - 1) {
-		log.debug(logPrefix + 'Access granted. Pathname "' + trimmedPathname + '" is in the public paths array.');
+		that.log.debug(logPrefix + 'Access granted. Pathname "' + trimmedPathname + '" is in the public paths array.');
 		return cb(null, true);
 	}
 
 	if ( ! user && trimmedPathname === that.options.redirectUnauthorizedTo) {
-		log.debug(logPrefix + 'Access granted. No valid user set and pathname is the login url.');
+		that.log.debug(logPrefix + 'Access granted. No valid user set and pathname is the login url.');
 		return cb(null, true);
 	}
 
 	if ( ! user || ! user.fields || ! Array.isArray(user.fields.role)) {
-		log.debug(logPrefix + 'Access denied. No user set or user has no roles and pathname is not the login url.');
+		that.log.debug(logPrefix + 'Access denied. No user set or user has no roles and pathname is not the login url.');
 		return cb(null, false);
 	}
 
 	// Hard coded access to logout page when logged in
 	if (user && trimmedPathname === 'logout') {
-		log.debug(logPrefix + 'Access granted. User is logged in and trying to log out.');
+		that.log.debug(logPrefix + 'Access granted. User is logged in and trying to log out.');
 		return cb(null, true);
 	}
 
@@ -157,14 +163,14 @@ Acl.prototype.gotAccessTo = function (user, req, cb) {
 				if (role === row.role) {
 					const	matches	= trimmedPathname.match(new RegExp(row.uri, 'g'));
 					if (matches) {
-						log.debug(logPrefix + 'Access granted. Matched regex: "' + row.uri + '" for uri: "' + trimmedPathname + '" for role: "' + role + '"');
+						that.log.debug(logPrefix + 'Access granted. Matched regex: "' + row.uri + '" for uri: "' + trimmedPathname + '" for role: "' + role + '"');
 						return cb(null, true);
 					}
 				}
 			}
 		}
 
-		log.verbose(logPrefix + 'Access denied. No matching rules found for logged in user.');
+		that.log.verbose(logPrefix + 'Access denied. No matching rules found for logged in user.');
 		return cb(null, false); // No rules was matched
 	});
 };

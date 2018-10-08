@@ -1,15 +1,15 @@
 'use strict';
 
-const	topLogPrefix	= 'larvitadmingui: index.js: ',
-	DbMigration	= require('larvitdbmigration'),
-	Session	= require('larvitsession'),
-	LUtils	= require('larvitutils'),
-	lbwww	= require('larvitbase-www'),
-	Events	= require('events'),
-	Acl	= require(__dirname + '/models/acl.js'),
-	Lfs	= require('larvitfs'),
-	lfs	= new Lfs(),
-	_	= require('lodash');
+const	topLogPrefix	= 'larvitadmingui: index.js: ';
+const DbMigration	= require('larvitdbmigration');
+const Session	= require('larvitsession');
+const LUtils	= require('larvitutils');
+const LBWWW	= require('larvitbase-www');
+const Events	= require('events');
+const Acl	= require(__dirname + '/models/acl.js');
+const Lfs	= require('larvitfs');
+const lfs	= new Lfs();
+const _	= require('lodash');
 
 // Extend lodash
 _.defaultsDeep	= require('lodash.defaultsdeep');
@@ -17,8 +17,8 @@ _.urlUtil	= require(__dirname + '/models/utils.js').urlUtil;
 _.trim	= require('lodash.trim');
 
 function App(options) {
-	const	logPrefix	= topLogPrefix + 'App() - ',
-		that	= this;
+	const	logPrefix	= topLogPrefix + 'App() - ';
+	const that	= this;
 
 	that.options	= options || {};
 	that.options.baseOptions	= that.options.baseOptions || {};
@@ -27,28 +27,30 @@ function App(options) {
 	that.emitter	= new Events();
 	that.dbReady	= false;
 
-	if ( ! that.options.log) {
+	if (! that.options.log) {
 		const	lUtils	= new LUtils();
 
 		that.options.log	= new lUtils.Log();
 	}
 	that.log	= that.options.log;
 
-	if ( ! that.options.db) {
+	if (! that.options.db) {
 		const	err	= new Error('Required option "db" is missing');
+
 		that.log.error(logPrefix + err.message);
 		throw err;
 	}
 	that.db	= that.options.db;
 
-	if ( ! that.options.userLib) {
+	if (! that.options.userLib) {
 		const	err	= new Error('Required option "userLib" is missing');
+
 		that.log.error(logPrefix + err.message);
 		throw err;
 	}
 	that.userLib	= that.options.userLib;
 
-	if ( ! that.options.session) {
+	if (! that.options.session) {
 		that.options.session = new Session({
 			'db':	that.db,
 			'log':	that.log
@@ -67,13 +69,13 @@ function App(options) {
 
 	that.options.routerOptions.routes.push({
 		'regex':	'\\.css$',
-		'controller':	'css'
+		'controllerPath':	'css.js'
 	});
 
 	that.options.baseOptions.httpOptions.port = options.port;
 
 	that.acl	= new Acl(that.options);
-	that.basewww	= new lbwww(that.options);
+	that.basewww	= new LBWWW(that.options);
 	that.basewww.options.baseOptions.middleware = [
 		require('cookies').express(),
 		function (req, res, cb) { that.session.start(req, res, cb); },
@@ -81,7 +83,7 @@ function App(options) {
 		function mwRoute(req, res, cb)	{ that.basewww.mwRoute(req, res, cb);	},
 		function mwSendStatic(req, res, cb)	{ that.basewww.mwSendStatic(req, res, cb);	},
 		function setPropertiesOnRequest(req, res, cb) { that.setPropertiesOnRequest(req, res, cb); },
-		require(lfs.getPathSync('models/controllerGlobal.js')).middleware(),
+		require(lfs.getPathSync('models/controllerGlobal.js')),
 		function checkAndRedirect(req, res, cb) { that.checkAndRedirect(req, res, cb); },
 		function mwRunController(req, res, cb)	{ that.basewww.mwRunController(req, res, cb);	},
 		function mwRender(req, res, cb)	{ that.basewww.mwRender(req, res, cb);	},
@@ -94,9 +96,9 @@ function App(options) {
 }
 
 App.prototype.runDbMigrations = function runDbMigrations() {
-	const	logPrefix	= topLogPrefix + 'App.runDbMigrations() - ',
-		options	= {},
-		that	= this;
+	const	logPrefix	= topLogPrefix + 'App.runDbMigrations() - ';
+	const options	= {};
+	const that	= this;
 
 	let	dbMigration;
 
@@ -150,6 +152,7 @@ App.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 	that.acl.checkAndRedirect(req, res, function (err, userGotAccess) {
 		if (err) {
 			that.log.error(logPrefix + err.message);
+
 			return cb(err);
 		}
 
@@ -161,7 +164,7 @@ App.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 			// Instead just run sendToClient directly, circumventing the afterware as well.
 			res.end('Access denied');
 			req.finished = true;
-			//res.sendToClient(null, req, res);
+			// Res.sendToClient(null, req, res);
 		}
 
 		cb();
