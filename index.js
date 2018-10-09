@@ -92,6 +92,10 @@ function App(options) {
 		function writeSessionToDb(req, res, cb)	{ that.session.writeToDb(req, res, cb); }
 	];
 
+	if (that.options.middleware) {
+		that.basewww.options.baseOptions.middleware.unshift(that.options.middleware[0]);
+	}
+
 	that.runDbMigrations();
 }
 
