@@ -59,6 +59,7 @@ Acl.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 	if (res.globalData.user && trimmedPathname === '') {
 		res.statusCode	= 302;
 		res.setHeader('Location',	that.options.redirectLoggedInTo);
+
 		return cb(null, true);
 	}
 
@@ -69,9 +70,11 @@ Acl.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 			that.log.debug(logPrefix + 'Access granted. Valid user logged in, but redirecting from login page.');
 			res.statusCode	= 302;
 			res.setHeader('Location',	that.options.redirectLoggedInTo);
+
 			return cb(null, true);
 		} else if (result) {
 			that.log.debug(logPrefix + 'Access granted.');
+
 			return cb(null, true);
 		} else if (trimmedPathname !== that.options.redirectUnauthorizedTo && ! res.globalData.user) {
 			res.statusCode = 302;
@@ -80,6 +83,7 @@ Acl.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 			} else {
 				res.setHeader('Location', that.options.redirectUnauthorizedTo);
 			}
+
 			return cb(null, false);
 		}
 

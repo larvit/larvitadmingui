@@ -15,11 +15,12 @@ module.exports = function run(req, res, cb) {
 				return cb(err, req, res);
 			}
 
-			if ( ! user) {
+			if (! user) {
 				req.log.verbose(logPrefix + 'Wrong username and/or password for username: "' + req.formFields.username + '"');
 				res.statusCode  = 401; // Unauthorized
 				res.data.formErrors = ['Wrong username or password'];
 				res.data.formFields = req.formFields;
+
 				delete res.data.formFields.passowrd;
 
 				return cb(null, req, res);
@@ -28,11 +29,12 @@ module.exports = function run(req, res, cb) {
 			req.acl.checkAndRedirect(req, res, function (err, userGotAccess) {
 				if (err) return cb(err, req, res, data);
 
-				if ( ! userGotAccess) {
+				if (! userGotAccess) {
 					req.log.verbose(logPrefix + 'acl.gotAccessTo() returned false for username: "' + req.formFields.username + '"');
 					res.statusCode  = 401; // Unauthorized
 					res.data.formErrors = ['Invalid rights'];
 					res.data.formFields = req.formFields;
+
 					delete res.data.formFields.passowrd;
 
 					return cb(null, req, res);
@@ -46,6 +48,8 @@ module.exports = function run(req, res, cb) {
 				return cb(null, req, res);
 			});
 		});
+
+		return;
 	}
 
 	return cb(null, req, res);
