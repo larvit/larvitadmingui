@@ -86,8 +86,6 @@ module.exports = function controllerGlobal(req, res, cb) {
 						});
 					}
 				}
-
-				return cb();
 			}
 		}
 
