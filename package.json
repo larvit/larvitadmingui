@@ -22,7 +22,7 @@
     "larvitdbmigration": "4.0.2",
     "larvitfs": "2.3.0",
     "larvitsession": "5.0.1",
-    "larvituser": "^0.17.2",
+    "larvituser": "^0.17.3",
     "larvitutils": "2.1.0",
     "lodash.defaultsdeep": "^4.6.0",
     "lodash.trim": "^4.5.1"
