@@ -3,5 +3,11 @@
 const	test	= require('tape');
 
 test('eslint', require('tape-eslint')({
-	'ignore': ['public/vendor/**']
+	'files': [
+		'index.js',
+		'controllers/*',
+		'models/*',
+		'dbMigration/*',
+		'test/*'
+	]
 }));

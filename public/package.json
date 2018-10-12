@@ -1,18 +1,11 @@
 {
-  "name": "larvitadmingui",
-  "version": "0.13.0",
+  "name": "larvitadmingui-public",
+  "version": "1.0.0",
   "author": {
     "name": "Mikael 'Lilleman' Göransson",
     "email": "lilleman@larvit.se"
   },
   "private": false,
-  "contributors": [
-    {
-      "name": "Valter Karlsson",
-      "email": "valter@larvit.se",
-      "url": "http://larvit.se"
-    }
-  ],
   "dependencies": {
     "@fortawesome/fontawesome-free": "5.3.1",
     "bootstrap": "4.1.3",

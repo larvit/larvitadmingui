@@ -1,37 +1,38 @@
 'use strict';
 
-const	topLogPrefix	= 'larvitadmingui: models/acl.js: ',
-	lUtils = new (require('larvitutils'))(),
-	url	= require('url'),
-	_	= require('lodash');
+const topLogPrefix = 'larvitadmingui: models/acl.js: ';
+const lUtils = new (require('larvitutils'))();
+const url = require('url');
+const _ = require('lodash');
 
 function Acl(options) {
-	const	logPrefix	= topLogPrefix + 'Acl() - ',
-		that	= this;
+	const logPrefix = topLogPrefix + 'Acl() - ';
+	const that = this;
 
 	if (options === undefined) {
 		options = {};
 	}
 
 	_.defaultsDeep(options, options, {
-		'redirectUnauthorizedTo':	'', // In the admin, the login page should be the default "" path
-		'redirectLoggedInTo':	'home'
+		'redirectUnauthorizedTo': '', // In the admin, the login page should be the default "" path
+		'redirectLoggedInTo': 'home'
 	});
 
-	if ( ! options.log) {
+	if (! options.log) {
 		options.log = new lUtils.Log('warning');
 	}
 
 	that.log = options.log;
 
-	that.options	= options;
+	that.options = options;
 
-	if ( ! that.options.db) {
-		const	err	= new Error('Required option "db" is missing');
+	if (! that.options.db) {
+		const err = new Error('Required option "db" is missing');
+
 		throw err;
 	}
 
-	that.db	= that.options.db;
+	that.db = that.options.db;
 
 	that.log.debug(logPrefix + 'Setting up module instance');
 }
@@ -39,25 +40,26 @@ function Acl(options) {
 /**
  * Check and redirect a request
  *
- * @param obj req - standard request object, including urlParsed parameter
- * @param obj res - standard response object
- * @param func cb - callback(err, userGotAccess) - userGotAccess is a boolean
+ * @param {obj} req - standard request object, including urlParsed parameter
+ * @param {obj} res - standard response object
+ * @param {func} cb - callback(err, userGotAccess) - userGotAccess is a boolean
+ * @return {bool} nothing
  */
 Acl.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
-	const	logPrefix	= topLogPrefix + 'Acl.prototype.checkAndRedirect() - ',
-		that	= this;
+	const logPrefix = topLogPrefix + 'Acl.prototype.checkAndRedirect() - ';
+	const that = this;
 
-	let	trimmedPathname;
+	let trimmedPathname;
 
 	that.log.silly(logPrefix + 'Running.');
 
 	trimmedPathname = _.trim(req.urlParsed.pathname, '/');
 	if (trimmedPathname.substring(- 5) === '.json') {
-		trimmedPathname	= trimmedPathname.substring(0, trimmedPathname.length - 5);
+		trimmedPathname = trimmedPathname.substring(0, trimmedPathname.length - 5);
 	}
 
 	if (res.globalData.user && trimmedPathname === '') {
-		res.statusCode	= 302;
+		res.statusCode = 302;
 		res.setHeader('Location',	that.options.redirectLoggedInTo);
 
 		return cb(null, true);
@@ -68,7 +70,7 @@ Acl.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 
 		if (result && trimmedPathname === that.options.redirectUnauthorizedTo && res.globalData.user) {
 			that.log.debug(logPrefix + 'Access granted. Valid user logged in, but redirecting from login page.');
-			res.statusCode	= 302;
+			res.statusCode = 302;
 			res.setHeader('Location',	that.options.redirectLoggedInTo);
 
 			return cb(null, true);
@@ -89,7 +91,7 @@ Acl.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 
 		// Default to no access false
 		that.log.verbose(logPrefix + 'Access denied. No rules matched.');
-		res.statusCode	= 403;
+		res.statusCode = 403;
 		cb(null, false);
 	});
 };
@@ -98,16 +100,17 @@ Acl.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
  * Check if user got access to request
  *
  * @param {obj} user - user object from larvituser
- * @param {obj} req - standard request object from node http server
- *  OR
- * @param {str} req - URL string, after the domain. For example /home or / or /foo/bar
+ * @param {obj_or_str} req -
+ * 	Obj: standard request object from node http server
+ * 	Str: URL string, after the domain. For example /home or / or /foo/bar
  * @param {func} cb - function (err, result) - result is a boolean
+ * @return {bool} nothing
  */
 Acl.prototype.gotAccessTo = function (user, req, cb) {
-	const	logPrefix	= topLogPrefix + 'Acl.prototype.gotAccessTo() - ',
-		that	= this;
+	const logPrefix = topLogPrefix + 'Acl.prototype.gotAccessTo() - ';
+	const that = this;
 
-	let	trimmedPathname;
+	let trimmedPathname;
 
 	if (typeof req === 'string') {
 		req = {'orgReqStr': req};
@@ -116,40 +119,46 @@ Acl.prototype.gotAccessTo = function (user, req, cb) {
 
 	trimmedPathname = _.trim(req.urlParsed.pathname, '/');
 	if (trimmedPathname.substring(- 5) === '.json') {
-		trimmedPathname	= trimmedPathname.substring(0, trimmedPathname.length - 5);
+		trimmedPathname = trimmedPathname.substring(0, trimmedPathname.length - 5);
 	}
 
 	// Always allow access to static files
 	if (req.routeResult !== undefined && req.routeResult.staticFilename !== undefined) {
 		that.log.debug(logPrefix + 'Access granted. Static file requested: "' + req.routeResult.staticFilename + '"');
+
 		return cb(null, true);
 	}
 
 	// Always allow access to css files
 	if (RegExp('\\.css$').test(req.urlParsed.pathname)) {
 		that.log.debug(logPrefix + 'Access granted, is css file.');
+
 		return cb(null, true);
 	}
 
 	// Give access to configured public paths
 	if (that.options.publicPaths !== undefined && that.options.publicPaths.indexOf(trimmedPathname) !== - 1) {
 		that.log.debug(logPrefix + 'Access granted. Pathname "' + trimmedPathname + '" is in the public paths array.');
+
 		return cb(null, true);
 	}
 
-	if ( ! user && trimmedPathname === that.options.redirectUnauthorizedTo) {
+	if (! user && trimmedPathname === that.options.redirectUnauthorizedTo) {
 		that.log.debug(logPrefix + 'Access granted. No valid user set and pathname is the login url.');
+
 		return cb(null, true);
 	}
 
-	if ( ! user || ! user.fields || ! Array.isArray(user.fields.role)) {
+	if (! user || ! user.fields || ! Array.isArray(user.fields.role)) {
 		that.log.debug(logPrefix + 'Access denied. No user set or user has no roles and pathname is not the login url.');
+
 		return cb(null, false);
 	}
 
 	// Hard coded access to logout page when logged in
 	if (user && trimmedPathname === 'logout') {
 		that.log.debug(logPrefix + 'Access granted. User is logged in and trying to log out.');
+
 		return cb(null, true);
 	}
 
@@ -159,15 +168,17 @@ Acl.prototype.gotAccessTo = function (user, req, cb) {
 		if (err) return cb(err, false);
 
 		for (let i = 0; rows[i] !== undefined; i ++) {
-			const	row	= rows[i];
+			const row = rows[i];
 
 			for (let i = 0; user.fields.role[i] !== undefined; i ++) {
-				const	role	= user.fields.role[i];
+				const role = user.fields.role[i];
 
 				if (role === row.role) {
-					const	matches	= trimmedPathname.match(new RegExp(row.uri, 'g'));
+					const matches = trimmedPathname.match(new RegExp(row.uri, 'g'));
+
 					if (matches) {
 						that.log.debug(logPrefix + 'Access granted. Matched regex: "' + row.uri + '" for uri: "' + trimmedPathname + '" for role: "' + role + '"');
+
 						return cb(null, true);
 					}
 				}
@@ -175,6 +186,7 @@ Acl.prototype.gotAccessTo = function (user, req, cb) {
 		}
 
 		that.log.verbose(logPrefix + 'Access denied. No matching rules found for logged in user.');
+
 		return cb(null, false); // No rules was matched
 	});
 };

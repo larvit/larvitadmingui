@@ -1,6 +1,6 @@
 {
   "name": "larvitadmingui",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "author": {
     "name": "Mikael 'Lilleman' Göransson",
     "email": "lilleman@larvit.se"
@@ -16,13 +16,13 @@
   "dependencies": {
     "async": "^2.1.2",
     "cookies": "^0.7.0",
-    "larvitbase-www": "0.5.1",
+    "larvitbase-www": "^0.6.0",
     "larvitcss": "0.3.0",
     "larvitdb": "2.1.0",
     "larvitdbmigration": "4.0.2",
     "larvitfs": "2.3.0",
     "larvitsession": "5.0.1",
-    "larvituser": "0.16.1",
+    "larvituser": "^0.17.0",
     "larvitutils": "2.1.0",
     "lodash.defaultsdeep": "^4.6.0",
     "lodash.trim": "^4.5.1"
@@ -34,11 +34,10 @@
     "eslint": "^5.2.0",
     "freeport": "^1.0.5",
     "istanbul": "^0.4.5",
-    "requestretry": "^2.0.2",
+    "requestretry": "^3.0.1",
     "tape": "^4.9.1",
     "tape-eslint": "^1.2.1"
   },
-  "postinstall": "cd public && rm -rf node_modules && rm package-lock.json && npm i",
   "keywords": [
     "admin",
     "gui",
@@ -57,7 +56,8 @@
   },
   "homepage": "https://github.com/larvit/larvitadmingui",
   "scripts": {
-    "test": "./node_modules/tape/bin/tape ./test/*"
+    "test": "./node_modules/tape/bin/tape ./test/*",
+    "postinstall": "cd public && rm -rf node_modules && rm -f package-lock.json && npm i"
   },
   "license": "ISC",
   "maintainers": [

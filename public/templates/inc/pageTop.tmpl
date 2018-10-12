@@ -5,7 +5,7 @@
 		<%- include('inc/header', data) %>
 		<%- include('inc/mainNav', data) %>
 		<main id="main" role="main" class="container-fluid">
-			<div class="row mt-md-3">		
+			<div class="row mt-md-3">
 				<div class="col-12">
 					<h2 class="mt-3 custom-dark-color">
 						<% var pageHeader = false;
@@ -18,11 +18,11 @@
 									});
 								});
 							}
-	
-						if (pageHeader) { 
-							print(pageHeader)
-						} else { 
-							print('No header found')
+
+						if (pageHeader) {
+							%><%= pageHeader %><%
+						} else {
+							%>No header found<%
 						} %>
 					</h2>
 
