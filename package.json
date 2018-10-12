@@ -38,6 +38,7 @@
     "tape": "^4.9.1",
     "tape-eslint": "^1.2.1"
   },
+  "postinstall": "cd public && rm -rf node_modules && rm package-lock.json && npm i",
   "keywords": [
     "admin",
     "gui",
