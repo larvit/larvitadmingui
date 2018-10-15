@@ -31,19 +31,19 @@
 						<div class="tab-pane fade show active p-5" id="home" role="tabpanel" aria-labelledby="home-tab">
 							<% if (Array.isArray(data.global.messages)) {
 								for (const msg of data.global.messages) { %>
-									<%- include('msgBox', { 'msgClass': 'success', 'msgTxt': msg }) %>
+									<%- include('msgBox', { 'data': { 'msgClass': 'success', 'msgTxt': msg }}) %>
 								<% }
 							} %>
 							
 							<% if (Array.isArray(data.global.warnings)) {
 								for (const msg of data.global.warnings) { %>
-									<%- include('msgBox', { 'msgClass': 'warning', 'msgTxt': msg }) %>
+									<%- include('msgBox', { 'data': { 'msgClass': 'warning', 'msgTxt': msg }}) %>
 								<% }
 							} %>
 
 							<% if (Array.isArray(data.global.errors)) {
 								for (const msg of data.global.errors) { %>
-									<%- include('msgBox', { 'msgClass': 'error', 'msgTxt': msg }) %>
+									<%- include('msgBox', { 'data': { 'msgClass': 'danger', 'msgTxt': msg }}) %>
 								<% }
 							} %>
 
