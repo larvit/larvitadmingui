@@ -41,7 +41,7 @@
 								<% }
 							} %>
 
-							<% if (Array.isArray(data.errors)) {
+							<% if (Array.isArray(data.global.errors)) {
 								for (const msg of data.global.errors) { %>
 									<%- include('msgBox', { 'msgClass': 'error', 'msgTxt': msg }) %>
 								<% }
