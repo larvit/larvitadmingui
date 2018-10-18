@@ -17,7 +17,7 @@
     "async": "^2.1.2",
     "cookies": "^0.7.0",
     "larvitbase-www": "^0.6.4",
-    "larvitcss": "0.3.0",
+    "larvitcss": "0.4.0",
     "larvitdb": "2.1.0",
     "larvitdbmigration": "4.0.2",
     "larvitfs": "2.3.0",
