@@ -3,11 +3,11 @@
 			<%
 			if (data !== undefined && data.global !== undefined && data.global.menuStructure !== undefined) {
 				let	i	= 0;
-	
+
 				_.forEach(data.global.menuStructure, function(menuItems, groupName) {
 					let	visibleMenuItems	= false;
 					i ++;
-	
+
 					// Check if there are any visible items in this group name
 					_.forEach(menuItems, function(menuItem) {
 						if (menuItem.loggedInUserGotAccess) {
@@ -18,15 +18,15 @@
 					if (visibleMenuItems) {
 					%>
 					<li>
-						<a class="<% if (menuItems && menuItems.length > 0) { print('dropdown-toggle') } %>" href="#collapse-<%- groupName %>" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse-<%- groupName %>">
-							<span><i class="fas fa-chart-bar"></i> <%- groupName %></span>
+						<a class="<% if (menuItems && menuItems.length > 0) { %>dropdown-toggle<% } %>" href="#collapse-<%- groupName.replace(/ /g, '') %>" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapse-<%- groupName %>">
+							<span><%- groupName %></span>
 						</a>
 					</li>
-	
-	
+
+
 					<% if (menuItems && menuItems.length > 0) { %>
-						
-						<ul class="collapse list-unstyled ml-3" id="collapse-<%- groupName %>">
+
+						<ul class="collapse list-unstyled ml-3" id="collapse-<%- groupName.replace(/ /g, '') %>">
 							<% _.forEach(menuItems, function(menuItem) { if (menuItem.loggedInUserGotAccess) { %>
 								<li>
 									<a href="<%= menuItem.href %>" class="<%
@@ -38,7 +38,7 @@
 							<% }}); %>
 						</ul>
 					<% } %>
-	
+
 				<% }
 				});
 			} %>

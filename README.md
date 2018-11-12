@@ -52,12 +52,12 @@ Start it up and check your browser at http://127.0.0.1:8001 - be sure to setup y
 'use strict';
 
 exports.run = function(req, res, cb) {
-	const	data	= {'global': res.globalData};
+	res.data	= {'global': res.globalData};
 
-	data.global.messages	= ['Happy message'];
-	data.global.errors	= ['Sad message'];
+	res.data.global.messages	= ['Happy message'];
+	res.data.global.errors	= ['Sad message'];
 
-	cb(null, req, res, data);
+	cb(null, req, res);
 };
 ```
 

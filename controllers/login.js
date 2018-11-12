@@ -3,9 +3,9 @@
 const	topLogPrefix	= 'larvitadmingui: controllers/login.js: ';
 
 module.exports = function run(req, res, cb) {
-	const	logPrefix	= topLogPrefix + 'run() - ';
+	const logPrefix = topLogPrefix + 'run() - ';
 
-	res.data	= {'global': res.globalData};
+	res.data = {'global': res.globalData};
 
 	if (req.formFields !== undefined && req.formFields.username !== undefined && req.formFields.password !== undefined) {
 		req.log.verbose(logPrefix + 'Login form POSTed, username: "' + req.formFields.username + '"');
