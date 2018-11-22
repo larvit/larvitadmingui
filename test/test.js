@@ -140,9 +140,72 @@ test('Login', function (t) {
 
 			t.equal(response.statusCode,	200);
 			t.equal($('a[href="/logout"]').length,	1);
-
 			t.end();
 		});
+	});
+});
+
+test('Check links in menu', function (t) {
+	const tasks = [];
+	const baseUrl = 'http://127.0.0.1:' + port;
+	const jar = request.jar();
+
+	let menuLinks;
+
+	tasks.push(function (cb) {
+		const reqOptions = {};
+
+		reqOptions.url = 'http://127.0.0.1:' + port;
+		reqOptions.jar = jar;
+		reqOptions.method = 'post';
+		reqOptions.form = {};
+		reqOptions.form.username = 'flump';
+		reqOptions.form.password = 'blärk';
+
+		request(reqOptions, function (err, response, body) {
+			let $;
+
+			if (err) throw err;
+
+			$ = cheerio.load(body);
+
+			menuLinks = $('ul ul li').find('a')
+				.map(function (i, el) { return $(el).attr('href'); })
+				.get();
+			cb();
+		});
+	});
+	tasks.push(function (cb) {
+		const tasks = [];
+
+		for (let i = 0; menuLinks[i] !== undefined; i ++) {
+			const	menuLink	= menuLinks[i];
+
+			tasks.push(function (cb) {
+				const reqOptions = {};
+
+				reqOptions.url = baseUrl + menuLink;
+				reqOptions.jar = jar;
+
+				request(reqOptions, function (err, response) {
+					if (err) throw err;
+					if (menuLink === '/foo/foo') {
+						t.equal(response.statusCode,	404);
+					} else {
+						t.equal(response.statusCode,	200);
+					}
+					cb();
+				});
+			});
+		}
+		async.series(tasks, function (err) {
+			if (err) throw err;
+			cb();
+		});
+	});
+	async.series(tasks, function (err) {
+		if (err) throw err;
+		t.end();
 	});
 });
 

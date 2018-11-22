@@ -20,7 +20,7 @@
 
 								<% if (data.formErrors instanceof Array) { %>
 									<div>
-										<% _.forEach(formErrors, function(errStr) { %>
+										<% _.forEach(data.formErrors, function(errStr) { %>
 											<span class="alert alert-danger"><%= errStr %></span>
 										<% }); %>
 									</div>

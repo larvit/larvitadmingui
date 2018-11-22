@@ -62,28 +62,36 @@ module.exports = function controllerGlobal(req, res, cb) {
 		const tasks = [];
 
 		for (const groupName of Object.keys(res.globalData.menuStructure)) {
-			for (let i = 0; res.globalData.menuStructure[groupName][i] !== undefined; i ++) {
-				const menuItem = res.globalData.menuStructure[groupName][i];
+			const menuGroup = res.globalData.menuStructure[groupName];
 
-				tasks.push(function (cb) {
-					req.acl.gotAccessTo(res.globalData.user, menuItem.href, function (err, result) {
-						menuItem.loggedInUserGotAccess = result;
+			menuGroup.paths = [];
+			if (menuGroup !== undefined && menuGroup.menuItems !== undefined) {
+				for (let i = 0; menuGroup.menuItems[i] !== undefined; i ++) {
+					const menuGroupItem = menuGroup.menuItems[i];
 
-						return cb(err);
-					});
-				});
+					tasks.push(function (cb) {
+						menuGroupItem.href = menuGroup.path + menuGroupItem.path;
+						menuGroup.paths.push(menuGroupItem.href);
+						req.acl.gotAccessTo(res.globalData.user, menuGroupItem.href, function (err, result) {
+							menuGroupItem.loggedInUserGotAccess = result;
 
-				if (menuItem.subNav) {
-					for (let i = 0; menuItem.subNav[i] !== undefined; i ++) {
-						const subMenuItem = menuItem.subNav[i];
-
-						tasks.push(function (cb) {
-							req.acl.gotAccessTo(res.globalData.user, subMenuItem.href, function (err, result) {
-								subMenuItem.loggedInUserGotAccess = result;
-
-								return cb(err);
-							});
+							return cb(err);
 						});
+					});
+					if (menuGroupItem.subNav) {
+						for (let i = 0; menuGroupItem.subNav[i] !== undefined; i ++) {
+							const subMenuItem = menuGroupItem.subNav[i];
+
+							tasks.push(function (cb) {
+								subMenuItem.href = menuGroup.path + subMenuItem.path;
+								menuGroup.paths.push(subMenuItem.href);
+								req.acl.gotAccessTo(res.globalData.user, subMenuItem.href, function (err, result) {
+									subMenuItem.loggedInUserGotAccess = result;
+
+									return cb(err);
+								});
+							});
+						}
 					}
 				}
 			}

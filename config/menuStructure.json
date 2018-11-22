@@ -1,28 +1,48 @@
 {
-	"System": [
-		{
-			"label": "Home",
-			"controllerName": "home",
-			"href": "/home",
-			"pageHeader": "Home"
-		}
-	],
-	"Example": [
-		{
-			"label": "Foo",
-			"controllerName": "foo",
-			"href": "/foo",
-			"pageHeader": "Foo",
-			"subNav": [
-				{
-					"label": "List",
-					"href": "/foo/list"
-				},
-				{
-					"label": "Edit",
-					"href": "/foo/edit"
-				}
-			]
-		}
-	]
+	"Test": {
+		"icon" : "fa-mountains",
+		"path" : "/test",
+		"menuItems" :	[
+			{
+				"label":	"Test",
+				"controllerName":	"test",
+				"path":	"/test",
+				"pageHeader":	"Test"
+			}
+		]
+	},
+	"System": {
+		"icon" : "fa-mountains",
+		"path" : "",
+		"menuItems" : [
+			{
+				"label": "Home",
+				"controllerName": "home",
+				"path": "/home",
+				"pageHeader": "Home"
+			}
+		]
+	},
+	"Example": {
+		"icon" : "fa-mountains",
+		"path" : "/foo",
+		"menuItems" : [
+			{
+				"label": "Foo",
+				"controllerName": "foo",
+				"path": "/foo",
+				"pageHeader": "Foo",
+				"subNav": [
+					{
+						"label": "List",
+						"path": "/foo/list"
+					},
+					{
+						"label": "Edit",
+						"path": "/foo/edit"
+					}
+				]
+			}
+		]
+	}
 }

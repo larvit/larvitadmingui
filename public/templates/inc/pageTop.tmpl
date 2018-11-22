@@ -8,22 +8,21 @@
 			<div class="row mt-md-3">
 				<div class="col-12">
 					<h2 class="mt-3 custom-dark-color">
-						<% var pageHeader = false;
+							<% var pageHeader = false;
 							if (data && data.global !== undefined && data.global.menuStructure !== undefined) {
-								_.forEach(data.global.menuStructure, function(menuItems, groupName) {
-									_.forEach(menuItems, function(menuItem) {
+								_.forEach(data.global.menuStructure, function(menuGroupItem, groupName) {
+									_.forEach(menuGroupItem.menuItems, function(menuItem) {
 										if ((menuItem.controllerName === data.global.controllerName || menuItem.controllerName === data.global.menuControllerName) && menuItem.pageHeader !== undefined) {
 											pageHeader = menuItem.pageHeader;
 										}
 									});
 								});
 							}
-
-						if (pageHeader) {
-							%><%= pageHeader %><%
-						} else {
-							%>No header found<%
-						} %>
+							if (pageHeader) {
+								%><%= pageHeader %><%
+							} else {
+								%>No header found<%
+							} %>
 					</h2>
 
 					<%- include('subNav', data) %>
