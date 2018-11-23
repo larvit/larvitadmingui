@@ -60,9 +60,30 @@ module.exports = function controllerGlobal(req, res, cb) {
 	// Check if logged in user got access to menuStructure items
 	tasks.push(function (cb) {
 		const tasks = [];
+		let rc = req.headers.cookie;
+		let menuCollapseSettings;
+
+		if (rc) {
+			rc.split(';').forEach(function (cookie) {
+				if (cookie) {
+					let decodedCookie = decodeURIComponent(cookie);
+					let splitDecodedCookie = decodedCookie.split('=');
+
+					if (splitDecodedCookie[0] && splitDecodedCookie[0].trim() === 'menuStructure' && splitDecodedCookie[1] !== undefined) {
+						menuCollapseSettings = JSON.parse(splitDecodedCookie[1]);
+					}
+				}
+			});
+		}
 
 		for (const groupName of Object.keys(res.globalData.menuStructure)) {
 			const menuGroup = res.globalData.menuStructure[groupName];
+
+			if (menuCollapseSettings && menuCollapseSettings[groupName] !== undefined) {
+				menuGroup.expand = menuCollapseSettings[groupName];
+			} else {
+				menuGroup.expand = true;
+			}
 
 			menuGroup.paths = [];
 			if (menuGroup !== undefined && menuGroup.menuItems !== undefined) {
@@ -71,6 +92,8 @@ module.exports = function controllerGlobal(req, res, cb) {
 
 					tasks.push(function (cb) {
 						menuGroupItem.href = menuGroup.path + menuGroupItem.path;
+
+
 						menuGroup.paths.push(menuGroupItem.href);
 						req.acl.gotAccessTo(res.globalData.user, menuGroupItem.href, function (err, result) {
 							menuGroupItem.loggedInUserGotAccess = result;
