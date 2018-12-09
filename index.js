@@ -79,6 +79,7 @@ function App(options) {
 	that.basewww.options.baseOptions.middleware = [
 		require('cookies').express(),
 		function (req, res, cb) { that.session.start(req, res, cb); },
+		function mwSetNextCallData(req, res, cb) { that.mwSetNextCallData(req, res, cb); },
 		function mwParse(req, res, cb) { that.basewww.mwParse(req, res, cb); },
 		function mwRoute(req, res, cb) { that.basewww.mwRoute(req, res, cb); },
 		function mwSendStatic(req, res, cb) { that.basewww.mwSendStatic(req, res, cb); },
@@ -129,6 +130,18 @@ App.prototype.runDbMigrations = function runDbMigrations() {
 			that.dbReady = true;
 		});
 	});
+};
+
+App.prototype.mwSetNextCallData = function mwSetNextCallData(req, res, cb) {
+	if (req.session && req.session.data && req.session.data.nextCallData) {
+		for (const key of Object.keys(req.session.data.nextCallData)) {
+			res[key] = req.session.data.nextCallData[key];
+		}
+
+		delete req.session.data.nextCallData;
+	}
+
+	cb();
 };
 
 App.prototype.setPropertiesOnRequest = function setPropertiesOnRequest(req, res, cb) {
