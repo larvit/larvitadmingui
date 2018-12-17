@@ -134,8 +134,11 @@ App.prototype.runDbMigrations = function runDbMigrations() {
 
 App.prototype.mwSetNextCallData = function mwSetNextCallData(req, res, cb) {
 	if (req.session && req.session.data && req.session.data.nextCallData) {
+		// TODO(vktr): Probably should do this recursive instead
 		for (const key of Object.keys(req.session.data.nextCallData)) {
-			res[key] = req.session.data.nextCallData[key];
+			for (const subKey of Object.keys(req.session.data.nextCallData[key])) {
+				res[key][subKey] = req.session.data.nextCallData[key][subKey];
+			}
 		}
 
 		delete req.session.data.nextCallData;
