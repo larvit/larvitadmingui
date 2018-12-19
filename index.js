@@ -137,6 +137,10 @@ App.prototype.mwSetNextCallData = function mwSetNextCallData(req, res, cb) {
 		// TODO(vktr): Probably should do this recursive instead
 		for (const key of Object.keys(req.session.data.nextCallData)) {
 			for (const subKey of Object.keys(req.session.data.nextCallData[key])) {
+				if ( ! res[key]) {
+					res[key]	= {};
+				}
+
 				res[key][subKey] = req.session.data.nextCallData[key][subKey];
 			}
 		}
