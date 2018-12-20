@@ -58,6 +58,14 @@ function App(options) {
 	}
 	that.session = that.options.session;
 
+	if (that.options.menuStructure) {
+		that.menuStructure = that.options.menuStructure;
+	} else {
+		// Include menu structure config
+		// Do it through stringify/parse to not screw up the original structure
+		that.menuStructure = JSON.parse(JSON.stringify(require(lfs.getPathSync('config/menuStructure.json'))));
+	}
+
 	if (that.options.baseOptions.afterware === undefined) { that.options.baseOptions.afterware = []; }
 	if (that.options.routerOptions.routes === undefined) { that.options.routerOptions.routes = []; }
 
@@ -137,7 +145,7 @@ App.prototype.mwSetNextCallData = function mwSetNextCallData(req, res, cb) {
 		// TODO(vktr): Probably should do this recursive instead
 		for (const key of Object.keys(req.session.data.nextCallData)) {
 			for (const subKey of Object.keys(req.session.data.nextCallData[key])) {
-				if ( ! res[key]) {
+				if (! res[key]) {
 					res[key]	= {};
 				}
 
@@ -164,6 +172,7 @@ App.prototype.setPropertiesOnRequest = function setPropertiesOnRequest(req, res,
 	req.db = that.db;
 	req.userLib = that.userLib;
 	req.log = that.log;
+	req.menuStructure = that.menuStructure;
 
 	return cb();
 };
