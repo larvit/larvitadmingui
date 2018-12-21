@@ -172,7 +172,7 @@ App.prototype.setPropertiesOnRequest = function setPropertiesOnRequest(req, res,
 	req.db = that.db;
 	req.userLib = that.userLib;
 	req.log = that.log;
-	req.menuStructure = that.menuStructure;
+	req.menuStructure = Object.assign({}, that.menuStructure); // Object.assign is fastest clone method according to tests. And this needs to be cloned so it does not change between requests
 
 	return cb();
 };
