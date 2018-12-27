@@ -172,7 +172,12 @@ App.prototype.setPropertiesOnRequest = function setPropertiesOnRequest(req, res,
 	req.db = that.db;
 	req.userLib = that.userLib;
 	req.log = that.log;
-	req.menuStructure = Object.assign({}, that.menuStructure); // Object.assign is fastest clone method according to tests. And this needs to be cloned so it does not change between requests
+
+	// TODO: Figure out a better way to reset the menu structure between requests.
+	// Some controllers modify the menuStructure which is why we need to reset it.
+	// Object.assign does not do a deep copy, so we use JSON parse/stringify to
+	// create a deep copy.
+	req.menuStructure = JSON.parse(JSON.stringify(that.menuStructure));
 
 	return cb();
 };
