@@ -217,7 +217,9 @@ App.prototype.ready = function ready(cb) {
 };
 
 App.prototype.start = function start(cb) {
-	this.basewww.start(cb);
+	this.ready(() => {
+		this.basewww.start(cb);
+	});
 };
 
 App.prototype.stop = function stop(cb) {
