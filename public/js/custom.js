@@ -11,8 +11,8 @@ $(function () {
 		if ($(this).prop('nodeName').toLowerCase() === 'button' || $(this).attr('type').toLowerCase() === 'submit') {
 			const form = $(this).closest('form');
 
-			let formData = form.serialize(),
-			    action   = form.attr('action');
+			let formData = form.serialize();
+			let action = form.attr('action');
 
 			if (action === undefined) {
 				action = window.location.href;
@@ -31,11 +31,6 @@ $(function () {
 		$(this).closest('.parent').remove();
 	});
 
-	// Sortable init
-	$('table.sortable tbody').sortable({
-		'helper': fixWidthHelper
-	}).disableSelection();
-
 	// Helper to keep full width of sortable tr's
 	function fixWidthHelper(e, ui) {
 		ui.children().each(function () {
@@ -44,6 +39,11 @@ $(function () {
 
 		return ui;
 	}
+
+	// Sortable init
+	$('table.sortable tbody').sortable({
+		helper: fixWidthHelper
+	}).disableSelection();
 
 	function showMainNav() {
 		$('.mainNav').css('left', '0');
@@ -113,12 +113,12 @@ $(function () {
 
 // Tab menus
 $(function () {
-	const	activeTabContent	= $('a.tab.active').attr('showcontent');
+	const activeTabContent = $('a.tab.active').attr('showcontent');
 
 	$('#' + activeTabContent).css('display', 'block');
 
 	$('.tab[showcontent]').on('click', function () {
-		const	className	= $(this).attr('showcontent');
+		const className = $(this).attr('showcontent');
 
 		if ($(this).hasClass('active')) return;
 

@@ -1,11 +1,11 @@
 'use strict';
 
-const	topLogPrefix	= 'larvitadmingui: models/utils.js: ',
-	querystring	= require('querystring'),
-	url	= require('url');
+const topLogPrefix = 'larvitadmingui: models/utils.js: ';
+const querystring = require('querystring');
+const url = require('url');
 
 function getUserFromSession(req, cb) {
-	const	logPrefix	= topLogPrefix + 'getUserFromSession() - ';
+	const logPrefix = topLogPrefix + 'getUserFromSession() - ';
 
 	req.log.silly(logPrefix + 'running');
 
@@ -21,9 +21,9 @@ function getUserFromSession(req, cb) {
 				req.log.debug(logPrefix + 'UserUuid: "' + user.uuid + '" found in database');
 
 				return cb(null, {
-					'uuid':	user.uuid,
-					'username':	user.username,
-					'fields':	user.fields
+					uuid: user.uuid,
+					username: user.username,
+					fields: user.fields
 				});
 			}
 
@@ -39,23 +39,25 @@ function getUserFromSession(req, cb) {
 function urlUtil() {};
 
 urlUtil.setParam = function (currentUrl, params) {
-	currentUrl	= url.parse(currentUrl, true);
+	currentUrl = url.parse(currentUrl, true);
 
 	for (const key in params) {
 		currentUrl.query[key] = params[key];
 	}
-	currentUrl.search	= querystring.stringify(currentUrl.query);
+	currentUrl.search = querystring.stringify(currentUrl.query);
+
 	return url.format(currentUrl);
 };
 
 urlUtil.removeParam = function (currentUrl, params) {
-	currentUrl	= url.parse(currentUrl, true);
-	for (let i = 0; params[i] !== undefined; i ++) {
+	currentUrl = url.parse(currentUrl, true);
+	for (let i = 0; params[i] !== undefined; i++) {
 		delete currentUrl.query[params[i]];
 	}
-	currentUrl.search	= querystring.stringify(currentUrl.query);
+	currentUrl.search = querystring.stringify(currentUrl.query);
+
 	return url.format(currentUrl);
 };
 
-exports.getUserFromSession	= getUserFromSession;
-exports.urlUtil	= urlUtil;
+exports.getUserFromSession = getUserFromSession;
+exports.urlUtil = urlUtil;

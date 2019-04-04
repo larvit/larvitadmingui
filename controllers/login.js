@@ -1,11 +1,11 @@
 'use strict';
 
-const	topLogPrefix	= 'larvitadmingui: controllers/login.js: ';
+const topLogPrefix = 'larvitadmingui: controllers/login.js: ';
 
 module.exports = function run(req, res, cb) {
-	const	logPrefix	= topLogPrefix + 'run() - ';
+	const logPrefix = topLogPrefix + 'run() - ';
 
-	res.data	= {'global': res.globalData};
+	res.data = {global: res.globalData};
 
 	if (req.formFields !== undefined && req.formFields.username !== undefined && req.formFields.password !== undefined) {
 		req.log.verbose(logPrefix + 'Login form POSTed, username: "' + req.formFields.username + '"');
@@ -15,9 +15,9 @@ module.exports = function run(req, res, cb) {
 				return cb(err, req, res);
 			}
 
-			if ( ! user) {
+			if (!user) {
 				req.log.verbose(logPrefix + 'Wrong username and/or password for username: "' + req.formFields.username + '"');
-				res.statusCode  = 401; // Unauthorized
+				res.statusCode = 401; // Unauthorized
 				res.data.formErrors = ['Wrong username or password'];
 				res.data.formFields = req.formFields;
 				delete res.data.formFields.passowrd;
@@ -28,9 +28,9 @@ module.exports = function run(req, res, cb) {
 			req.acl.checkAndRedirect(req, res, function (err, userGotAccess) {
 				if (err) return cb(err, req, res, data);
 
-				if ( ! userGotAccess) {
+				if (!userGotAccess) {
 					req.log.verbose(logPrefix + 'acl.gotAccessTo() returned false for username: "' + req.formFields.username + '"');
-					res.statusCode  = 401; // Unauthorized
+					res.statusCode = 401; // Unauthorized
 					res.data.formErrors = ['Invalid rights'];
 					res.data.formFields = req.formFields;
 					delete res.data.formFields.passowrd;
@@ -39,8 +39,8 @@ module.exports = function run(req, res, cb) {
 				}
 
 				req.log.info(logPrefix + 'Username "' + req.formFields.username + '" logged in');
-				req.session.data.userUuid	= user.uuid;
-				res.statusCode	= 302;
+				req.session.data.userUuid = user.uuid;
+				res.statusCode = 302;
 				res.setHeader('Location', '/home');
 
 				cb(null, req, res);

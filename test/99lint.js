@@ -1,7 +1,7 @@
 'use strict';
 
-const	test	= require('tape');
+const test = require('tape');
 
 test('eslint', require('tape-eslint')({
-	'ignore': ['public/vendor/**']
+	ignore: ['public/vendor/**']
 }));
