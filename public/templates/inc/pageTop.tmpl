@@ -2,9 +2,9 @@
 	<script>document.body.className = document.body.className === '' ? 'js' : document.body.className + ' js';</script>
 	<div class="page_wrapper">
 		<span class="target_fix" id="mainNav"></span>
-		<%- include('inc/header', data) %>
+		<%- include('header', data) %>
 		<section class="section main_wrapper">
-			<%- include('inc/mainNav', data) %>
+			<%- include('mainNav', data) %>
 			<section class="section content">
 				<div id="content_header" class="row">
 					<h1><%
@@ -26,24 +26,24 @@
 						<% }
 					%></h1>
 				</div>
-				<%- include('inc/breadcrumbs', data) %>
+				<%- include('breadcrumbs', data) %>
 				<div id="content_wrapper" class="content_wrapper">
-					<%- include('inc/subNav', data) %>
+					<%- include('subNav', data) %>
 					<div class="wrap">
 						<%
 							if (data.global.messages instanceof Array) {
 								_.forEach(data.global.messages, function(msgStr) { %>
-									<%- include('inc/msgBox', {'msgClass': 'happy', 'msgTxt': msgStr}) %>
+									<%- include('msgBox', {'msgClass': 'happy', 'msgTxt': msgStr}) %>
 								<% });
 							}
 							if (data.global.warnings instanceof Array) {
 								_.forEach(data.global.warnings, function(warningStr) { %>
-									<%- include('inc/msgBox', {'msgClass': 'warn', 'msgTxt': warningStr}) %>
+									<%- include('msgBox', {'msgClass': 'warn', 'msgTxt': warningStr}) %>
 								<% });
 							}
 							if (data.global.errors instanceof Array) {
 								_.forEach(data.global.errors, function(errStr) { %>
-									<%- include('inc/msgBox', {'msgClass': 'sad', 'msgTxt': errStr}) %>
+									<%- include('msgBox', {'msgClass': 'sad', 'msgTxt': errStr}) %>
 								<% });
 							}
 						%>

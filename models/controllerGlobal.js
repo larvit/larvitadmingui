@@ -5,7 +5,6 @@ const async = require('async');
 const utils = require('./utils');
 const Lfs = require('larvitfs');
 const lfs = new Lfs();
-const log = require('winston');
 
 function middleware(req, res, cb) {
 	const logPrefix = topLogPrefix + 'middleware() - ';
@@ -40,7 +39,7 @@ function middleware(req, res, cb) {
 
 	// Something went wrong with setting up the session
 	if (req.session === undefined) {
-		log.warn(logPrefix + 'No req.session found');
+		req.log.warn(logPrefix + 'No req.session found');
 
 		return cb(null);
 	}
@@ -49,7 +48,7 @@ function middleware(req, res, cb) {
 	tasks.push(function (cb) {
 		utils.getUserFromSession(req, function (err, user) {
 			if (user) {
-				log.debug(logPrefix + 'User found in session. UserUuid: "' + user.uuid + '"');
+				req.log.debug(logPrefix + 'User found in session. UserUuid: "' + user.uuid + '"');
 
 				res.globalData.user = user;
 			}
