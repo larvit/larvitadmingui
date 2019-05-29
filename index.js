@@ -56,7 +56,6 @@ function App(options) {
 	}
 	that.session = that.options.session;
 
-	if (that.options.baseOptions.afterware === undefined) { that.options.baseOptions.afterware = []; }
 	if (that.options.routerOptions.routes === undefined) { that.options.routerOptions.routes = []; }
 
 	that.options.routerOptions.routes.push({
@@ -157,7 +156,7 @@ App.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 			res.adminRights = true;
 		} else {
 			// If userGotAccess is false, we should not execute the controller.
-			// Instead just run sendToClient directly, circumventing the afterware as well.
+			// Instead just run sendToClient directly
 			res.end('Access denied');
 		}
 
