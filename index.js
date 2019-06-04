@@ -74,7 +74,7 @@ function App(options) {
 
 	that.options.routerOptions.routes.push({
 		regex: '\\.css$',
-		controllerPath: 'css'
+		controllerPath: 'css.js'
 	});
 
 	that.acl = new Acl(that.options);
