@@ -69,8 +69,6 @@ function App(options) {
 		controller: 'css'
 	});
 
-	that.options.baseOptions.httpOptions.port = options.port;
-
 	that.acl = new Acl(that.options);
 	that.basewww = new Lbwww(that.options);
 	that.basewww.options.baseOptions.middleware = [
