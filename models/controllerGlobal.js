@@ -6,17 +6,15 @@ const utils = require('./utils');
 const Lfs = require('larvitfs');
 const lfs = new Lfs();
 
-function middleware(req, res, cb) {
-	const logPrefix = topLogPrefix + 'middleware() - ';
+module.exports = function controllerGlobal(req, res, cb) {
+	const logPrefix = topLogPrefix + 'controllerGlobal() - ';
 	const tasks = [];
 
 	if (!res.globalData) {
 		res.globalData = {};
 	}
 
-	// Include menu structure config
-	// Do it through stringify/parse to not screw up the original structure
-	res.globalData.menuStructure = JSON.parse(JSON.stringify(require(lfs.getPathSync('config/menuStructure.json'))));
+	res.globalData.menuStructure = req.menuStructure;
 
 	// Include the domain in global data
 	res.globalData.domain = req.headers.host;
@@ -41,7 +39,7 @@ function middleware(req, res, cb) {
 	if (req.session === undefined) {
 		req.log.warn(logPrefix + 'No req.session found');
 
-		return cb(null);
+		return cb(null, req, res);
 	}
 
 	// Set the logged in user
@@ -90,8 +88,4 @@ function middleware(req, res, cb) {
 	});
 
 	async.series(tasks, cb);
-}
-
-exports.middleware = function () {
-	return middleware;
 };

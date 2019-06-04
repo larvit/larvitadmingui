@@ -1,9 +1,8 @@
 'use strict';
 
 const topLogPrefix = 'larvitadmingui: models/acl.js: ';
-const LUtils = require('larvitutils');
+const lUtils = new (require('larvitutils'))();
 const url = require('url');
-const db = require('larvitdb');
 const _ = require('lodash');
 
 function Acl(options) {
@@ -14,19 +13,25 @@ function Acl(options) {
 		options = {};
 	}
 
-	if (!options.log) {
-		const lUtils = new LUtils();
-
-		options.log = new lUtils.Log();
-	}
-
 	_.defaultsDeep(options, options, {
 		redirectUnauthorizedTo: '', // In the admin, the login page should be the default "" path
 		redirectLoggedInTo: 'home'
 	});
 
-	that.options = options;
+	if (!options.log) {
+		options.log = new lUtils.Log('warning');
+	}
+
 	that.log = options.log;
+	that.options = options;
+
+	if (!that.options.db) {
+		const err = new Error('Required option "db" is missing');
+
+		throw err;
+	}
+
+	that.db = that.options.db;
 
 	that.log.debug(logPrefix + 'Setting up module instance');
 }
@@ -156,7 +161,7 @@ Acl.prototype.gotAccessTo = function (user, req, cb) {
 
 	// If we get down here, we have a logged in user and pathname is not the login url.
 	// Lets see if the logged in users roles give it access
-	db.query('SELECT * FROM user_roles_rights', function (err, rows) {
+	that.db.query('SELECT * FROM user_roles_rights', function (err, rows) {
 		if (err) return cb(err, false);
 
 		for (let i = 0; rows[i] !== undefined; i++) {

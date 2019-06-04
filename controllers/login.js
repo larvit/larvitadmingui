@@ -43,7 +43,7 @@ module.exports = function run(req, res, cb) {
 				res.statusCode = 302;
 				res.setHeader('Location', '/home');
 
-				cb(null, req, res);
+				return cb(null, req, res);
 			});
 		});
 

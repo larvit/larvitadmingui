@@ -56,6 +56,14 @@ function App(options) {
 	}
 	that.session = that.options.session;
 
+	if (that.options.menuStructure) {
+		that.menuStructure = that.options.menuStructure;
+	} else {
+		// Include menu structure config
+		// Do it through stringify/parse to not screw up the original structure
+		that.menuStructure = JSON.parse(JSON.stringify(require(lfs.getPathSync('config/menuStructure.json'))));
+	}
+
 	if (that.options.routerOptions.routes === undefined) { that.options.routerOptions.routes = []; }
 
 	that.options.routerOptions.routes.push({
@@ -66,7 +74,7 @@ function App(options) {
 
 	that.options.routerOptions.routes.push({
 		regex: '\\.css$',
-		controller: 'css'
+		controllerPath: 'css'
 	});
 
 	that.acl = new Acl(that.options);
@@ -74,11 +82,12 @@ function App(options) {
 	that.basewww.options.baseOptions.middleware = [
 		require('cookies').express(),
 		function (req, res, cb) { that.session.start(req, res, cb); },
+		function mwSetNextCallData(req, res, cb) { that.mwSetNextCallData(req, res, cb); },
 		function mwParse(req, res, cb) { that.basewww.mwParse(req, res, cb); },
 		function mwRoute(req, res, cb) { that.basewww.mwRoute(req, res, cb); },
 		function mwSendStatic(req, res, cb) { that.basewww.mwSendStatic(req, res, cb); },
 		function setPropertiesOnRequest(req, res, cb) { that.setPropertiesOnRequest(req, res, cb); },
-		require(lfs.getPathSync('models/controllerGlobal.js')).middleware(),
+		require(lfs.getPathSync('models/controllerGlobal.js')),
 		function checkAndRedirect(req, res, cb) { that.checkAndRedirect(req, res, cb); },
 		function mwRunController(req, res, cb) { that.basewww.mwRunController(req, res, cb); },
 		function mwRender(req, res, cb) { that.basewww.mwRender(req, res, cb); },
@@ -86,6 +95,10 @@ function App(options) {
 		function mwCleanup(req, res, cb) { that.basewww.mwCleanup(req, res, cb); },
 		function writeSessionToDb(req, res, cb) { that.session.writeToDb(req, res, cb); }
 	];
+
+	if (that.options.middleware) {
+		that.basewww.options.baseOptions.middleware.unshift(that.options.middleware[0]);
+	}
 
 	that.runDbMigrations();
 }
@@ -122,6 +135,25 @@ App.prototype.runDbMigrations = function runDbMigrations() {
 	});
 };
 
+App.prototype.mwSetNextCallData = function mwSetNextCallData(req, res, cb) {
+	if (req.session && req.session.data && req.session.data.nextCallData) {
+		// TODO(vktr): Probably should do this recursive instead
+		for (const key of Object.keys(req.session.data.nextCallData)) {
+			for (const subKey of Object.keys(req.session.data.nextCallData[key])) {
+				if (!res[key]) {
+					res[key] = {};
+				}
+
+				res[key][subKey] = req.session.data.nextCallData[key][subKey];
+			}
+		}
+
+		delete req.session.data.nextCallData;
+	}
+
+	cb();
+};
+
 App.prototype.setPropertiesOnRequest = function setPropertiesOnRequest(req, res, cb) {
 	const that = this;
 
@@ -136,11 +168,19 @@ App.prototype.setPropertiesOnRequest = function setPropertiesOnRequest(req, res,
 	req.userLib = that.userLib;
 	req.log = that.log;
 
+	// TODO: Figure out a better way to reset the menu structure between requests.
+	// Some controllers modify the menuStructure which is why we need to reset it.
+	// Object.assign does not do a deep copy, so we use JSON parse/stringify to
+	// create a deep copy.
+	req.menuStructure = JSON.parse(JSON.stringify(that.menuStructure));
+
 	return cb();
 };
 
 App.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 	const that = this;
+
+	if (req.finished) return cb();
 
 	that.acl.checkAndRedirect(req, res, function (err, userGotAccess) {
 		if (err) {
@@ -154,8 +194,9 @@ App.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 			res.adminRights = true;
 		} else {
 			// If userGotAccess is false, we should not execute the controller.
-			// Instead just run sendToClient directly
+			// Instead just run sendToClient directly, circumventing the afterware as well.
 			res.end('Access denied');
+			req.finished = true;
 		}
 
 		cb();
@@ -170,7 +211,9 @@ App.prototype.ready = function ready(cb) {
 };
 
 App.prototype.start = function start(cb) {
-	this.basewww.start(cb);
+	this.ready(() => {
+		this.basewww.start(cb);
+	});
 };
 
 App.prototype.stop = function stop(cb) {
