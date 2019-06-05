@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = function (req, res, cb) {
+function run(req, res, cb) {
 	delete req.session.data.userUuid;
 
 	// Redirect to the login page
@@ -9,3 +9,6 @@ module.exports = function (req, res, cb) {
 
 	cb(null, req, res);
 };
+
+module.exports = run;
+module.exports.run = run;

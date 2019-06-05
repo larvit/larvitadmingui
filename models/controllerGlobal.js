@@ -3,8 +3,6 @@
 const topLogPrefix = 'larvitadmingui: models/controllerGlobal.js: ';
 const async = require('async');
 const utils = require('./utils');
-const Lfs = require('larvitfs');
-const lfs = new Lfs();
 
 module.exports = function controllerGlobal(req, res, cb) {
 	const logPrefix = topLogPrefix + 'controllerGlobal() - ';
