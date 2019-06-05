@@ -2,12 +2,13 @@
 	<%
 		/**
 		 * Expects an object like this:
-		 *
-		 *	{
+		 * {
+		 * 	'pagination': {
 		 *		"totalElements":	int,
 		 *		"urlParsed":	obj, // From url.parse()
 		 *		"elementsPerPage":	int
 		 *	}
+		 * }
 		 */
 
 		function buildUrl(urlParsed) {
@@ -24,27 +25,27 @@
 			return urlStr;
 		}
 
-		var localUrlParsed = _.cloneDeep(data.urlParsed);
+		var localUrlParsed = _.cloneDeep(data.pagination.urlParsed);
 
 		localUrlParsed.query.offset = 0;
 		var firstPageUrl	= buildUrl(localUrlParsed);
 
-		localUrlParsed.query.offset = Math.floor(data.totalElements / elementsPerPage) * elementsPerPage;
+		localUrlParsed.query.offset = Math.floor(data.pagination.totalElements / elementsPerPage) * elementsPerPage;
 		if (localUrlParsed.query.offset === totalElements) localUrlParsed.query.offset -= elementsPerPage;
 		if (localUrlParsed.query.offset < 0) localUrlParsed.query.offset = 0;
 		var lastPageUrl	= buildUrl(localUrlParsed);
 
-		localUrlParsed.query.offset = (parseInt(data.urlParsed.query.offset) || 0) - elementsPerPage;
+		localUrlParsed.query.offset = (parseInt(data.pagination.urlParsed.query.offset) || 0) - elementsPerPage;
 		if (localUrlParsed.query.offset < 0) localUrlParsed.query.offset = 0;
 		var prevPageUrl = buildUrl(localUrlParsed);
 
-		localUrlParsed.query.offset = (parseInt(data.urlParsed.query.offset) || 0) + elementsPerPage;
+		localUrlParsed.query.offset = (parseInt(data.pagination.urlParsed.query.offset) || 0) + elementsPerPage;
 		if (localUrlParsed.query.offset >= totalElements) localUrlParsed.query.offset -= elementsPerPage;
 		var nextPageUrl = buildUrl(localUrlParsed);
 
-		var currentPage	= ((data.urlParsed.query.offset || 0) / data.elementsPerPage) + 1;
+		var currentPage	= ((data.pagination.urlParsed.query.offset || 0) / data.pagination.elementsPerPage) + 1;
 
-		var totalPages	= Math.floor(data.totalElements / elementsPerPage) + 1;
+		var totalPages	= Math.floor(data.pagination.totalElements / elementsPerPage) + 1;
 		if (((totalPages * elementsPerPage) - elementsPerPage) === totalElements) totalPages -= 1;
 	%>
 	<a href="<%= firstPageUrl %>">&lt; &lt;</a> <a href="<%= prevPageUrl %>">&lt;</a> Page <%= currentPage %> of <%= totalPages %> <a href="<%= nextPageUrl %>">&gt;</a> <a href="<%= lastPageUrl %>">&gt; &gt;</a>
