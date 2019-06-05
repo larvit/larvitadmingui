@@ -41,7 +41,7 @@
 				}
 			}
 
-			if (obj.rightButtons) {
+			if (data.rightButtons) {
 				_.forEach(rightButtons, function(button) {
 					print('<li class="u-pull-right">');
 					writeButton(button);
@@ -49,7 +49,7 @@
 				});
 			}
 
-			if (obj.leftButtons) {
+			if (data.leftButtons) {
 				_.forEach(leftButtons, function(button) {
 					print('<li class="u-pull-left">');
 					writeButton(button);
