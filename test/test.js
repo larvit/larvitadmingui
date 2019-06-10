@@ -49,7 +49,11 @@ function startStuff(cb) {
 	// Start gui http server
 	tasks.push(function (cb) {
 		app = new App({
-			port: port,
+			baseOptions: {
+				httpOptions: {
+					port
+				}
+			},
 			userLib: userLib,
 			log: log,
 			db: db
