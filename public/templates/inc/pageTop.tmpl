@@ -12,7 +12,7 @@
 						if (data.global !== undefined && data.global.menuStructure !== undefined) {
 							_.forEach(data.global.menuStructure, function(menuItems, groupName) {
 								_.forEach(menuItems, function(menuItem) {
-									if ((menuItem.controllerName === data.global.controllerName || menuItem.controllerName === data.global.menuControllerName) && menuItem.pageHeader !== undefined) {
+									if ((menuItem.controllerName === data.global.controllerPath || menuItem.controllerName === data.global.menuControllerName) && menuItem.pageHeader !== undefined) {
 										pageHeader = menuItem.pageHeader;
 									}
 								});

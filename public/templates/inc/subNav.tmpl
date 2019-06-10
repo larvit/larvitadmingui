@@ -4,7 +4,7 @@
 			_.forEach(menuItems, function(menuItem) {
 				if (
 					(data.global.menuControllerName !== undefined && data.global.menuControllerName === menuItem.controllerName)
-					|| (data.global.menuControllerName === undefined && menuItem.controllerName === data.global.controllerName)
+					|| (data.global.menuControllerName === undefined && menuItem.controllerName === data.global.controllerPath)
 				) {
 					if (menuItem.subNav !== undefined) {
 						_.forEach(menuItem.subNav, function(subNavItem) { if (subNavItem.loggedInUserGotAccess) { %>
