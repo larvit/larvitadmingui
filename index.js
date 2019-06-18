@@ -90,10 +90,10 @@ function App(options) {
 		require(lfs.getPathSync('models/controllerGlobal.js')),
 		function checkAndRedirect(req, res, cb) { that.checkAndRedirect(req, res, cb); },
 		function mwRunController(req, res, cb) { that.basewww.mwRunController(req, res, cb); },
+		function writeSessionToDb(req, res, cb) { that.session.writeToDb(req, res, cb); },
 		function mwRender(req, res, cb) { that.basewww.mwRender(req, res, cb); },
 		function mwSendToClient(req, res, cb) { that.basewww.mwSendToClient(req, res, cb); },
-		function mwCleanup(req, res, cb) { that.basewww.mwCleanup(req, res, cb); },
-		function writeSessionToDb(req, res, cb) { that.session.writeToDb(req, res, cb); }
+		function mwCleanup(req, res, cb) { that.basewww.mwCleanup(req, res, cb); }
 	];
 
 	if (that.options.middleware) {
