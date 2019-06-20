@@ -97,7 +97,7 @@ function App(options) {
 	];
 
 	if (that.options.middleware) {
-		that.basewww.options.baseOptions.middleware.unshift(that.options.middleware[0]);
+		that.basewww.options.baseOptions.middleware.splice(2, 0, ...that.options.middleware);
 	}
 
 	that.runDbMigrations();
