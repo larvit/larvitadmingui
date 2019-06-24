@@ -4,7 +4,6 @@ env:
   - CXX=g++-4.8 DBCONFFILE=config/db_travis.json
 
 node_js:
-  - 6
   - 8
   - 10
 
