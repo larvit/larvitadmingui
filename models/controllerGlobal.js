@@ -8,6 +8,8 @@ module.exports = function controllerGlobal(req, res, cb) {
 	const logPrefix = topLogPrefix + 'controllerGlobal() - ';
 	const tasks = [];
 
+	if (req.finished || (req.routed && req.routed.controllerPath && req.routed.controllerPath === 'css.js')) return cb();
+
 	if (!res.globalData) {
 		res.globalData = {};
 	}

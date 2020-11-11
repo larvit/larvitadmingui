@@ -81,23 +81,29 @@ function App(options) {
 	that.basewww = new Lbwww(that.options);
 	that.basewww.options.baseOptions.middleware = [
 		require('cookies').express(),
-		function (req, res, cb) { that.session.start(req, res, cb); },
-		function mwSetNextCallData(req, res, cb) { that.mwSetNextCallData(req, res, cb); },
 		function mwParse(req, res, cb) { that.basewww.mwParse(req, res, cb); },
 		function mwRoute(req, res, cb) { that.basewww.mwRoute(req, res, cb); },
 		function mwSendStatic(req, res, cb) { that.basewww.mwSendStatic(req, res, cb); },
 		function setPropertiesOnRequest(req, res, cb) { that.setPropertiesOnRequest(req, res, cb); },
+		function (req, res, cb) {
+			if (req.finished || (req.routed && req.routed.controllerPath && req.routed.controllerPath === 'css.js')) return cb();
+			that.session.start(req, res, cb);
+		},
+		function mwSetNextCallData(req, res, cb) { that.mwSetNextCallData(req, res, cb); },
 		require(lfs.getPathSync('models/controllerGlobal.js')),
 		function checkAndRedirect(req, res, cb) { that.checkAndRedirect(req, res, cb); },
 		function mwRunController(req, res, cb) { that.basewww.mwRunController(req, res, cb); },
-		function writeSessionToDb(req, res, cb) { that.session.writeToDb(req, res, cb); },
+		function writeSessionToDb(req, res, cb) {
+			if (req.finished) return cb();
+			that.session.writeToDb(req, res, cb);
+		},
 		function mwRender(req, res, cb) { that.basewww.mwRender(req, res, cb); },
 		function mwSendToClient(req, res, cb) { that.basewww.mwSendToClient(req, res, cb); },
 		function mwCleanup(req, res, cb) { that.basewww.mwCleanup(req, res, cb); }
 	];
 
 	if (that.options.middleware) {
-		that.basewww.options.baseOptions.middleware.splice(2, 0, ...that.options.middleware);
+		that.basewww.options.baseOptions.middleware.splice(7, 0, ...that.options.middleware);
 	}
 
 	that.runDbMigrations();
@@ -136,6 +142,8 @@ App.prototype.runDbMigrations = function runDbMigrations() {
 };
 
 App.prototype.mwSetNextCallData = function mwSetNextCallData(req, res, cb) {
+	if (req.finished) return cb();
+
 	if (req.session && req.session.data && req.session.data.nextCallData) {
 		// TODO(vktr): Probably should do this recursive instead
 		for (const key of Object.keys(req.session.data.nextCallData)) {
@@ -180,7 +188,7 @@ App.prototype.setPropertiesOnRequest = function setPropertiesOnRequest(req, res,
 App.prototype.checkAndRedirect = function checkAndRedirect(req, res, cb) {
 	const that = this;
 
-	if (req.finished) return cb();
+	if (req.finished || (req.routed && req.routed.controllerPath && req.routed.controllerPath === 'css.js')) return cb();
 
 	that.acl.checkAndRedirect(req, res, function (err, userGotAccess) {
 		if (err) {
