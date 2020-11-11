@@ -245,6 +245,16 @@ table.sortable {
 			background-image:               url('../images/icons_colors/a94442/cross.svg');
 		}
 
+	.msgBox.sassy {
+		background:                     #dee3f2;
+		border:                         1px solid #b0c6d4;
+		color:                          #365175;
+	}
+
+		.msgBox.sassy a.close:after {
+			background-image:               url('../images/icons_colors/365175/cross.svg');
+		}
+
 .page_wrapper {
 	position:                       relative;
 	height:                         100%;

@@ -46,4 +46,9 @@
 									<%- include('msgBox', {'msgClass': 'sad', 'msgTxt': errStr}) %>
 								<% });
 							}
+							if (data.global.info instanceof Array) {
+								_.forEach(data.global.info, function(infoStr) { %>
+									<%- include('msgBox', {'msgClass': 'sassy', 'msgTxt': infoStr}) %>
+								<% });
+							}
 						%>
