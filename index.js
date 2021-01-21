@@ -81,8 +81,10 @@ function App(options) {
 	that.basewww = new Lbwww(that.options);
 	that.basewww.options.baseOptions.middleware = [
 		require('cookies').express(),
-		function mwParse(req, res, cb) { that.basewww.mwParse(req, res, cb); },
+		function mwParseUrl(req, res, cb) { that.basewww.mwParseUrl(req, res, cb); },
+		function mwValidateRoute(req, res, cb) { that.basewww.mwValidateRoute(req, res, cb); },
 		function mwRoute(req, res, cb) { that.basewww.mwRoute(req, res, cb); },
+		function mwParse(req, res, cb) { that.basewww.mwParse(req, res, cb); },
 		function mwSendStatic(req, res, cb) { that.basewww.mwSendStatic(req, res, cb); },
 		function setPropertiesOnRequest(req, res, cb) { that.setPropertiesOnRequest(req, res, cb); },
 		function (req, res, cb) {

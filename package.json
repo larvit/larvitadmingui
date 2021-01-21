@@ -1,6 +1,6 @@
 {
   "name": "larvitadmingui",
-  "version": "0.14.3",
+  "version": "0.14.4",
   "author": {
     "name": "Mikael 'Lilleman' Göransson",
     "email": "lilleman@larvit.se"
@@ -17,8 +17,8 @@
     "async": "^2.1.2",
     "bower": "^1.7.9",
     "cookies": "^0.7.0",
-    "larvitbase-www": "^0.7.4",
-    "larvitcss": "^0.5.4",
+    "larvitbase-www": "^0.7.7",
+    "larvitcss": "^0.5.5",
     "larvitdb": "^2.1.0",
     "larvitdbmigration": "^4.0.2",
     "larvitfs": "^2.3.0",
