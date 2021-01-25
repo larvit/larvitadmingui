@@ -105,7 +105,7 @@ function App(options) {
 	];
 
 	if (that.options.middleware) {
-		that.basewww.options.baseOptions.middleware.splice(7, 0, ...that.options.middleware);
+		that.basewww.options.baseOptions.middleware.splice(9, 0, ...that.options.middleware);
 	}
 
 	that.runDbMigrations();
