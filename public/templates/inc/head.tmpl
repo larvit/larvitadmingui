@@ -1,3 +1,6 @@
+
+<% const cssVersion = data && data.global && data.global.cssVersion ? data.global.cssVersion : ''; %>
+
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -8,21 +11,21 @@
 		<base href="/" />
 		<link rel="icon"       type="image/svg+xml" href="favicon.svg" sizes="any" />
 		<link rel="icon"       type="image/png"     href="favicon.png" />
-		<link rel="stylesheet" type="text/css"      href="css/normalize.css" />
-		<link rel="stylesheet" type="text/css"      href="css/skeleton.css" />
-		<link rel="stylesheet" type="text/css"      href="css/icons.css" />
-		<link rel="stylesheet" type="text/css"      href="vendor/jquery-ui/jquery-ui.min.css" />
-		<link rel="stylesheet" type="text/css"      href="css/general.css" />
-		<link rel="stylesheet" type="text/css"      href="css/shared.css" />
-		<link rel="stylesheet" type="text/css"      href="css/buttons.css" />
-		<link rel="stylesheet" type="text/css"      href="css/custom.css" />
-		<link rel="stylesheet" type="text/css"      href="css/theme.css" />
+		<link rel="stylesheet" type="text/css"      href="css/normalize.css?<%=cssVersion%>" />
+		<link rel="stylesheet" type="text/css"      href="css/skeleton.css?<%=cssVersion%>" />
+		<link rel="stylesheet" type="text/css"      href="css/icons.css?<%=cssVersion%>" />
+		<link rel="stylesheet" type="text/css"      href="vendor/jquery-ui/jquery-ui.min.css?<%=cssVersion%>" />
+		<link rel="stylesheet" type="text/css"      href="css/general.css?<%=cssVersion%>" />
+		<link rel="stylesheet" type="text/css"      href="css/shared.css?<%=cssVersion%>" />
+		<link rel="stylesheet" type="text/css"      href="css/buttons.css?<%=cssVersion%>" />
+		<link rel="stylesheet" type="text/css"      href="css/custom.css?<%=cssVersion%>" />
+		<link rel="stylesheet" type="text/css"      href="css/theme.css?<%=cssVersion%>" />
 
-		<script src="vendor/js/lodash.min.js"></script>
-		<script src="vendor/js/jquery.min.js"></script>
-		<script src="vendor/jquery-ui/jquery-ui.min.js"></script>
-		<script src="vendor/js/js.cookie.js"></script>
-		<script src="js/jquery.custom.resize.js"></script>
-		<script src="js/custom.js"></script>
-		<script src="js/theme.js"></script>
+		<script src="vendor/js/lodash.min.js?<%=cssVersion%>"></script>
+		<script src="vendor/js/jquery.min.js?<%=cssVersion%>"></script>
+		<script src="vendor/jquery-ui/jquery-ui.min.js?<%=cssVersion%>"></script>
+		<script src="vendor/js/js.cookie.js?<%=cssVersion%>"></script>
+		<script src="js/jquery.custom.resize.js?<%=cssVersion%>"></script>
+		<script src="js/custom.js?<%=cssVersion%>"></script>
+		<script src="js/theme.js?<%=cssVersion%>"></script>
 	</head>

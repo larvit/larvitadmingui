@@ -10,6 +10,7 @@ const Acl = require(__dirname + '/models/acl.js');
 const Lfs = require('larvitfs');
 const lfs = new Lfs();
 const _ = require('lodash');
+const cssUuid = require('uuid').v4();
 
 // Extend lodash
 _.defaultsDeep = require('lodash.defaultsdeep');
@@ -93,6 +94,13 @@ function App(options) {
 		},
 		function mwSetNextCallData(req, res, cb) { that.mwSetNextCallData(req, res, cb); },
 		require(lfs.getPathSync('models/controllerGlobal.js')),
+		(req, res, cb) => {
+			if (res.globalData) {
+				res.globalData.cssVersion = cssUuid;
+			}
+
+			cb();
+		},
 		function checkAndRedirect(req, res, cb) { that.checkAndRedirect(req, res, cb); },
 		function mwRunController(req, res, cb) { that.basewww.mwRunController(req, res, cb); },
 		function writeSessionToDb(req, res, cb) {
