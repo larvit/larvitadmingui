@@ -15,7 +15,7 @@
 			var urlStr = urlParsed.path.split('?')[0] + '?';
 
 			for (var param in urlParsed.query) {
-				urlStr += (param + '=' + urlParsed.query[param] + '&');
+				urlStr += (param + '=' + encodeURIComponent(urlParsed.query[param]) + '&');
 			}
 
 			if (urlStr.substring(urlStr.length - 1) === '&') {
